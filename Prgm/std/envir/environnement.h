@@ -32,7 +32,7 @@
 //#endif
 
 #ifdef Darwin
-	#define macintosh
+//#define macintosh
 	#define MACOSX
 	#define ACCES_DB
 #endif /* Darwin */
