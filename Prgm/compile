@@ -43,7 +43,7 @@ endif
 
 setenv PRGM $prgm
 setenv APPLIS $xeq
-cd $prgm/std/librairies/compil/unix; make_all x11
+cd $prgm/std/librairies/compil/unix; ./make_all x11
 if ( "$1" != "" ) then
 	set appli = "$1"
 else 
