@@ -1,0 +1,26 @@
+# Mesures implementees: trgr_type/trgr_seuil_min/impedance/taux_voie/taux_global
+Exports = (
+	{
+		nom = regul_tempe
+		timing = periodique 	# Moment d'exportation (periodique/debut_run/fin_run)
+		support = fichier 	# Support d'envoi (fichier/catalogue/log/memoire/udp)
+		chemin = DernierExport 	# Nom du support
+		periode_ms = 1000 	# Intervalle entre exportations (ms)
+		exportable = (
+			{ R := impedance  },
+			{ taux := taux_voie  }
+		)
+		exporte = ()
+	}, {
+		nom = catalogue
+		timing = fin_run 	# Moment d'exportation (periodique/debut_run/fin_run)
+		support = catalogue 	# Support d'envoi (fichier/catalogue/log/memoire/udp)
+		chemin = sans-objet 	# Nom du support
+		periode_ms = 0 	# Intervalle entre exportations (ms)
+		exportable = (
+			{ trgr := trgr_type  },
+			{ seuil := trgr_seuil_min  }
+		)
+		exporte = ( "trgr[signal]", "seuil[signal]" )
+	}
+)

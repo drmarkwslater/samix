@@ -1,0 +1,23 @@
+include $(COMPIL_LIB)/opium4/makefile.defs
+OPIUM := $(SOURCE_LIB)/$(LIBFOLDER)
+OPIUMNAME := $(LIBNAME)
+OPIUMLIB := $(LIBS)/lib$(LIBNAME).a
+OPIUMMAKE := $(COMPIL_LIB)/$(LIBFOLDER)
+$(OPIUMLIB):
+	cd $(OPIUMMAKE); make
+
+ifeq ($(wm),gl)
+include $(COMPIL_LIB)/GLFW/makefile.defs
+	GLFWNAME := $(LIBNAME)
+	GLFWLIB := $(LIBS)/lib$(LIBNAME).a
+	GLFWMAKE := $(COMPIL_LIB)/$(LIBFOLDER)
+$(GLFWLIB):
+	cd $(GLFWMAKE); make
+
+include $(COMPIL_LIB)/GLUT/makefile.defs
+	GLUTNAME := $(LIBNAME)
+	GLUTLIB := $(LIBS)/lib$(LIBNAME).a
+	GLUTMAKE := $(COMPIL_LIB)/$(LIBFOLDER)
+$(GLUTLIB):
+	cd $(GLUTMAKE); make
+endif

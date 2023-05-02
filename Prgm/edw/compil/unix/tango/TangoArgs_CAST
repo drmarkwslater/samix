@@ -1,0 +1,8 @@
+# Configuration
+#
+d	/home/manip/mnt/castmm/v4/cern/raw/		# Repertoire de depart ('top directory')
+a	.		# Repertoire pour les archivages (relatif au rep. de depart)
+/-v/-r5156		# Nom du fichier a analyser
+e	100000		# Nombre d'evenements maximum (0 si evenements de longueur fixe)
+c	EvtUnite1663	# Nom du fichier de l'evenement unite
+b	off		# Mode bavard

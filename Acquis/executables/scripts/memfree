@@ -1,0 +1,19 @@
+#!/bin/tcsh
+#
+set i = 4
+while ( 1 )
+	set Ligne = `ipcs -m | cat -n | grep -w $i | grep -v IPC`
+	if((`echo ${Ligne}` != "") && (`echo ${Ligne}` != $i)) then
+		if($Ligne[4] != "0x00000000") then
+			echo Supprime la memoire partagee $Ligne[3]
+			ipcrm -m $Ligne[3]
+		else
+			echo Cle de l\'identifieur $Ligne[3] = $Ligne[4], pas de suppression
+			@ i++
+		endif
+	else
+		echo Plus de memoire partagee
+		exit
+	endif
+end
+exit

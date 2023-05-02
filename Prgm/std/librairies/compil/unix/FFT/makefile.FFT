@@ -1,0 +1,40 @@
+# ***** Fast Fourrier Transform *********************************************************
+
+LIBSRCE = $(SOURCE_LIB)/$(LIBFOLDER)
+LIBBINS = $(RELS)/$(LIBNAME)
+LIBFILE = $(LIBS)/lib$(LIBNAME).a
+
+LIBCODE_DIR = $(notdir $(wildcard $(LIBSRCE)/fftw/*.c)) 
+LIBOBJS_DIR = $(LIBCODE_DIR:.c=.o)
+LIBRELS_DIR := $(foreach fichier,$(LIBOBJS_DIR),$(LIBBINS)/$(fichier))
+
+LIBCODE_REV = $(notdir $(wildcard $(LIBSRCE)/rfftw/*.c))
+LIBOBJS_REV = $(LIBCODE_REV:.c=.o)
+LIBRELS_REV := $(foreach fichier,$(LIBOBJS_REV),$(LIBBINS)/$(fichier))
+
+ifneq ($(FOLDER),$(LIBNAME))
+$(FOLDER): $(LIBNAME)
+endif
+$(LIBFILE): $(LIBNAME)
+
+$(LIBNAME): $(LIBS) $(LIBBINS) $(LIBRELS_DIR) $(LIBRELS_REV)
+	@echo ".................... Assemblage de la librairie $(LIBNAME) ........."
+#	$(CC) $(CFLAGS) -I$(LIBSRCE) -I$(LIBSRCE)/fftw $(LIBSRCE)/fftw/*.c
+#	$(CC) $(CFLAGS) -I$(LIBSRCE) -I$(LIBSRCE)/fftw -I$(LIBSRCE)/rfftw $(LIBSRCE)/rfftw/*.c
+#	$(LIBGEN:LIBRAIRIE=$(LIBFILE)) $(LIBBINS)/*.$O
+	$(LIBGEN:LIBRAIRIE=$(LIBFILE)) $(LIBRELS_DIR) $(LIBRELS_REV)
+	@echo ".................... Librairie $(LIBNAME) prete ...................."
+
+$(LIBRELS_DIR): $(LIBSRCE)/$(notdir $(@:.o=.c)) $(LIBDEFS) $(LIBBINS)
+	@echo "===== Compile $(LIBSRCE)/fftw/$(notdir $(@:.o=.c))"
+	$(CC) $(CFLAGS) -I$(LIBSRCE) -I$(LIBSRCE)/fftw $(LIBFLAGS) $(BINAIRE) $(LIBSRCE)/fftw/$(notdir $(@:.o=.c))
+$(LIBRELS_REV): $(LIBSRCE)/$(notdir $(@:.o=.c)) $(LIBDEFS) $(LIBBINS)
+	@echo "===== Compile $(LIBSRCE)/rfftw/$(notdir $(@:.o=.c))"
+	$(CC) $(CFLAGS) -I$(LIBSRCE) -I$(LIBSRCE)/fftw -I$(LIBSRCE)/rfftw $(LIBFLAGS) $(BINAIRE) $(LIBSRCE)/rfftw/$(notdir $(@:.o=.c))
+
+$(LIBBINS): $(RELS)
+	mkdir -pv $(LIBBINS)
+
+clean:
+	cd $(RELS) && rm -vfr $(LIBBINS) && cd $(LIBS) && rm -vf $(LIBFILE)
+

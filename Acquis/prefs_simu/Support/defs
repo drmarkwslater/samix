@@ -1,0 +1,55 @@
+// [claps]
+{
+	"variables": [
+		{
+			"name": "Pmain",
+			"code": "float",
+			"size": 1,
+			"keys": "",
+			"status": "read"
+		},
+		{
+			"name": "Pauxi",
+			"code": "float",
+			"size": 1,
+			"keys": "",
+			"status": "read"
+		},
+		{
+			"name": "HVnorth",
+			"code": "int",
+			"size": 1,
+			"keys": "",
+			"status": "read"
+		},
+		{
+			"name": "HVsouth",
+			"code": "int",
+			"size": 1,
+			"keys": "",
+			"status": "read"
+		},
+		{
+			"name": "SourceType",
+			"code": "key",
+			"size": 1,
+			"keys": "Fe/AmBe",
+			"status": "read"
+		},
+		{
+			"name": "SourceInUse",
+			"code": "bool",
+			"size": 1,
+			"keys": "",
+			"status": "read"
+		}
+	]
+}
+{
+	"Pmain": 0,
+	"Pauxi": 0,
+	"HVnorth": 0,
+	"HVsouth": 0,
+	"SourceType": "Fe",
+	"SourceInUse": false
+}

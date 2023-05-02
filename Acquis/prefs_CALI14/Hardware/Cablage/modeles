@@ -1,0 +1,32 @@
+Version = 2
+Cablages = (
+	{ signal1 := detecteur = 1voie, numeriseurs = (AdcCali),
+		capteurs = ( { signal := 1.1 } ),
+		reglages = ()
+	},
+	{ signal4 := detecteur = 1voie, numeriseurs = (AdcCali),
+		capteurs = ( { signal := 1.4 } ),
+		reglages = ()
+	},
+	{ signal1_UV2 := detecteur = 2voies, numeriseurs = (AdcRp),
+		capteurs = ( { signal := 1.1 }, { light := 1.2 } ),
+		reglages = (
+			{ HV1 := DAC-A },
+			{ HV2 := DAC-B },
+			{ led := E1-3 }
+		)
+	},
+#	{ signal1_UV2_M34 := detecteur = 4voies, numeriseurs = (AdcCali),
+#		capteurs = ( { sensor := 1.1 }, { light := 1.2 }, { lmonit := 1.3 }, { fmonit := 1.4 } ),
+#		reglages = ()
+#	},
+#        { signal123UV := detecteur = 4voies, numeriseurs = (AdcCali),
+#               capteurs = ( { sensor := 1.1 }, { sensor2 := 1.2 } , { lowgain := 1.3 }, { light := 1.4  } ),
+#                reglages = ()
+#        },
+        { signal123UV := detecteur = 4voies, numeriseurs = (AdcCali),
+                capteurs = ( { near := 1.1 }, { far := 1.2 } , { single := 1.3 }, { light := 1.4  } ),
+                reglages = ()
+        },
+	{ direct := detecteur = 1voie, numeriseurs = (), reglages = () }
+)

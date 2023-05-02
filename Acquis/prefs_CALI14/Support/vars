@@ -1,0 +1,11 @@
+# [claps]
+utilise = (
+	{ Pmain := Pmain, index = 0, unite = , archive = non, affiche = non, format = float, min = 0, max = 0  },
+	{ Pauxi := Pauxi, index = 0, unite = , archive = non, affiche = non, format = float, min = 0, max = 0  },
+	{ HVnorth := HVnorth, index = 0, unite = , archive = non, affiche = non, format = int, min = 0, max = 0  },
+	{ HVsouth := HVsouth, index = 0, unite = , archive = non, affiche = non, format = int, min = 0, max = 0  },
+	{ SourceType := SourceType, index = 0, unite = , archive = non, affiche = non, format = key, cles = Fe/AmBe  },
+	{ SourceInUse := SourceInUse, index = 0, unite = , archive = non, affiche = non, format = bool,   }
+)
+sources = { SourceInUse := "Source in use", index = 0, role = calib }
+autorisees = non 	# Autorisation de deplacer les sources

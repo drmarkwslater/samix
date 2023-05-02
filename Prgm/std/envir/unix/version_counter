@@ -1,0 +1,15 @@
+#!/bin/tcsh
+#
+echo "| Fichier:" $1/$2
+mkdir -p $1/AutresVersions
+set info = `grep -m 1 VERSION $3/version.c | sed s/"#define VERSION "//`
+set v = `grep -m 1 VERSION $3/version.c | sed s/"#define VERSION "// | sed y/./_/`
+set r = `grep -m 1 RELEASE $3/release.h | sed s/"#define RELEASE "//`
+set vsn = $v\_$r
+echo "| Version:" $vsn a `date "+%Hh%M %Ss %p le %A %d %B %G (semaine %V)"`
+#-- printf "$vsn\n" > Tango.app/Contents/Resources/version
+cp $1/$2 $1/AutresVersions/$2$vsn
+echo "| Sauvegarde:" $1/AutresVersions/$2$vsn
+@ r++ 
+printf "#define RELEASE $r\n" > $3/release.h; printf "#define VERSION $info.$r\n" > $3/vsninfo.h
+echo "| Prochaine release:" $r 

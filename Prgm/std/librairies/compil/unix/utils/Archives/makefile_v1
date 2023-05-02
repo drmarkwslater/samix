@@ -1,0 +1,8 @@
+cible: utils
+
+include ../../../../envir/unix/makefile.unix
+include $(COMPIL_LIB)/opium4/makefile.opium4
+include $(COMPIL_LIB)/utils/makefile.utils
+
+clean:
+	cd $(CLEANDIR) && rm -vf $(CLEANLIST)

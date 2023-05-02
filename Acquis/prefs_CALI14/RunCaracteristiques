@@ -1,0 +1,8 @@
+#
+Trigger.demande = oui 	# Detection d'evenement a activer (sinon, c'est un stream)
+Detec.demarrage.actif = non 	# Procedures de demarrage des detecteurs, activees
+Detec.entretien.actif = non 	# Procedures d'entretien des detecteurs, activees
+Sauvegarde.evt = seul 	# Mode de sauvegarde si evts (seul/coinc/voisins/tous/manip)
+Sauvegarde.assoc = oui 	# Sauvegarde egalement des detecteurs associes
+Trmt.regul.evt = non 	# Type de regulation du taux d'evenements (non/taux/intervalles)
+Trmt.archivage = non 	# Archivage des evenements ou des donnees brutes

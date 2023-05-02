@@ -1,0 +1,30 @@
+# ***** Acces PCI *********************************************************
+
+PCI = $(SOURCE_EDW)/PCI
+
+PCINAME = PCI
+PCIBIN = $(RELS)/PCI
+PCILIB = $(LIBS)/lib$(PCINAME).a
+
+REPERTOIRES = $(RELS) $(LIBS) $(PCIBIN)
+PCILIST = $(PCIBIN)/IcaLib.$O $(PCIBIN)/PciLib.$O
+
+$(PCINAME): $(PCILIST)
+	$(LIBGEN:LIBRAIRIE=$(PCILIB)) $(PCILIST)
+	@echo ".................... Librairie $(PCINAME) prete ...................."
+
+$(PCILIB): $(PCILIST)
+	$(LIBGEN:LIBRAIRIE=$(PCILIB)) $(PCILIST)
+	@echo ".................... Librairie $(PCINAME) prete ...................."
+
+$(PCIBIN):
+	mkdir -pv $(PCIBIN)
+
+$(PCIBIN)/IcaLib.$O: $(PCI)/IcaLib.c $(PCI)/IcaLib.h $(REPERTOIRES)
+	$(CC) $(CFLAGS) -I$(SOURCE_EDW) -I$(PCI) $D $(BINAIRE) $(PCI)/IcaLib.c
+
+$(PCIBIN)/PciLib.$O: $(PCI)/PciLib.c $(PCI)/PciLib.h $(REPERTOIRES)
+	$(CC) $(CFLAGS) -I$(SOURCE_EDW) -I$(PCI) $D $(BINAIRE) $(PCI)/PciLib.c
+
+BINLIST = $(PCILIST)
+

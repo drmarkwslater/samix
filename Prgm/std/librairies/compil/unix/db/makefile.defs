@@ -1,0 +1,4 @@
+LIBNAME = db
+LIBFOLDER = db
+LIBFLAGS = -I$(SOURCE_LIB)/utils
+LIBSTANDARD = oui

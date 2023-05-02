@@ -1,0 +1,23 @@
+#!/bin/sh
+#
+printf "`pwd`\n" > $HOME/.samba_top
+if [[ $1 ]]; then {
+	if [[ $2 ]]; then xeq=$1/$2
+	else xeq=$1/SambaApp; fi
+#	echo "Deplacement de l'application: "; mv -v executables/ $xeq/
+} else  xeq=`pwd`/executables; fi
+printf "$xeq\n" >> $HOME/.samba_top
+echo "Fichier cree: $HOME/.samba_top"
+cp $xeq/scripts/tcsh_login $HOME/.login
+defaults write com.apple.Terminal Shell /bin/tcsh
+mkdir -p $xeq/AutresVersions
+echo "Repertoire cree: $xeq/AutresVersions"
+mv sauve version_courante status_samba ChangeVersion VersionSamba.app/ LanceSamba.app/ Samba.app/ Samba.app.dSYM/ Tango.app/ Tango.app.dSYM/ $xeq/
+mv modeles_SPC/prefs_proto modeles_SPC/SambaArgs .
+defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>'`echo $xeq`'/VersionSamba.app</string><key>_CFURLStringType</key><integer>0</integer></dict><key>file-label</key><string>VersionSamba</string></dict></dict>'
+defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>'`echo $xeq`'/StartSamba.app</string><key>_CFURLStringType</key><integer>0</integer></dict><key>file-label</key><string>StartSamba</string></dict></dict>'
+defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>'`echo $xeq`'/scripts/ReportSambaCrash</string><key>_CFURLStringType</key><integer>0</integer></dict><key>file-label</key><string>ReportSambaCrash</string></dict></dict>'
+#defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>'`echo $xeq`'/Samba.app/</string><key>_CFURLStringType</key><integer>0</integer></dict><key>file-label</key><string>SAMBA</string></dict></dict>'
+killall Dock
+sleep 1
+#++ $xeq/Samba.app/Contents/MacOS/Samba -installe -H=`pwd` -K=`pwd` -info=$xeq/Samba.app/Contents/Resources/ -langue=English -fontsize=10 -noir

@@ -1,0 +1,18 @@
+#
+toto 1/1voie: ok (HS/ok)
+	parms detecteur = {
+		masse = 0 	# masse du detecteur (g)
+		mode = standard 	# mode de sauvegarde
+		demarrage = neant 	# nom du fichier de demarrage de run
+		entretien = neant 	# nom du fichier d'entretien periodique
+		voisins = () 	# detecteurs a sauver aussi en mode 'voisins'
+		associes = () 	# detecteurs a sauver aussi en mode 'individuel'
+	}
+#
+#	---------- Parametrage de la voie signal ----------
+#
+	parms signal = {
+		usage = defaut 	# Utilisation finale de la voie (jetee/defaut/stream/evts/tout)
+		sensibilite = 1 	# nV/keV
+		Rdetecteur = 1.4013e-45 	# Mohms
+	}

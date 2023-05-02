@@ -1,0 +1,16 @@
+#!/bin/tcsh
+#
+if($1 != "") then
+	if(-e $HOME/.samba_top_$1) then
+		cp $HOME/.samba_top_$1 $HOME/.samba_top 
+		echo "Configuration $1 en service"
+	else
+		echo "Configuration indefinie!"
+	endif
+else
+	echo "Configuration a preciser, parmi:"
+	cd $HOME
+	foreach config (`ls .samba_top_*`)
+		echo "> $config:s/.samba_top_//"
+	end
+endif

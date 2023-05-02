@@ -1,0 +1,74 @@
+cible: samba
+	@echo "                    _____________________"
+	@echo "                   |                     |"
+	@echo "                   | Logiciel SAMBA pret |"
+	@echo "                   |_____________________|"
+#	@echo ".................... Logiciel SAMBA pret ...................."
+
+include ../../../../std/envir/unix/makefile.$(OSTYPE)
+include $(COMPIL_LIB)/opium4/makefile.opium4
+include $(COMPIL_LIB)/utils/makefile.utils
+include $(COMPIL_LIB)/db/makefile.db
+include $(COMPIL_LIB)/FFT/makefile.FFT
+include $(COMPIL_LIB)/tcp/makefile.tcp
+include $(COMPIL_LIB)/cephes/makefile.cephes
+include $(COMPIL_EDW)/PCI/makefile.PCI
+
+LIBSTD = $(XLDLIBS) -lm
+#LIBMIG = -L$(OPIUMBIN) -l$(OPIUMNAME) -L$(UTILSBIN) -l$(UTILSNAME) \
+#	-L$(FFTBIN) -l$(FFTNAME) -L$(CEPHESBIN) -l$(CEPHESNAME) \
+#	-L$(TCPBIN) -l$(TCPNAME) -L$(PCIBIN) -l$(PCINAME) -lcurl -lX11 -lm
+LIBMIG = -L$(LIBS) -l$(OPIUMNAME) -l$(UTILSNAME) -l$(DBNAME) -l$(FFTNAME) -l$(CEPHESNAME) -l$(TCPNAME) -l$(PCINAME) -lcurl -lX11 -lm
+
+
+# ***** Repertoires propres ***************************************************
+
+SAMBA = $(SOURCE_EDW)/samba
+SALSA = $(SOURCE_EDW)/salsa
+
+SAMBADEFS = $(wildcard $(SAMBA)/*.h) $(wildcard $(SALSA)/*.h)
+
+RELS_SAMBA = $(RELS)/samba
+
+INCLUDES = -I$(SOURCE_EDW) -I$(SOURCE_EDW)/Electronique -I$(SAMBA) -I$(SALSA) -I$(SOURCE_LIB) -I$(OPIUM) -I$(DB) -I$(TCP) -I$(PCI) -I$(FFT) -I$(FFT)/fftw -I$(FFT)/rfftw -I$(UTILS) -I/usr/include
+
+# ***** Listes ***************************************************************
+
+SAMBAFICS = $(notdir $(wildcard $(SAMBA)/*.c))
+SAMBALIST = $(SAMBAFICS:.c=.o)
+SALSAFICS = $(notdir $(wildcard $(SALSA)/*.c))
+SALSALIST = $(SALSAFICS:.c=.o)
+
+# ***** Interface utilisateur ************************************************
+
+samba: $(BIN)/samba
+	@echo "$(BIN)/samba> includes=[$(INCLUDES)]"
+	$(RELOAD)
+
+$(BIN)/samba: $(SAMBALIST) $(SALSALIST) $(PCILIB) $(UTILSLIB) $(OPIUMLIB) $(DBLIB) $(TCPLIB) $(FFTLIB) $(CEPHESLIB)
+	@echo "ar=" && which ar
+	@echo "ld=" && which ld
+	cd $(RELS) && $(LD) $(LFLAGS) $G $(EXECUTABLE) $(SAMBALIST) $(SALSALIST) $(LIBSTD) $(LIBMIG)
+	@echo ".................... Executable SAMBA pret ...................."
+
+$(SAMBALIST): $(wildcard $(SAMBA)/*.c) $(SAMBADEFS)
+	@echo "sambalist > includes=[$(INCLUDES)]"
+	cd $(RELS) && $(CC) $(CFLAGS) $(INCLUDES) $D -DSAMBA -DForSamba $(BINAIRE) $(SAMBA)/$(@:.o=.c)
+
+$(SALSALIST): $(wildcard $(SALSA)/*.c) $(SAMBADEFS)
+	@echo "salsalist > includes=[$(INCLUDES)]"
+	cd $(RELS) && $(CC) $(CFLAGS) $(INCLUDES) $D -DSAMBA -DForSamba $(BINAIRE) $(SALSA)/$(@:.o=.c)
+
+$(RELS_SAMBA): $(RELS_SAMBA)
+	mkdir -pv $(RELS_SAMBA)
+
+clean:
+	rm -vf $(SAMBALIST) $(SALSALIST)
+emptyall:
+	rm -vf $(OPIUMLIST)
+	rm -vf $(UTILLIST)
+	rm -vf $(DBLIST)
+	rm -vf $(PCILIST)
+	rm -vf $(TCPLIST)
+	rm -vf $(SAMBALIST)
+

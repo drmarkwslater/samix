@@ -1,0 +1,12 @@
++ Signal /donnees=signal /duree=1/limites=-2000 2000
+         /dimensions=862 285/position=43 367/affichage=oui /traces=
+       sphere           brute   	 (0000 FFFF 0000)
++ Amplitude /donnees=histo /bins=300/evts=0/limites=0 5000
+            /dimensions=449 282/position=136 372/affichage=oui /traces=
+       amplitude    sphere          	 (0000 FFFF 0000)
++ Bruit LdB /donnees=histo /bins=150/evts=0/limites=0 30
+            /dimensions=296 285/position=922 44/affichage=oui /traces=
+       bruit        sphere          	 (0000 FFFF 0000)
++ AmplitudeBis /donnees=histo /bins=300/evts=0/limites=3000 4000
+               /dimensions=449 282/position=609 399/affichage=oui /traces=
+       amplitude    sphere          	 (0000 FFFF 0000)

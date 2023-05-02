@@ -1,0 +1,2 @@
+scp $1.tar sphere2@192.168.1.104:Samba/executables
+ssh sphere2@192.168.1.104 "cd Samba/executables; tar xvf $1.tar; ./sauve $1"

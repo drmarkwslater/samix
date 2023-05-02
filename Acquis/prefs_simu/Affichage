@@ -1,0 +1,66 @@
+# [claps]
+# Parametres generaux
+Graphiques.hauteur = 250 	# Hauteur des graphiques (pixels)
+Graphiques.largeur = 400 	# Largeur des graphiques (pixels)
+Graphique.synchro = non 	# Synchronisation avec la synchronisation
+Donnees.duree = 1 	# Duree de donnees affichee (ms)
+Donnees.unite.chgt = ADU 	# Changement d'unite des donnees (ADU/mV ADC/mV BB/nV detec/keV)
+Donnees.unite.mV = 0.038 	# Valeur d'un ADU en mV
+Donnees.unite.keV = 1000 	# Valeur d'un ADU en keV
+#
+# Contenu de l'ecran
+Affichage.donnees = GraphiquesV2 	# Fichier de definition de l'affichage des graphiques utilisateurs
+Affichage.interv = 500 	# Intervalle entre affichage des donnees (ms)
+Affichage.modes = non 	# Affichage des modes de fonctionnement
+Affichage.trigger = non 	# Affichage du trigger demande
+Affichage.ldb = non 	# Affichage des lignes de base
+Affichage.seuils = non 	# Affichage du graphique des seuils
+Affichage.etat = non 	# Affichage de l'etat de l'acquisition
+Affichage.reseau = non 	# Affichage de l'etat du reseau
+Affichage.evt = oui 	# Affichage du dernier evenement
+Affichage.taux.panel = non 	# Affichage du panel des taux d'evenements
+Affichage.taux.graph = non 	# Affichage du graphique des taux d'evenements
+Affichage.classes = non 	# Affichage de la planche des evenements par classe
+#
+# Modes pour les evenements
+Evt.fenetre_integree = oui 	# Fenetre du dernier evenement integree a la planche du run
+Evt.sonorisation = oui 	# Sonorisation en fonction de la categorie d'evenement (si definie)
+Evt.Y.automatique = oui 	# Vrai si calcul automatique des extremas en Y pour chaque evenement
+# Si echelle Y fixe
+Evt.Ymin = -30000 	# Valeur du minimum en Y pour chaque evenement
+Evt.Ymax = 30000 	# Valeur du maximum en Y pour chaque evenement
+#
+# Spectres au vol
+Bolo.num = 0 	# Numero de detecteur a etudier
+Bolo.voie = 2 	# Modele de voie de ce detectur
+Longueur = 65536 	# Nombre de points de la FFT
+Mode.auvol = glissant 	# Methode de calcul de spectre au vol (manu/surv/auto/glissant)
+Axe.X.type = lineaire 	# Type d'axe pour les X (lineaire/log)
+Axe.X.limites = manu 	# Limitation de l'axe X (manu/auto)
+Axe.X.min = 0 	# Minimum sur l'axe des X, si limites manuelles
+Axe.X.max = 0 	# Maximum sur l'axe des X, si limites manuelles
+Axe.Y.type = lineaire 	# Type d'axe pour les Y (lineaire/log)
+Axe.Y.limites = manu 	# Limitation de l'axe Y (manu/auto)
+Axe.Y.min = 0 	# Minimum sur l'axe des Y, si limites manuelles
+Axe.Y.max = 0 	# Maximum sur l'axe des Y, si limites manuelles
+#
+# Suivi de spectres
+Pics.dim = 1000 	# Dimension du suivi (echantillons)
+Pics.nb = 0 	# Nombre de pics a suivre
+Pics.1.min = 100 	# Minimum du pic #1 (ADU)
+Pics.1.max = 500 	# Maximum du pic #1 (ADU)
+Pics.2.min = 100 	# Minimum du pic #2 (ADU)
+Pics.2.max = 500 	# Maximum du pic #2 (ADU)
+Pics.3.min = 100 	# Minimum du pic #3 (ADU)
+Pics.3.max = 500 	# Maximum du pic #3 (ADU)
+#
+# Histogrammes predefinis
+Histo.ampl = non 	# Affichage de l'histogramme des amplitudes
+Histo.ampl.min = 5000 	# Nb evts minimum pour l'histogramme des amplitudes
+Histo.ampl.max = 5000 	# Nb evts maximum pour l'histogramme des amplitudes
+Histo.montee = non 	# Affichage de l'histogramme des temps de montee
+Histo.montee.min = 0 	# Nb evts minimum pour l'histogramme des temps de montee
+Histo.montee.max = 5000 	# Nb evts maximum pour l'histogramme des temps de montee
+Histo.2D = non 	# Affichage de l'histo amplitude x tps montee
+Histo.2D.min = 0 	# Nb evts minimum pour l'histo amplitude x tps montee
+Histo.2D.max = 500 	# Nb evts maximum pour l'histo amplitude x tps montee

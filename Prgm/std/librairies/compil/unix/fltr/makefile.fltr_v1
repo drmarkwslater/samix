@@ -1,0 +1,61 @@
+# ***** librairie de filtrage *********************************************************
+
+LIBSRCE = $(SOURCE_LIB)/$(LIBFOLDER)
+LIBBINS = $(RELS)/$(LIBNAME)
+LIBFILE = $(LIBS)/lib$(LIBNAME).a
+
+LIBDEFS = $(wildcard $(LIBSRCE)/*.h)
+LIBOBJS = $(LIBBINS)/chbevl.$O $(LIBBINS)/cmplx.$O $(LIBBINS)/const.$O \
+	$(LIBBINS)/ellf.$O $(LIBBINS)/ellie.$O $(LIBBINS)/ellik.$O \
+	$(LIBBINS)/ellpe.$O $(LIBBINS)/ellpj.$O $(LIBBINS)/ellpk.$O \
+	$(LIBBINS)/mtherr.$O $(LIBBINS)/polevl.$O
+
+$(LIBNAME): $(LIBOBJS) $(LIBS)
+	@echo ".................... Assemblage de la librairie $(LIBNAME) ........."
+	cd $(LIBBINS) && $(LIBGEN:LIBRAIRIE=$(LIBFILE)) $(LIBOBJS)
+	@echo ".................... Librairie $(LIBNAME) prete ...................."
+
+$(LIBFILE): $(LIBOBJS) $(LIBS)
+	@echo ".................... Assemblage de la librairie $(LIBNAME) ........."
+	cd $(LIBBINS) && $(LIBGEN:LIBRAIRIE=$(LIBFILE)) $(LIBOBJS)
+	@echo ".................... Librairie $(LIBNAME) prete ...................."
+
+$(LIBBINS)/chbevl.$O: $(LIBSRCE)/chbevl.c $(LIBBINS)
+	$(CC) $(CFLAGS) -I$(LIBSRCE) $(LIBFLAGS) $(BINAIRE) $(LIBSRCE)/chbevl.c
+
+$(LIBBINS)/cmplx.$O: $(LIBSRCE)/cmplx.c $(LIBBINS)
+	$(CC) $(CFLAGS) -I$(LIBSRCE) $(LIBFLAGS) $(BINAIRE) $(LIBSRCE)/cmplx.c
+
+$(LIBBINS)/const.$O: $(LIBSRCE)/const.c $(LIBBINS)
+	$(CC) $(CFLAGS) -I$(LIBSRCE) $(LIBFLAGS) $(BINAIRE) $(LIBSRCE)/const.c
+
+$(LIBBINS)/ellf.$O: $(LIBSRCE)/ellf.c $(LIBBINS)
+	$(CC) $(CFLAGS) -I$(LIBSRCE) $(LIBFLAGS) $(BINAIRE) $(LIBSRCE)/ellf.c
+
+$(LIBBINS)/ellie.$O: $(LIBSRCE)/ellie.c $(LIBBINS)
+	$(CC) $(CFLAGS) -I$(LIBSRCE) $(LIBFLAGS) $(BINAIRE) $(LIBSRCE)/ellie.c
+
+$(LIBBINS)/ellik.$O: $(LIBSRCE)/ellik.c $(LIBBINS)
+	$(CC) $(CFLAGS) -I$(LIBSRCE) $(LIBFLAGS) $(BINAIRE) $(LIBSRCE)/ellik.c
+
+$(LIBBINS)/ellpe.$O: $(LIBSRCE)/ellpe.c $(LIBBINS)
+	$(CC) $(CFLAGS) -I$(LIBSRCE) $(LIBFLAGS) $(BINAIRE) $(LIBSRCE)/ellpe.c
+
+$(LIBBINS)/ellpj.$O: $(LIBSRCE)/ellpj.c $(LIBBINS)
+	$(CC) $(CFLAGS) -I$(LIBSRCE) $(LIBFLAGS) $(BINAIRE) $(LIBSRCE)/ellpj.c
+
+$(LIBBINS)/ellpk.$O: $(LIBSRCE)/ellpk.c $(LIBBINS)
+	$(CC) $(CFLAGS) -I$(LIBSRCE) $(LIBFLAGS) $(BINAIRE) $(LIBSRCE)/ellpk.c
+
+$(LIBBINS)/mtherr.$O: $(LIBSRCE)/mtherr.c $(LIBBINS)
+	$(CC) $(CFLAGS) -I$(LIBSRCE) $(LIBFLAGS) $(BINAIRE) $(LIBSRCE)/mtherr.c
+
+$(LIBBINS)/polevl.$O: $(LIBSRCE)/polevl.c $(LIBBINS)
+	$(CC) $(CFLAGS) -I$(LIBSRCE) $(LIBFLAGS) $(BINAIRE) $(LIBSRCE)/polevl.c
+
+$(LIBBINS): $(RELS)
+	mkdir -pv $(LIBBINS)
+
+clean:
+	cd $(RELS) && rm -vfr $(LIBBINS) && cd $(LIBS) && rm -vf $(LIBFILE)
+

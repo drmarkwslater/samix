@@ -1,0 +1,74 @@
+# [claps]
+Intitule = "Acquisition CALI14" 	# Designation de la configuration
+#
+# ===== Fichiers de Description du Montage =====
+Bolo.max = 8 						# Nombre maximum de detecteurs geres
+Voie.max = 24 						# Nombre maximum de voies gerees
+Run.types = test/ar37/fe55/ambe/fond 			# Noms des types de run
+Fichier.modeles = Hardware/Modeles 			# Liste des modeles (materiel, chassis, environnement)
+Fichier.detecteurs = Hardware/Detecteurs/liste 		# Definition des detecteurs
+Fichier.cablage = Hardware/Cablage/actuel 		# Definition du cablage
+Fichier.numeriseurs = Hardware/Numeriseurs/liste 	# Liste des numeriseurs
+Fichier.repartiteurs = Hardware/Repartiteurs/liste  	# Liste des repartiteurs
+Fichier.media = Hardware/Media 				# Liste des media auxiliaires
+Fichier.reseau = Hardware/Reseau 			# Liste des adresses IP des satellites
+Fichier.satellites = Hardware/Satellites 		# Liste des satellites a controler
+Fichier.gene = Hardware/Generateurs 			# Liste des modes de simulation
+Fichier.support = Support/prefs 			# Parametrisation du support
+Fichier.banc = Banc 					# Parametrisation du banc de tests des numeriseurs
+Fichier.basique = Basic 				# Parametrisation des acces basiques
+#
+# ===== Electronique =====
+IP.port = 2048 			# Valeur plancher du port de lecture via IP
+Sat.port = 3072 		# Valeur plancher du port de lecture des satellites
+FIFO.dim = 262144 		# Profondeur des FIFO IP ou NI (16 bits)
+Voie.status = neant 		# Nom de la voie avec status
+#-- Prgm.repartiteur = 0x1e 	# Page de programmation des IBB
+#-- Lect.DMA = oui 			# Lecture en DMA si c'est possible
+#-- Oscillateur = 125 		# Horloge fondamentale du systeme (MHz)
+#-- Diviseur.0 = 10 		# Valeur du diviseur 0
+#-- Diviseur.1 = 60 		# Valeur du diviseur 1 (nombre de bits a produire par echantillon)
+#
+# ===== Parametres de fonctionnement et de gestion =====
+Fichier.parametres = Parametres 			# Parametrisation generale
+Fichier.compte-rendu = CompteRenduInitial 		# Options de compte-rendu de demarrage
+Fichier.dictionnaire = Dictionnaires 			# Dictionnaires de synonymes
+Fichier.exports = Exportations 				# Fichier d'exportation de variables
+Fichier.lecture = Lecture 				# Parametrisation de la lecture
+Fichier.affichage = Affichage 				# Parametrisation des affichages
+Fichier.finesses = Finesses 				# Parametrisation secondaire
+Fichier.verifs = Verifications 				# Options de verification
+Fichier.comptage = RunEnregistre 			# Gestion automatique des noms des runs
+Fichier.etat-elec = EtatPolars 				# Etat de l'electronique
+Fichier.conditions = RunConditions 			# Conditions de run courantes
+Fichier.caract = RunCaracteristiques 			# Caracteristiques des run
+Imprime.configs = non 					# Imprime les configs
+# * ----- Journalisation automatique
+Database.serveur = neant 		# Adresse de la Base de Donnees
+Cahier.manip = neant 			# Type de cahier de manip (neant/texte/elog)
+Cahier.adrs =  				# Nom du cahier de manip (fichier ou serveur, selon type)
+Cahier.cible = "-u acquis darkmatr -l STPC -a A" 	# Coordonnees d'acces au cahier de manip (si serveur)
+#              (typiquement, -u acquis darkmatr -l STPC -a Author=SAMBA -a Category=Acquisition)
+Gardiens =  	# Personnes a avertir en cas d'arret acquisition (cf 'mail')
+# * ----- Demarrage differe
+Calendrier.place = Calendriers 		# Description de l'emplacement des calendriers
+Calendrier.nom = Samba 			# Nom du calendrier des evenements destines a SAMBA
+Calendrier.run = run 			# Nom des evenements du calendrier definissant les periodes de run
+#
+# ===== Scripts utilisateur (si procedures speciales) =====
+Fichier.procedures = Procedures 			# Repertoire des procedures
+# * les 6 noms des scripts ci-dessous sont relatifs au repertoire des procedures
+Run.start =  				# Script de demarrage des runs
+Run.stop =  				# Script d'arret des runs
+Detec.regen.entree = regen_demarre 	# Script de mise en regeneration
+Detec.regen.sortie = regen_termine 	# Script de fin de regeneration
+Detec.service.start =  			# Script de debut de l'entretien periodique
+Detec.service.stop =  			# Script de fin de l'entretien periodique
+#
+# ===== Fichiers de parametrage des algorithmes =====
+Fichier.calculs = Calculs 				# Parametrisation des calculs
+Fichier.filtres = Filtres 				# Definition des filtres
+Fichier.sequences = Sequences 				# Definition des sequences
+Fichier.regul.evt = RegulEvt 				# Definition de la regulation du taux d'evenements
+Fichier.VI = Vi 					# Jeu de V(I)
+Fichier.evt-unite = EvtUnite 				# Evenements unite

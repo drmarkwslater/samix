@@ -1,0 +1,6 @@
+#!/bin/tcsh
+#
+set v=2
+if ($1 != "") set v=$1
+@ udp = $v * 1024 * 1024
+sudo sysctl net.inet.udp.recvspace=$udp

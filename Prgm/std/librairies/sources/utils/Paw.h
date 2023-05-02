@@ -1,0 +1,1 @@
+#ifndef PAW_H#define PAW_H#include <utils/hbook.h>void PawInit();void PawFileOpen(int id, char *chemin, char *fichier, float *bloc, char *noms);void PawFileClose(char *chemin);#endif

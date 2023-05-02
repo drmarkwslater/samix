@@ -1,0 +1,24 @@
+# [claps]
+# Spectres
+Donnees = brute 	# Type de donnees utilisees
+PseudoVoies = exclues 	# Prise en compte des pseudo voies (exclues/aussi)
+Invalidees = exclues 	# Prise en compte des voies invalidees au vol(exclues/aussi)
+Mode.auto = somme 	# Methode de calcul des spectres automatiques (somme/trigge/glissant)
+Spectres.max = 25 	# Nb spectres si somme ou glissant
+Spectres.larg = 500 	# Largeur de la fenetre d'affichage
+Spectres.haut = 350 	# Hauteur de la fenetre d'affichage
+#
+# Spectres multiples
+Physique = (
+	{ charge := dimension = 1048576, X.echelle = log, X.limites = manu, X.min = 0.1, X.max = 1000, Y.echelle = log, Y.limites = manu, Y.min = 100, Y.max = 1e+06 },
+	{ lumiere := dimension = 1048576, X.echelle = log, X.limites = auto, X.min = 0.1, X.max = 1000, Y.echelle = log, Y.limites = manu, Y.min = 0.01, Y.max = 1000 },
+	{ light := dimension = 1048576, X.echelle = log, X.limites = manu, X.min = 0.1, X.max = 1000, Y.echelle = log, Y.limites = manu, Y.min = 100, Y.max = 1e+06 }
+)
+#
+# Traitements speciaux
+# CSNSM: A=Retard de l'entree (echantillons), B=Demi ligne de base (echantillons),
+#        C=<base> - <max> (echantillons), D=<max> - <min> (echantillons)
+CSNSM.filtres = (
+	{ basique := A = 7, B = 64, C = 96, D = 32 },
+	{ meilleur := A = 10, B = 128, C = 96, D = 128 }
+)

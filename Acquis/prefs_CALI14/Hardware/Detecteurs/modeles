@@ -1,0 +1,28 @@
+#
+Physique = (
+	{ charge := duree-ms = 2, temps-mort-ms = -1, fenetre-ms = 4, delai-ms = -1, dimtemplate = 64, montee-ms = 0, descente1-ms = 10, descente2-ms = 0, facteur2 = 0 },
+	{ light := duree-ms = 2, temps-mort-ms = -1, fenetre-ms = 4, delai-ms = -1, dimtemplate = 64, montee-ms = 0, descente1-ms = 10, descente2-ms = 0, facteur2 = 0 }
+)
+Voies = (
+	{ sensor := physique = charge, temps-mort-ms = -1, pretrigger_% = 25, base.debut_% = 25, base.fin_% = 75, montee.debut_% = 10, montee.fin_% = 90, coincidence-ms = 20 },
+	{ corrector := physique = charge, temps-mort-ms = -1, pretrigger_% = 25, base.debut_% = 25, base.fin_% = 75, montee.debut_% = 10, montee.fin_% = 90, coincidence-ms = 20 },
+	{ signal := physique = charge, temps-mort-ms = -1, pretrigger_% = 25, base.debut_% = 25, base.fin_% = 75, montee.debut_% = 10, montee.fin_% = 90, coincidence-ms = 20 },
+	{ bille := physique = charge, temps-mort-ms = -1, pretrigger_% = 25, base.debut_% = 25, base.fin_% = 75, montee.debut_% = 10, montee.fin_% = 90, coincidence-ms = 20 },
+	{ light := physique = light, temps-mort-ms = -1, pretrigger_% = 25, base.debut_% = 25, base.fin_% = 75, montee.debut_% = 10, montee.fin_% = 90, coincidence-ms = 20 },
+	{ near := physique = charge, temps-mort-ms = -1, pretrigger_% = 25, base.debut_% = 25, base.fin_% = 75, montee.debut_% = 10, montee.fin_% = 90, coincidence-ms = 20 },
+	{ far := physique = charge, temps-mort-ms = -1, pretrigger_% = 25, base.debut_% = 25, base.fin_% = 75, montee.debut_% = 10, montee.fin_% = 90, coincidence-ms = 20 },
+	{ single := physique = charge, temps-mort-ms = -1, pretrigger_% = 25, base.debut_% = 25, base.fin_% = 75, montee.debut_% = 10, montee.fin_% = 90, coincidence-ms = 20 },
+	{ sipm := physique = light, temps-mort-ms = -1, pretrigger_% = 25, base.debut_% = 25, base.fin_% = 75, montee.debut_% = 10, montee.fin_% = 90, coincidence-ms = 20 }
+)
+Detecteurs = (
+	{ ball := capteurs = signal, reglages = (), associes = () },
+	{ rod := capteurs = (sensor, corrector), reglages = (), associes = () },
+	{ 1voie := capteurs = signal, reglages = (), associes = () },
+	{ 2voies := capteurs = (signal, light), reglages = (
+		{ HV1 := categorie = polar, capteur = signal },
+		{ HV2 := categorie = polar, capteur = light },
+		{ led := categorie = relais, capteur = signal }
+	), associes = () },
+	{ 4voies := capteurs = (near, far, single, light), reglages = (), associes = () },
+	{ 2beta := capteurs = (bille, sipm), reglages = (), associes = () }
+)

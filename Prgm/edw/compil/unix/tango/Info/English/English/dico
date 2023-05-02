@@ -1,0 +1,573 @@
+"": 
+"%d evenement%s contenu%s dans (%g < %s < %g, %g < %s < %g)": "%d event%s inside%s dans (%g < %s < %g, %g < %s < %g)"
+"(Coupure haute)": "(Top cut)"
+"(Expert only)": 
+"(Unite)": "(Unit)"
+"(donnee #0)": "(data #0)":"
+"(donnee #1)": "(data #1)":"
+"(donnee #2)": "(data #2)":"
+"(pour commencer)": "(as a beginning)"
+"+/-": 
+"..": 
+"..ce segment": ".. this segment"
+"..le precedent segment": "..the previous segment"
+"..toute la procedure": "..the whole procedure"
+"A retracer": "To plot again"
+"Abandon calib": "Give up calib"
+"Abcisse": "X-axis"
+"Abcisse maximum": "X-axis maximum"
+"Abcisse minimum": "X-axis minimum"
+"Abscisse": "X-axis"
+"Abscisse maxi": "X-axis maximum"
+"Abscisse mini": "X-axis minimum"
+"Accepte": "Accept"
+"Actuel sur biplots": "Current on biplot"
+"Affichage": "Display"
+"Affichages": "Displays"
+"Afficher": "Display"
+"Ajouter": "Add"
+"Ajouter tous les evts": "Add all events"
+"Ajouter un run": "Add a run"
+"Ajouter/retirer 1": "Add/Remove 1"
+"Amplitude":
+"Amplitude de calibration (ADU)": "Calibrating amplitude (ADU)"
+"Amplitude min (absolue)": "Min (absolue) amplitude"
+"Amplitude minimum": "Minimum amplitude"
+"Amplitudes": 
+"Analyse": "Analysis"
+"Analytique": "Analytic"
+"Annuler": "Cancel"
+"Applications": 
+"Appliquer": "Apply"
+"Appliquer coef.": "Apply coef."
+"Appliquer fichier": "Apply file contents"
+"Au minimum": "At least"
+"Au vol": "On-the-fly"
+"Automatique": "Automatic"
+"Axe X": "X-axis"
+"Axe Y": "Y-axis"
+"Axe Z": "Z-axis"
+"Bolo concerne": "Actual detector"
+"Bolo enregistres": "Registered detectors"
+"Bolo touche": "Hit detector"
+"Bolos affiches": "Displayed detectors"
+"Bruit": "Noise"
+"Ca suffit": "That's enough"
+"Calcul des energies": "Energy computation"
+"Calcul du facteur de quenching": "Quancing factor computation"
+"Calcul evenement unite": "Unit event computation"
+"Calculer": "Compute"
+"Calculer (auto)": "Compute (auto)"
+"Calculer evt unite": "Compute MeanEvent"
+"Calculs": "Computations"
+"Calib 1 voie": "Calib 1 channel"
+"Calibration des evts unite de ": "Unit event calib for"
+"Catalogue": "Catalog"
+"Ce fichier n'a PAS pu etre ajoute": "This file could NOT been added"
+"Cete fonction n'est pas applicable a ce detecteur": "Not applyable for this detector"
+"Channel choice": 
+"Chemin": "Path"
+"Choix Filtres": "Filter choice"
+"Choix mesure": "Measure choice"
+"Choix temps": "Time choice"
+"Choix voie": "Channel choice"
+"Clear": 
+"ClesArgs": 
+"Coefficient": 
+"Coefficients de calibration": "Calibration coefficients"
+"Coefficients voie chaleur": "Heat channel coefficients"
+"Commentaire": "Comment"
+"Commun": Common
+"CompteUnix":
+"Condition":
+"Connaisseurs": "Expert"
+"Conserver": "Keep on screen"
+"Contraste [3D]": "Contrast [3D]"
+"Correction chaleur": "Heat correction"
+"Correction crosstalk": 
+"Couleur bleue": "Blue"
+"Couleur rouge": "Red"
+"Couleur verte": "Green"
+"Couper": "Cut"
+"Couper variable": "Cut on a variable"
+"Couper zone": "Cut a 2D-plot area"
+"Coupure": "Cut"
+"Coupure a suivre": "Next cut"
+"Coupure courante": "Current cut"
+"Coupure sur l'espace": "Cut on space"
+"Coupures": "Cuts"
+"Courbe": "Plot"
+"Creer": "Create"
+"Creer template SAMBA": "Create a SAMBA template"
+"Current header": 
+"Customize": 
+"Cut": 
+"Cut a 2D-plot area": 
+"Cut on a variable": 
+"Cuts": 
+"D'apres biplot": "From a biplot"
+"Dans le fichier": "Into the file"
+"Date":
+"Date.microsecs": 
+"Date.secondes": 
+"Debats": 
+"Debut montee": "Rise begin"
+"Debut trace  (s)": "Track begin  (s)"
+"Debut trace (us)": "Track begin (us)"
+"Defiler": "Scan"
+"Definitions": 
+"Degre": "Degree"
+"Degre final": "Final degree"
+"Delai": "Delay"
+"Denomination": "Name"
+"Dernier evenenemt a sauver": "Last event to save"
+"Derniere partition": "Last partition"
+"Designation des limites de zone de coupure": 
+"Designation des limites du fit": "Fit limits mode"
+"Desktop": 
+"Detecteur concerne": "Related detector"
+"Detecteur touche": "Hit detector"
+"Diagonale": 
+"Dimensions graphiques": "Plot windows dimensions"
+"Dimensions totales": "Run contents"
+"Display": 
+"Displayed detectors": 
+"Displays": 
+"Documents":
+"Donnee": "Data"
+"Downloads":
+"Dropbox": 
+"Dumper evenement": "Dump event"
+"Echantillonage": "Sampling"
+"Ecrans": Screens
+"Ecriture": "Writing"
+"Ecriture Ntuple": 
+"Effacer": "Clear"
+"Energie chaleur max": 
+"Energie chaleur min": 
+"Energie du signal de reference": "Reference energy"
+"Energie moyenne": "Mean energy"
+"Energies": "Energies"
+"Entete courante": "Current header"
+"Entete generale": "General header"
+"Entetes": "Headers"
+"Entree des limites de fit": "Fit limits input"
+"Espace": "Space"
+"Evenement": "Event"
+"Evenement No...": "Event number.."
+"Evenement no": "Event nb"
+"Evenement unite": "Unit Event"
+"Evenements": "Events"
+"Evenements valides": "Valid events"
+"Event number..": 
+"Events": 
+"Examen individuel": "Individual lookup"
+"Excluded mark": 
+"Exposant": "Exponent"
+"Extractions": 
+"Fact_Delmas_2013.pdf": 
+"Facteur multiplicatif": "Multpliying factor"
+"Fenetres": "Windows"
+"Fermer": "Close"
+"Fermer un fichier": "Close a file"
+"Fichier": "File"
+"Fichier abandonne au bout de %d evenements (%d%%)": "Not all used, only %d processed events (%d%%)"
+"Fichier inutilisable (No such file or directory)": "Unusable file"
+"Fichier termine, %d evenements traites": "End of run reached, %d processed events"
+"Fichiers": "Files"
+"Filtrage": "Filtering"
+"Filtre SAMBA": 
+"Filtre a modifier": "Filter to modify"
+"Filtre a personnaliser": "Filter to customize"
+"Filtres": "Filters"
+"Filtres standard, ou entree des coefficients a la main?": "Standard filter, or manually defined coefficients?"
+"Fin   montee": "Rise end"
+"Fin analyse": "Analysis end"
+"Fin de la saisie": "Input end"
+"Fit": 
+"Fit 2eme degre": "2nd degree fit"
+"Fit Gaussien": "Gaussian fit"
+"Fit area": 
+"Fit lineaire": "Linear fit"
+"Fit parabole": "Parabolic fit"
+"Fit parabolique": "Parabolic fit"
+"Fit voie choisie": "Channel fit"
+"Fitter": "Fit"
+"Fonction pas encore implementee": Unimplemented
+"Format": 
+"Gaussien": "Gaussian"
+"General": 
+"GigaStamp": 
+"GigaStamp0": 
+"Gigastamp debut": 
+"Graphique": "Grafics"
+"Grille": "Grid"
+"Hauteur": "Heigth"
+"Headers": 
+"Heat correction": 
+"Heure": "Hour"
+"Histogramme correct?": "Histogram OK?"
+"Hit detector": 
+"Horloge     (ms)": "Clock (ms)"
+"Hote": "Host"
+"IRM.pdf": 
+"Icon": 
+"Imprime fit gaussien": "Print gaussian fit"
+"Individual lookup": 
+"Infos": 
+"Initialisation v%s en cours": "Initialization V%s started"
+"Interface": 
+"Intitule": "Label"
+"Khi2 chaleur maximum": 
+"Khi2 ionisation maximum": 
+"L'evenement unite sera desormais %s": "The Unit event will be now %s"
+"La figure '%s' represente une seule variable": "The plot '%s' shows 1 variable only"
+"Lancer": "Launch"
+"Laquelle": "Which one"
+"Largeur": "Width"
+"Largeur bin": "Bin width"
+"LdB": 
+"Lect.delai.mini": 
+"Lect.taux.seuil": 
+"Lecture Ntuple": 
+"Lequel": "Which one"
+"Library": 
+"Limites Evt moyen": "MeanEvent limits"
+"Limites axes": "Axis limits"
+"Limites du fit": "Fit limits"
+"Lineaire": "Linear"
+"Lire selectes": "Read selected"
+"List": 
+"Liste a utiliser": "List to use"
+"Liste des bolos": "Detector list"
+"Liste des courbes utilisables": "Available tracks list"
+"Liste des runs": "Run list"
+"Lister": "List"
+"Marquage exclus": "Excluded mark"
+"Marquer": "Mark"
+"Maximum": 
+"MeanEvent limits": 
+"Mediane": "Median"
+"Meme bolo plus tard": "Same detector, later"
+"MiG_prgm": 
+"Minimum": 
+"Minimum amplitude": 
+"Minimum pointe: %g": "Located minimum: %g"
+"Mode": 
+"Mode de lecture": "Read mode"
+"Modele": "Model"
+"Modifier": "Modify"
+"Modifier (manu)": "Modify by hand"
+"Modifier coef.": "Modify coef."
+"Modify": 
+"Modify by hand": 
+"Movies": 
+"Moyenne": "Mean"
+"Music": 
+"Nb bins": 
+"Nb points": 
+"Nb points descente voies sphere": "Fall samples nb"
+"Nb points montee voies sphere": "Rise samples nb"
+"Nb.evts (0:tous)": "Evt Nb (0:all)"
+"Ne rien changer": "No changes"
+"New": 
+"Next cut": 
+"Niveau minimum": "Minimum level"
+"NoModif": 
+"Nom": Name
+"Nom de l'evenement": "Event name"
+"Nom de l'evenement unite cree": "New Unit event name"
+"Nombre de bins": "Bins Nb"
+"Nombre de coefficients": "Coefficient Nb"
+"Nombre de points": "Point Nb"
+"Nombre total d'evenements": "Total event number"
+"Non": "No"
+"Normalisation": 
+"Normalisation evenements": 
+"Normaliser evts": "Normalize events"
+"Nouveau": "New"
+"Nouveau traces": "New graphics"
+"Ntuple": 
+"Numero": "Number"
+"OK": 
+"On variable": 
+"Opera": 
+"Operations": 
+"Options": 
+"Ordonnee": "Y-axis"
+"Ou bien on annule..": "Or, I cancel.."
+"Oui": "Yes"
+"Parabolique": "Parabolic"
+"Pas d'evenement trouve": "No event found"
+"Pas de filtre en memoire": "No known filter"
+"Pas de plot utilisable": "No useful plot"
+"Pas de voie '%s' pour le detecteur '%s'": "No channel '%s' for the detector '%s'"
+"Perifs": 
+"Personnaliser": "Customize"
+"Pictures": 
+"Plot": 
+"Plot again": 
+"Plot type": 
+"Plot windows dimensions": 
+"Pointer un ntuple": "Locate a ntuple"
+"Pointes d'abord le coin haut-gauche,": "Locate first the upper-left limit,"
+"Pointes le MAXIMUM de la partie a fitter": "Locate the fit range MAXIMUM"
+"Pointes le minimum de la partie a fitter": "Locate the fit range MINIMUM"
+"Polarisation ionisation": 
+"Population zone": "Area population"
+"Position maxi": 
+"Pour": "for"
+Precedent": "Previous"
+"Premier evenenemt a sauver": "First event to save"
+"Premiere partition": "First partition"
+"Pretrigger": 
+"Processings": 
+"Prod Amplitudes": 
+"Profil X": 
+"Profil Y": 
+"Profondeur": "Depth"
+"Public": 
+"Quel plot": "Which plot"
+"Quenching": 
+"Quitter": "Quit"
+"Quota montee": "Rise amount quota"
+"Rafraichir": "Refresh"
+"Rattraper SAMBA": "Last SAMBA events"
+"Recherche standard": "Standard browser"
+"Recuperer": "Restore"
+"Refaire coupures": "Redo cuts"
+"Refresh": 
+"Refuse": "Rejected"
+"Regeneration": 
+"Related detector": 
+"Release": 
+"Relire": "Restore"
+"Relire evt unite": "Read UnitEvent"
+"Relire une liste": "Read a list"
+"Relit": "Restore"
+"Relu %d ntuple%s de %d variable%s (total: %d ntuple%s)": "Read  %d ntuple%s of %d variable%s (total: %d ntuple%s)"
+"Rep": 
+"Repert": "Directory"
+"Repertoires": "Directories"
+"Reserve": 
+"Reset": 
+"Resolution FWHM": 
+"Resolution ligne de base": "Baseline resolution"
+"Resolution signal": "Signal resolution"
+"Reste": "Remains"
+"Restore": 
+"Retirer coupure": "Remove a cut"
+"Retirer tous les evts": "Remove all events"
+"Retirer un run": "Remove a run"
+"Retracer": "Plot again"
+"Run": 
+"Runs pris en compte": "Accounted Runs"
+"Samba":
+"Sauvegarde de l'evenement unite impossible": "Unable to save the Unit event"
+"Sauver": "Save"
+"Sauver coupures": "Save the cuts"
+"Sauver evt unite": "Save the Unit event"
+"Sauver la liste": "Save the list"
+"Sauver selectes": "Save selected"
+"Sauver tables": "Save tables"
+"Save": 
+"Segment negatif": "Negative segment"
+"Selection": 
+"Selection de tous": "Select all"
+"Selection des variables du Ntuple": 
+"Selection manuelle": "Manual selection"
+"Selection variables": 
+"Seuil": "Threshold"
+"Seuil negatif": "Bottom threshold"
+"Seuil positif": "Top threshold"
+"Seulement %d/%d evenements examines": "Only %d events used (out of %d)"
+"Sigma": 
+"Sinon, minimum": "Or, minimum"
+"Sites": 
+"Somme": "Addition"
+"Soustraction pattern": "Pattern substraction"
+"Specifique EDW": "EDW-specifics"
+"Standard browser": 
+"Starter": 
+"Statistiques": "Statistics"
+"Stopper": "Stop"
+"Suivant": "Next"
+"Supplements": "Adds"
+"Supprimer": "Suppress"
+"Supprimer toutes": "Suppress all"
+"Sur les biplots": "On biplots"
+"Sur variable": "On variable"
+"System": 
+"TANGO version %s": 
+"Table a examiner": "Array to search"
+"Temperature":
+"Temps total d'acquisition": "Total acquisition time"
+"TempsMort.microsecs": 
+"TempsMort.secondes": 
+"Time choice": 
+"TimeStamp": 
+"TimeStamp0": 
+"Timestamp debut": 
+"Tout retirer": "Remove all"
+"Trace": "Plot"
+"Tracer evt unite?": "Plot the Unit event?"
+"Traces": "Plots"
+"Traitements": "Processings"
+"Trigger": 
+"Type":
+"Type de courbe": "Plot type"
+"Type de trace": "Plot type"
+"Unite": "Unit"
+"Utiliser ce %g%s evenement pour la moyenne?": "Use this %g%s event for the mean"
+"Valeur actuelle": "Current value"
+"Valeur d'un bin": "Bin value"
+"Valeur maxi": "Max value"
+"Valeur visee": "Value target"
+"Valeurs SAMBA": "SAMBA values"
+"Variable": 
+"Variable '%s' inconnue, ne sera pas lue": "Unknown variable '%s', will not be read"
+"Variable non definie: '%s'": 
+"Variables a sauver": "Variables to be saved"
+"Version": 
+"Veux-tu sauver la liste des runs?": "Save the run list?"
+"Voie touchee": "Hit channel"
+"Voies affichees": "Displayed channels"
+"Which plot":
+"Y (axe des Y)": 
+"Y-axis": 
+"Zone Neutrons": 
+"Zone de biplot": "Biplot zone"
+"Zone de fit": "Fit area"
+"Zones plot Q": "Qplot areas"
+"Zoom bolo touche": "Zoom on hit detector"
+"a": 
+"a0": 
+"a1": 
+"a2": 
+"absent": "none"
+"acq": 
+"ampl": 
+"amplitude":
+"amplitude max + integrale": 
+"analytique": 
+"archives": 
+"avec lissage ligne de base": 
+"avec x0": 
+"b": 
+"b1": 
+"b2": 
+"base":
+"bin":
+"binaires": 
+"biplot": 
+"bit-trigger": 
+"bolo trigge seul": "only hit detector"
+"bruit": "noise"
+"c":
+"cable": 
+"carre": "square"
+"centre": "center"
+"cercle": "circle"
+"certificat": 
+"chemin": "path"
+"classique1": 
+"classique2": 
+"compile": 
+"continuer/increment_de/multipl.par/diviser_par": 
+"continuer/increment_de/multipl.par/diviser_par/attribuer": 
+"croix": "cross"
+"database": 
+"date": 
+"debut evt unite": "Unit event begin"
+"dectitre": 
+"delai": "delay"
+"demodulation": 
+"derivee": 
+"descente": "fall"
+"donnees": data
+"emballe":
+"ener": 
+"essais":
+"et maximum": "and maximum"
+"et termines par le coin bas-droit": "then finish with the lower right limit"
+"etoile": "star"
+"evt-unite": 
+"executables": 
+"exponentielle": 
+"fall": 
+"fichier": "file"
+"figures": 
+"filtrage": "filtering"
+"fin evt unite": "UnitEvent end"
+"fonction": "function"
+"for": 
+"front": "edge"
+"function": 
+"gaussienne": "gaussian"
+"histo": 
+"hyperbole": 
+"installe": 
+"intedif": 
+"integ": 
+"integrale": 
+"invalidation": "cancelation"
+"jeu de graphiques": "grafics set"
+"jusque la, ca va...": "so far, so good"
+"khi2": 
+"la voie choisie": "the choosen channel"
+"lissage": "smoothing"
+"liste ci-dessous": "above list"
+"logarithme": 
+"logs":
+"longueur": "length"
+"man":
+"manip": 
+"max": 
+"maxi": 
+"mbox": 
+"min": 
+"montee": "rise"
+"moyenne": mean
+"n/a": 
+"neant": 
+"noise": 
+"nom du jeu de figures": "name for the plot set"
+"normal": 
+"nouvelle": "new"
+"number": 
+"numeriseurs": digitizers
+"numero": "number"
+"par convolution avec l'evenement moyen": 
+"par verification de l'amplitude max": 
+"pente": "slope"
+"perso": 
+"polynome": 
+"portages": 
+"porte": 
+"precedente ET": "previous AND"
+"precedente OU": "previous, OR"
+"profil X": "X profile"
+"profil Y": "Y profile"
+"projection X": 
+"projection Y": 
+"projets": 
+"random": 
+"resolution FWHM":
+"resultats": 
+"results": 
+"secs sur": "secs over"
+"settings": 
+"seuil": "threshold"
+"sigma": 
+"slope": 
+"sms":
+"sommaire": "abstract"
+"std":
+"temperature": 
+"test": 
+"tout": "all events"
+"toutes les voies": "all channels"
+"transfere": 
+"triangle": 
+"valeur d'un bin": 
+"voies du bolo": "bolo's channels"

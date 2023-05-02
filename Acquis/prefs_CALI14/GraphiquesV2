@@ -1,0 +1,44 @@
+# [claps]
+Fenetres = (
+	{ Signal := signal, min = -2500, max = 2500, duree_ms = 10, donnees = (
+		{ capteur = signal, detecteur = sphere, etat = brute, couleur = { rouge = 0, vert = 100, bleu = 0 } },
+		{ capteur = light, detecteur = sphere, etat = brute, couleur = { rouge = 100, vert = 50, bleu = 0 } }
+	), dimension = { l = 860, h = 280 }, position = { x = 28, y = 390 }, affichage = non, grille = non },
+	{ Traite := signal, min = -1200, max = 1200, duree_ms = 5.99962, donnees = (
+		{ capteur = signal, detecteur = sphere, etat = traitee, couleur = { rouge = 0, vert = 100, bleu = 0 } },
+		{ capteur = light, detecteur = sphere, etat = traitee, couleur = { rouge = 100, vert = 50, bleu = 0 } }
+	), dimension = { l = 860, h = 280 }, position = { x = 492, y = 498 }, affichage = non, grille = non },
+	{ Amplitude := histo, bin_min = 3000, bin_max = 6000, nb.bins = 100, max.evts = 0, donnees = (
+		{ var = amplitude, capteur = signal, detecteur = sphere, couleur = { rouge = 0, vert = 100, bleu = 0 } },
+		{ var = amplitude, capteur = light, detecteur = sphere, couleur = { rouge = 100, vert = 50, bleu = 0 } }
+	), classe = toutes, dimension = { l = 430, h = 280 }, position = { x = 12, y = 467 }, affichage = oui, grille = non },
+	{ "Bruit LdB" := histo, bin_min = 0, bin_max = 20, nb.bins = 150, max.evts = 0, donnees = { var = bruit, capteur = signal, detecteur = sphere, couleur = { rouge = 0, vert = 100, bleu = 0 } }, classe = toutes, dimension = { l = 430, h = 280 }, position = { x = 922, y = 44 }, affichage = non, grille = non },
+	{ AmplitudeBis := histo, bin_min = 3000, bin_max = 4000, nb.bins = 300, max.evts = 0, donnees = { var = amplitude, capteur = signal, detecteur = sphere, couleur = { rouge = 0, vert = 100, bleu = 0 } }, classe = toutes, dimension = { l = 430, h = 280 }, position = { x = 944, y = 376 }, affichage = non, grille = non },
+	{ montees := histo, bin_min = 0.025, bin_max = 0.03, nb.bins = 100, max.evts = 0, donnees = (
+		{ var = tps.montee, capteur = signal, detecteur = sphere, couleur = { rouge = 0, vert = 100, bleu = 0 } },
+		{ var = tps.montee, capteur = light, detecteur = sphere, couleur = { rouge = 100, vert = 50, bleu = 0 } }
+	), classe = toutes, dimension = { l = 430, h = 280 }, position = { x = 477, y = 650 }, affichage = oui, grille = non },
+	{ HistoRT := 2D-histo, , X = {
+		var = amplitude
+		capteur = signal
+		detecteur = sphere
+		bin_min = 2000
+		bin_max = 5500
+		nb.bins = 50
+	}, Y = {
+		var = tps.montee
+		capteur = signal
+		detecteur = sphere
+		bin_min = 0.007
+		bin_max = 0.0075
+		nb.bins = 20
+	}, classe = alpha, dimension = { l = 200, h = 150 }, position = { x = 924, y = 652 }, affichage = non, grille = non },
+	{ delai := biplot, , nb = 30, X = { Date := min = 2000, max = 7000 }, Y = { Delai := min = 0.02, max = 0.12 }, classe = beta, dimension = { l = 400, h = 250 }, position = { x = 100, y = 434 }, affichage = non, grille = non },
+	{ evt := evenement, min = 0, max = 0, duree_ms = 2, donnees = { capteur = signal, detecteur = sphere, etat = traitee, couleur = { rouge = 0, vert = 100, bleu = 0 } }, dimension = { l = 400, h = 250 }, position = { x = 20, y = 100 }, affichage = non, grille = non },
+	{ RC := histo, bin_min = 0.1, bin_max = 0.18, nb.bins = 100, max.evts = 0, donnees = { var = rc, capteur = signal, detecteur = sphere, couleur = { rouge = 0, vert = 100, bleu = 0 } }, classe = toutes, dimension = { l = 400, h = 250 }, position = { x = 816, y = 44 }, affichage = non, grille = non },
+	{ charge := histo, bin_min = 4000, bin_max = 8000, nb.bins = 100, max.evts = 0, donnees = { var = charge, capteur = signal, detecteur = sphere, couleur = { rouge = 0, vert = 100, bleu = 0 } }, classe = toutes, dimension = { l = 427, h = 250 }, position = { x = 17, y = 722 }, affichage = oui, grille = non },
+	{ descente := histo, bin_min = 0.1, bin_max = 0.13, nb.bins = 100, max.evts = 0, donnees = { var = descente, capteur = signal, detecteur = sphere, couleur = { rouge = 0, vert = 100, bleu = 0 } }, classe = toutes, dimension = { l = 400, h = 250 }, position = { x = 1233, y = 44 }, affichage = non, grille = non },
+	{ RT-ampl := biplot, , nb = 200, X = { ampl-signal := min = 3000, max = 6000 }, Y = { montee-signal := min = 0.026, max = 0.029 }, classe = toutes, dimension = { l = 200, h = 150 }, position = { x = 1250, y = 403 }, affichage = non, grille = non },
+	{ dispersion := histo, bin_min = 0.07, bin_max = 0.1, nb.bins = 25, max.evts = 0, donnees = { var = dispers, capteur = signal, detecteur = sphere, couleur = { rouge = 0, vert = 100, bleu = 0 } }, classe = toutes, dimension = { l = 400, h = 250 }, position = { x = 1165, y = 637 }, affichage = non, grille = non },
+	{ "Energie Bi" := histo, bin_min = 0, bin_max = 10000, nb.bins = 100, max.evts = 0, donnees = { var = prelim, capteur = signal, detecteur = sphere, couleur = { rouge = 0, vert = 100, bleu = 0 } }, classe = toutes, dimension = { l = 400, h = 250 }, position = { x = 19, y = 432 }, affichage = oui, grille = non }
+)

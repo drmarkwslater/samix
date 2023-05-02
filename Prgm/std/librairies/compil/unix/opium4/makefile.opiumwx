@@ -1,0 +1,40 @@
+# ***** OPIUM avec WxWidgets *********************************************************
+
+$(info  .................... Assemblage de la librairie $(LIBNAME) ....)
+
+LIBSRCE = $(SOURCE_LIB)/$(LIBFOLDER)
+LIBBINS = $(RELS)/$(LIBNAME)
+LIBFILE = $(LIBS)/lib$(LIBNAME).a
+
+LIBDEFS = $(wildcard $(LIBSRCE)/*.h)
+
+LIBCODE_STD = $(notdir $(wildcard $(LIBSRCE)/*.c))
+LIBOBJS_STD = $(LIBCODE_STD:.c=.o)
+LIBRELS_STD := $(foreach fichier,$(LIBOBJS_STD),$(LIBBINS)/$(fichier))
+
+LIBCODE_WXI = $(notdir $(wildcard $(SOURCE_LIB)/WXI/*.cpp))
+LIBOBJS_WXI = $(LIBCODE_WXI:.c=.o)
+LIBRELS_WXI := $(foreach fichier,$(LIBOBJS_WXI),$(LIBBINS)/$(fichier))
+
+ifneq ($(FOLDER),$(LIBNAME))
+$(FOLDER): $(LIBNAME)
+endif
+$(LIBFILE): $(LIBNAME)
+
+$(LIBNAME): $(LIBS) $(LIBBINS) $(LIBRELS_STD) $(LIBRELS_WXI)
+	@echo ".................... Assemblage final ........."
+	$(LIBGEN:LIBRAIRIE=$(LIBFILE)) $(LIBRELS_STD) $(LIBRELS_WXI)
+	@echo ".................... Librairie $(LIBNAME) prete ...................."
+
+$(LIBRELS_STD): $(LIBSRCE)/$(notdir $(@:.o=.c)) $(LIBDEFS) $(LIBBINS)
+	@echo "===== Compile $(LIBCODE_STD)"
+	$(CC) $(CFLAGS) -c -I$(LIBSRCE) -I$(SOURCE_LIB)/WXI $(LIBFLAGS) $(WXINCL) $(BINAIRE) $(LIBSRCE)/$(notdir $(@:.o=.c))
+$(LIBRELS_WXI): $(SOURCE_LIB)/WXI/$(notdir $(@:.o=.c)) $(LIBDEFS) $(LIBBINS)
+	@echo "===== Compile $(LIBCODE_WXI)"
+	$(CPP) $(CFLAGS) -I$(LIBSRCE) -I$(SOURCE_LIB)/WXI $(WXINCL) $(BINAIRE) $(SOURCE_LIB)/WXI/$(notdir $(@:.o=.c))
+
+$(LIBBINS): $(RELS)
+	mkdir -pv $(LIBBINS)
+
+clean:
+	cd $(RELS) && rm -vfr $(LIBBINS) && cd $(LIBS) && rm -vf $(LIBFILE)

@@ -1,0 +1,10 @@
+# [claps]
+Etiquettes = (
+	{ alpha := symbole = croix, r = 0, g = 0, b = 0xffff, son = Sons/Sol.wav },
+	{ beta := symbole = triangle, r = 0xffff, g = 0x7fff, b = 0, son = Sons/Do.wav },
+	{ gamma := symbole = cercle, r = 0, g = 0, b = 0xffff, son = Sons/Mi.wav },
+	{ higgs := symbole = carre, r = 0x8282, g = 0xffff, b = 0, son =  },
+	{ axions := symbole = carre, r = 0x8282, g = 0xffff, b = 0, son =  },
+	{ muon := symbole = cercle, r = 0x8282, g = 0xffff, b = 0, son =  },
+	{ neutron := symbole = point, r = 0, g = 0xffff, b = 0xbebe, son =  }
+)

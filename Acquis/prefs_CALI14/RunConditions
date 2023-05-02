@@ -1,0 +1,4 @@
+# [claps]
+Type = test 	# Type de run
+Source = neant 	# Source de calibration en place
+Blindage = absent 	# Configuration du blindage

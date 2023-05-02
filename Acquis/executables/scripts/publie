@@ -1,0 +1,60 @@
+#!/bin/tcsh
+#
+#	set loc = "lsm"; set evts = /Volumes/DonneesSPC4/events
+#	set loc = "grenoble"; set evts = $HOME/Samba/runs/events
+#	set loc = "saclay"; # set evts = $HOME/Samba/donnees/events
+
+	if(-e $HOME/.samba_top) then
+		# set top_data = ` cat -n ~/.samba_top | grep -w 1`; set top_decl = $top_data[2]
+		set top_decl = `grep setups $HOME/.samba_top | sed "s/setups //"`
+		set instal = "dans $top_decl"
+		# set loc_decl = ` cat -n ~/.samba_top | grep -w 3`; set loc = $loc_decl[2]
+		set loc = `grep labo $HOME/.samba_top | sed "s/labo //"`
+	else
+		set top_decl = ""
+		set loc_decl = ""
+		set instal = "ancienne"
+	endif
+	echo "      Installation: $instal"
+	if ("$loc" == "") then
+		set loc = "saclay";
+		echo "      Localisation: $loc PAR DEFAUT"
+	else
+		echo "      Localisation: $loc"
+	endif
+#
+	set xqt=`ps -x -o pid -o start -o pcpu -o command | grep "executables/Samba" | grep -v grep | sed "s/\/executables/ /"`
+	if ("$xqt" != "") then
+		set top_exec = $xqt[4]
+		echo "          Execution: $top_exec"
+	else
+		set top_exec = $top_decl
+	endif
+	if ("$top_exec" == "") then
+		echo "      Etat de Samba indeterminé (pas d'execution en cours, ni de fichier TOP defini)"
+	else
+		if(-e $top_exec/SambaArgs) then
+			set dsk = `grep "^E = " $top_exec/SambaArgs`
+			set donnees = $dsk[3]
+			set rep = `grep "^e = " $top_exec/SambaArgs`
+			set sans_slash = `echo $donnees | sed "s/\///"`
+			if ("$sans_slash" == "$donnees") then
+				set evts = $top_exec/$donnees/$rep[3]
+			else
+				set evts = $donnees/$rep[3]
+			endif
+			echo "        Evenements: $evts"
+			if ($#) then
+				foreach nom ($*)
+					scp -r $evts/$nom newsdata@sphere.phy.queensu.ca:/data/news/$loc/samba/
+				end
+			else
+				echo "             Usage: $0 <run_name> [ <run_name>] (NO slash in the run name)"
+				echo "              Runs:"
+				ls $evts
+			endif
+		else
+			echo "      Samba absent de cet ordinateur"
+		endif
+	endif
+#

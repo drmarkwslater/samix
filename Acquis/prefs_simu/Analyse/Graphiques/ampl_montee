@@ -1,0 +1,2 @@
+# [claps]
+Figures = { 2D-histo := x = amplitude-signal, x.min = 0, x.max = 10000, x.nb_bins = 100, y = montee-signal, y.min = 0, y.max = 0.2, y.nb_bins = 100  }

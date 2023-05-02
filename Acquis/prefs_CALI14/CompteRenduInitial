@@ -1,0 +1,23 @@
+# [claps]
+ordi.hardware = non 	# Configuration materielle de la machine d'acquisition
+ordi.software = non 	# Configuration logicielle de la machine d'acquisition
+electronique = non 	# Configuration de l'electronique d'acquisition
+initialisation = non 	# Phases de l'initialisation
+modeles = non 	# Examen des modeles
+reseau = non 	# Aquisitions connues
+repartiteurs.capacite = non 	# Capacite de transfert des repartiteurs
+repartiteurs.selecteur = non 	# Mode de selection de voies des repartiteurs
+detecteurs.fichier = non 	# Fichier de definition pour chaque detecteur
+detecteurs.associes = non 	# Detecteurs associes pour chaque detecteur
+detecteurs.compte = non 	# Comptage des detecteurs
+detecteurs.maintenance = non 	# Script de maintenance pour chaque detecteur
+detecteurs.classement = non 	# Classement initial des detecteurs
+detecteurs.perimetre = non 	# Liste des detecteurs avec mention local/etranger
+numeriseurs.sauvegarde = non 	# Ressources des numeriseurs a sauver
+numeriseurs.classement = non 	# Classement initial des numeriseurs
+cablage.repartiteurs = non 	# Cablage des repartiteurs
+cablage.detecteurs = non 	# Cablage des detecteurs
+voies.locales = oui 	# Liste des voies locales
+voies.composition = non 	# Composition des pseudo voies (si voies.locales uniquement)
+vars_manip = non 	# Liste des variables du montage experimental a utiliser
+media.liste = non 	# Liste des media lus ou crees

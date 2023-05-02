@@ -1,0 +1,103 @@
+#!/bin/tcsh
+#
+set samba = "Samba"
+set tango = "Tango"
+if ("$1" == "64") then
+	set samba = "Gasol"
+	set tango = "Gigas"
+endif
+set samba_app = $samba.app
+set tango_app = $tango.app
+set ce_jour = `date "+%c"`
+
+if(-e $HOME/.samba_top) then
+	# set top_data = `cat -n $HOME/.samba_top | grep -w 1`; set dir_data = $top_data[2]
+	set dir_data = `grep setups $HOME/.samba_top | sed "s/setups //"`
+	set instal = "dans $dir_data"
+else
+	set dir_data = ""
+	set instal = "ancienne"
+endif
+echo "      Installation: $instal"
+echo "       En date du : $ce_jour[1] $ce_jour[3] $ce_jour[2] $ce_jour[5] a $ce_jour[4]"
+#
+set xqt=`ps -x -o pid -o lstart -o pcpu -o command | grep "executables/$samba" | grep -v grep | sed "s/\/executables/ /"`
+if ("$xqt" != "") then
+	set dir_exec = $xqt[8]/executables
+else
+	# set top_exec = `cat -n $HOME/.samba_top | grep -w 2`; set dir_exec = $top_exec[2]
+	set dir_exec = `grep applis $HOME/.samba_top | sed "s/applis //"`
+endif
+if ("$dir_exec" == "") then
+	echo "      Etat de $samba indeterminé (pas d'execution en cours, ni de fichier TOP defini)"
+else
+	if(-e $dir_exec/$samba_app) then
+		set vsn = `more $dir_exec/$samba_app/Contents/Resources/version`
+		set args = $dir_data/SambaArgs
+		if(-e $args) then
+			set dsk = `grep "^E = " $args`; set datas = "dans $dsk[3]"
+			set prf = `grep "^P = " $args`; 
+			if("$prf" != "") then
+				set prefs = "dans $prf[3]"
+			else
+				set prf = `grep "^setup = " $args`; 
+				set prefs = "choix parmi $prf[3-]"
+			endif
+		else
+			set datas = "indeterminees ($args absent)"
+			set prefs = "indeterminees ($args absent)"
+		endif
+		echo "--"
+		echo "  Version de $samba : $vsn"
+		echo "       Préférences : $prefs"
+		echo "   Données sauvées : $datas"
+		# echo "  Disques externes : "; df -h | grep Donnees
+		echo "   Tampon ethernet : `sysctl -n net.inet.udp.recvspace` / `sysctl -n kern.ipc.maxsockbuf`"
+		if ("$xqt" != "") then
+			echo "Execution en cours : PId $xqt[1], depuis $xqt[2] $xqt[4] $xqt[3] $xqt[6] $xqt[5]"
+			echo " Activite actuelle : $xqt[7]% du CPU"
+		else
+			echo "Execution en cours : néant"
+		endif
+	else
+		echo "      $samba absent de cet ordinateur"
+	endif
+endif
+#
+set xqt=`ps -x -o pid -o lstart -o pcpu -o command | grep "executables/$tango" | grep -v grep | sed "s/\/executables/ /"`
+if ("$xqt" != "") then
+	set dir_exec = $xqt[8]/executables
+else
+	# set top_exec = `cat -n $HOME/.samba_top | grep 2`; set dir_exec = $top_exec[2]
+	set dir_exec = `grep applis $HOME/.samba_top | sed "s/applis //"`
+endif
+if ("$dir_exec" == "") then
+	echo "      Etat de $tango indeterminé (pas d'execution en cours, ni de fichier TOP defini)"
+else
+	if(-e $dir_exec/$tango_app) then
+		set vsn = `more $dir_exec/$tango_app/Contents/Resources/version`
+		set args = $dir_data/TangoArgs
+		if(-e $args) then
+			set dsk = `grep "^E = " $args`; set datas = "dans $dsk[3]"
+			set prf = `grep "^P = " $args`; set prefs = "dans $prf[3]"
+		else
+			set datas = "indeterminees ($args absent)"
+			set prefs = "indeterminees ($args absent)"
+		endif
+		echo "--"
+		echo "  Version de $tango : $vsn"
+		echo "       Préférences : $prefs"
+		echo " Données utilisées : $datas"
+		if ("$xqt" != "") then
+			echo "Execution en cours : PId $xqt[1], depuis $xqt[2] $xqt[4] $xqt[3] $xqt[6] $xqt[5]"
+			echo "               Run : $xqt[10]"
+			echo " Activite actuelle : $xqt[7]% du CPU"
+		else
+			echo "Execution en cours : néant"
+		endif
+	else
+		echo "      $tango absent de cet ordinateur"
+	endif
+endif
+
+exit

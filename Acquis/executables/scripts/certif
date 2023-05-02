@@ -1,0 +1,1 @@
+echo "!!! Ne PAS ajouter de passphrase !!!"; ssh-keygen -t rsa

@@ -1,0 +1,31 @@
+#!/bin/sh
+#
+if [[ $1 ]]; then {
+	app=$1
+	case $1 in 
+		( samba | Samba ) app=Samba;;
+		( tango | Tango ) app=Tango;;
+	esac
+	# read -d = topdir xeqdir loc < $HOME/.samba_top
+	topdir=`grep setups $HOME/.samba_top | sed "s/setups //"`
+	xeqdir=`grep applis $HOME/.samba_top | sed "s/applis //"`
+	loc=`grep labo $HOME/.samba_top | sed "s/labo //"`
+	cd $xeqdir
+	if [[ -d $app.app ]]; then {
+		if [[ -f $app.app/Contents/Resources/version ]]; then {
+			read -d = vsn < $app.app/Contents/Resources/version
+			echo ". La version courante de $app est $vsn"
+			if [[ -d AutresVersions/$app$vsn.app ]]
+				then echo ". Elle est deja sauvee dans $xeqdir/AutresVersions"
+				else echo ". Elle n'est PAS sauvee dans $xeqdir/AutresVersions"
+			fi
+		} else echo "! L'application $app n'a pas de numero de version"; fi
+	} elif [[ -x $app ]]; then echo "! Le fichier $app est un executable unix"
+	elif [[ -a $app ]]; then echo "! Le fichier $app est connu, mais pas comme un executable"
+	else echo "! L'application $app n'existe pas dans $xeqdir"; fi
+	exit
+}; fi
+
+echo "Indique la version courante d'une appli (comme Samba ou Tango), et son status dans 'AutresVersions'"
+echo "Usage: $0 { 'samba' | 'tango' | <autre_appli> }"
+exit

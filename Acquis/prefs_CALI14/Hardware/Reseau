@@ -1,0 +1,4 @@
+# Reseau participant a l'acquisition
+#
+acquisition = { local := ip = ., runs = m, repartiteurs = CALI14 }
+partitions = ()

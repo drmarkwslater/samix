@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# Usage: agrement <remote_adrs> [<port>]
+#
+fichier=id_rsa.pub
+tempo=tempo
+echo . Transfert de $fichier dans $1 sous le nom de $tempo
+if [[ $2 ]]; then scp -P $2 ~/.ssh/$fichier $1:.ssh/$tempo;
+else scp ~/.ssh/$fichier $1:.ssh/$tempo; fi
+#
+dest=authorized_keys
+echo . Ajout du contenu a $dest
+if [[ $2 ]]; then ssh -p $2 $1 "cd .ssh; cat $tempo > $dest";
+else ssh $1 "cd .ssh; cat $tempo >> $dest"; fi
+echo .............. Agrement termine le `date`

@@ -1,0 +1,29 @@
+#!/bin/sh
+#
+if [[ $1 ]]; then {
+    app=inconnue
+    case $1 in 
+	( samba | Samba ) app=Samba;;
+	( tango | Tango ) app=Tango;;
+	( gasol | Gasol ) app=Gasol;;
+	( gigas | Gigas ) app=Gigas;;
+    esac
+    if [[ $app != "inconnue" ]]; then {
+	# read -d = topdir xeqdir < $HOME/.samba_top
+	topdir=`grep setups $HOME/.samba_top | sed "s/setups //"`
+	xeqdir=`grep applis $HOME/.samba_top | sed "s/applis //"`
+	cd $xeqdir
+	read -d = vsn < $app.app/Contents/Resources/version
+	if [[ -d AutresVersions/$app$vsn.app ]]; then {
+	    echo La version courante de $app, $vsn, est deja sauvee dans $xeqdir/AutresVersions
+	} else {
+	    cp -Rv $1.app AutresVersions/$app$vsn.app
+	    echo La version courante de $app, $vsn, a ete sauvee dans $xeqdir/AutresVersions
+	}; fi
+	exit
+    }; fi
+}; fi
+
+echo "Sauve la version courante de Samba ou Tango dans 'AutresVersions'"
+echo "Usage: $0 { 'samba' | 'tango' | 'gasol' | 'gigas' }"
+exit

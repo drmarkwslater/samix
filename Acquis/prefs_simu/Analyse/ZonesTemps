@@ -1,0 +1,9 @@
+# [claps]
+montee_10 = 10 	# Pourcentage de l'amplitude pour le debut de la montee
+montee_90 = 90 	# Pourcentage de l'amplitude pour la fin de la montee
+montee_50 = 0.5 	# Quota de montee a retirer de la duree
+pre-lissage = 3 	# Largeur de lissage avant deconvolution
+post-lissage = 3 	# Largeur de lissage apres deconvolution
+multiple_si = 20000 	# Amplitude minimum pour compter un evenement multiple
+pendant_maxi = 5 	# Duree maximum d'un evenement multiple (s)
+voies = ()

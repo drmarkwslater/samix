@@ -1,0 +1,119 @@
+# wm: defini l'implementation (x11: X11, wx: wxWidgets, ou gl: OpenGL).
+# OpenGL par defaut, sinon utiliser "make wm=x11":
+#wm = gl
+# X11 par defaut, sinon utiliser "make wm=gl":
+wm = x11
+# wxWidgets par defaut, sinon utiliser "make wm=gl":
+#wm = wx
+
+OS = $(shell uname)
+# @echo xxxx : ici, ne fait rien
+# $(warning xxxx) affiche au prealable le nom du fichier et le numero de ligne
+$(info ====================== Compilation pour $(OS)/$(wm) ======================)
+
+FOLDER = $(notdir $(shell pwd))
+but: $(FOLDER)
+
+PRGM_STATUS = $(origin PRGM)
+ifeq ($(PRGM_STATUS),undefined)
+	PRGM = $(HOME)/Prgm
+endif
+$(info : Code et binaires dans '$(PRGM)')
+APPLIS_STATUS = $(origin APPLIS)
+ifeq ($(APPLIS_STATUS),undefined)
+	APPLIS = $(HOME)/Acquis/executables
+endif
+$(info : Applications dans '$(APPLIS)')
+
+# ***** Particularites de l'OS. A ajuster avant la premiere compilation *****
+
+BINAIRE = -o $@
+EXECUTABLE = -o $@
+LIBGEN = ar -rv LIBRAIRIE
+# G=g pour debug, D=<autre> pour autre define
+G =
+D =
+CFLAGS = -DUNIX -D__linux__ -D$(OS) $D $G -I. -I$(PRGM)/std/envir -I/usr/X11R6/include -c
+LFLAGS = -v $G
+#?? SYSINET = -lsocket -lnsl
+BIN_ACQ = $(APPLIS)
+#BIN_MIG = $(HOME)/bin.$(OS)
+BIN_MIG = $(HOME)/bin
+
+# ..... MacOS
+ifeq ($(OS),Darwin)
+	XCODE = /Applications/Xcode.app/Contents/Developer
+	FMWK = -framework IOKit -framework Cocoa -framework QuartzCore -framework System
+	CC = cc
+	CPP = $(XCODE)/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -g -isysroot $(XCODE)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk
+	CFLAGS += -Wno-int-to-void-pointer-cast -Wno-invalid-source-encoding
+	CFLAGS += -Wno-c++11-long-long -Wno-c++11-extensions -Wno-c++11-compat-deprecated-writable-strings
+	# "-Wno-#pragma-messages" : a verifier, pose probleme tel quel (# := commentaire)
+	LFLAGS += -L/usr/X11R6/lib
+	LD = cc
+	I = -I
+	O = o
+	L = lib
+	A = a
+	SO = dylib
+endif
+
+# ..... Ubuntu
+ifeq ($(OS),Linux)
+	FMWK =
+	CC = cc
+	CPP = g++ -std=gnu++11 -g
+	CFLAGS += -Wno-pointer-to-int-cast -Wno-format-truncation -Wno-write-strings -fmessage-length=120 -fdiagnostics-color=auto
+	LD = cc
+	I = -I
+	O = o
+	L = lib
+	A = a
+	SO = so
+endif
+
+# ***** Definitions generiques (a ne pas modifier) **************************
+AUTEUR = gros
+
+MAKES_STD = $(PRGM)/std/envir/unix
+
+COMPIL_DBG = $(PRGM)/std/diags/compil/unix
+SOURCE_DBG = $(PRGM)/std/diags/sources
+
+COMPIL_STD = $(PRGM)/std/applis/compil/unix
+SOURCE_STD = $(PRGM)/std/applis/sources
+
+COMPIL_LIB = $(PRGM)/std/librairies/compil/unix
+SOURCE_LIB = $(PRGM)/std/librairies/sources
+
+COMPIL_EDW = $(PRGM)/edw/compil/unix
+SOURCE_EDW = $(PRGM)/edw/sources
+
+COMPIL_MIG = $(PRGM)/MiG/compil/unix
+SOURCE_MIG = $(PRGM)/MiG/sources
+
+RELS = $(PRGM)/binaires/unix/rels
+LIBS = $(PRGM)/binaires/unix/lib
+#REPERTOIRES = $(RELS) $(LIBS)
+
+RELOAD = @echo ====================== Construction de $@ terminee ======================
+
+include $(PRGM)/std/envir/unix/makefile.$(wm)
+CFLAGS += -I$(SOURCE_LIB) $(IMPLEMENTATION)
+
+# ***** Creation des repertoires (ATTENTION: definir la cible dans les makefiles AVANT l'inclusion de ce fichier)
+#                                [mettre $(REPERTOIRES) dans les dependances?]
+$(BIN_ACQ):
+	mkdir -pv $(BIN_ACQ)
+$(BIN_MIG):
+	mkdir -pv $(BIN_MIG)
+
+$(PRGM)/binaires:
+	mkdir -pv $(PRGM)/binaires
+$(PRGM)/binaires/unix: $(PRGM)/binaires
+	mkdir -pv $(PRGM)/binaires/unix
+
+$(RELS): $(PRGM)/binaires/unix
+	mkdir -pv $(RELS)
+$(LIBS): $(PRGM)/binaires/unix
+	mkdir -pv $(LIBS)

@@ -1,0 +1,19 @@
+Bonjour Philippe,
+
+Dans le catalogue des runs, outre les commentaires optionnels il y a des infos systématiques quoique inaccessibles automatiquement par Samba en l'état.
+Quand on lance un run sauvegardé, il y a une fenêtre qu'il faut remplir avec, pour commencer, ces infos, puis les commentaires.
+Première précision: il faut que tout le monde s'attache à remplir correctement ces infos (donc, remarque à faire circuler à toute la collaboration). Par exemple, je vois en ce moment "source=neant" alors qu'il y en a une.
+Ensuite, la liste de ces infos est définie dans Samba/SnoGlobe/Environment
+J'y ai donc ajouté, comme "source" possible, "na22". Plus d'excuse donc pour ne pas utiliser ce champ.
+On peut y ajouter d'autres champs si l'information associée doit être systématique. Par exemple, peut être, "Position=SouthPole/EquatorItaly/EquatorFrance/etc"
+ou n'importe quelle info floating point ou integer. On peut, enfin, modifier la liste de mot-clés quand la variable est de ce type (exemple: neant -> none).
+
+Ces informations sont également reproduites dans les headers des runs (donc récupérables par tout bon programme d'analyse, comme Tango).
+
+A ceux qui utilisent Samba, de définir leur besoin en analyse et de mettre dans ce fichier tout ce qu'il leur convient.
+
+Amicalement,
+
+		MiG
+
+

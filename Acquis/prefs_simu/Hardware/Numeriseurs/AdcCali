@@ -1,0 +1,5 @@
+AdcCali#00 {
+	sortie = 0 	# 
+	gain = ()
+	ident = ( 1, 1, 1, 1 )
+}

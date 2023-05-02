@@ -1,0 +1,16 @@
+#
+=RP-S {
+	adresse = 192.168.2.30 	# Adresse IP ou No de carte PCI ou nom de run
+	etat = simule 	# HS/valide/simule
+	maintenance = . 	# Fichier definition les actions de chargement et demarrrage (init/start)
+	numerisation = standard 	# standard/BB/stamp/fichier
+	envoi = stream 	# type de donnees envoyees (stream/event)
+	numeriseurs = "[int]"
+	horloge = interne
+	port = 7
+	send = 8388607
+	user = root
+	pswd = root
+	init = ()
+	start = { ssh := "killall acqsvr; ./acqsvr >/nil 2>&1 &", direct = oui  }
+}

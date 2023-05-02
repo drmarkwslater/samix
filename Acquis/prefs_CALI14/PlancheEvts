@@ -1,0 +1,16 @@
+# [claps]
+graphiques = { par_classe = { largeur = 200, hauteur = 125 }, focus = { largeur = 400, hauteur = 250 } }
+tous-les-evts = {
+	taux.valeur = non
+	taux.courbe = non
+	trace_evt = non
+	deconvolue = non
+	autoscale = oui
+	scale.min = -6
+	scale.max = 32640
+}
+particulieres = (
+	{ alpha := taux.valeur = oui, taux.courbe = oui, trace_evt = oui, deconvolue = oui, autoscale = oui, scale.min = -50, scale.max = 5000 },
+	{ beta := taux.valeur = oui, taux.courbe = oui, trace_evt = oui, deconvolue = oui, autoscale = oui, scale.min = -50, scale.max = 5000 },
+	{ gamma := taux.valeur = oui, taux.courbe = oui, trace_evt = oui, deconvolue = oui, autoscale = oui, scale.min = -50, scale.max = 9000 }
+)

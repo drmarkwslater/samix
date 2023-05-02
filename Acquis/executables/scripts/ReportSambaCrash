@@ -1,0 +1,42 @@
+#!/bin/tcsh
+#
+if ($#) then
+	set appli = $1
+	set lieu = $2
+	if ($# < 3) then
+		set dest = $HOME/Desktop/{$appli}DernierCrash
+	else
+		set dest = $3
+	endif
+else
+	set appli = "Samba"
+	set lieu = "couriel"
+endif
+
+cd $HOME/Library/Logs/DiagnosticReports
+foreach crash (`ls -rt ${appli}*`)
+	# echo "Vu: $crash"
+	set dernier = $crash
+end
+
+if ($lieu == "ecran") then
+	open -e $dernier
+else if ($lieu == "dans") then
+	cp $dernier $dest
+	echo "Repertoire courant: `pwd`"
+	echo "$dernier copié dans $dest"
+else
+	echo "Envoi de $dernier à michel.gros@cea.fr"
+	set date = `echo $dernier | cut -d _ -f 2`
+	set ordi = `echo $dernier | sed s/.crash// | cut -d _ -f 3`
+	set aa = `echo $date | cut -c 1-4`
+	set mm = `echo $date | cut -c 6-7`
+	set jj = `echo $date | cut -c 9-10`
+	set hh = `echo $date | cut -c 12-13`
+	set mn = `echo $date | cut -c 14-15`
+	set ss = `echo $date | cut -c 16-17`
+	set user = `echo $HOME | cut -d / -f 3`
+	set adrs = `uname -n`
+	setenv REPLYTO $user@$adrs
+	cat $dernier | mail -s "Plantage de $appli dans $ordi, survenu le $jj.$mm.$aa a ${hh}:${mn}:${ss}" "michel.gros@cea.fr"
+endif

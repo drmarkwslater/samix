@@ -1,0 +1,1 @@
+#include <afx.h>class CConsoleWin32 {public:CConsoleWin32 ();~ CConsoleWin32 ();void StartDebugConsole(int nWidth,int nHeight,const char* pszfname=NULL);void DebugNewLine(void);void DebugPrintf(const char *szfmt,...);public:HANDLE          m_hStdOut;CStdioFile      m_stdFileDebug;}

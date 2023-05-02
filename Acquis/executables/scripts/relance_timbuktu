@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# tunnel cree par Timbuktu:
+# ssh -2 -v -e ~ -l acquis -C -L 50551:127.0.0.1:407 134.158.176.57
+#
+ps ax | grep "Timbuktu Host.app" | sed "s/\/Timbuktu Pro\//=/" >.timbuktu_topdir
+read -d = run bof status temps dir <.timbuktu_topdir
+if [[ ${dir:0:5} == "grep " ]]; then {
+	ps ax | grep "Timbuktu Pro" | sed "s/\/Timbuktu Pro\//=/" >.timbuktu_topdir
+	read -d = run bof status temps dir <.timbuktu_topdir
+	echo Process serveur arrete, lancement de $dir/Timbuktu Pro/Timbuktu Pro.app/Contents/SharedSupport/Timbuktu Host.app/ ...
+}; else {
+	echo Arret du process $run, puis relance de $dir/Timbuktu Pro/Timbuktu Pro.app/Contents/SharedSupport/Timbuktu Host.app/ ...
+	kill $run
+}; fi
+open -a "$dir/Timbuktu Pro/Timbuktu Pro.app/Contents/SharedSupport/Timbuktu Host.app/"
+exit

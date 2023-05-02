@@ -1,0 +1,10 @@
+# Repreciser wm, car introduit seulement plus tard, avec makefile.unix
+wm = x11
+LIBNAME = opium$(wm)
+LIBFOLDER = opium4
+LIBFLAGS = -I$(SOURCE_LIB)/utils -I$(SOURCE_LIB)/tcp
+ifeq ($(wm),wx)
+	LIBSTANDARD = non
+else
+	LIBSTANDARD = oui
+endif

@@ -1,0 +1,4 @@
+# [claps]
+coupures = ( amplitude, tps.montee, dispers )
+classes = ( amplitude, tps.montee )
+enregistre = ( amplitude, tps.montee, base, bruit, charge, top, dispers )

@@ -1,0 +1,57 @@
+#
+ADC = (
+	{ LTC2203 := bits = 16, signes, polar_Volts = 2.5 },
+	{ LTC1566 := bits = 14, signes, polar_Volts = 0.6 },
+	{ LTC2145 := bits = 14, signes, polar_Volts = 2.0 }
+)
+FPGA = ()
+Numeriseurs = (
+	{ AdcRp := version = 1.0, inactive = non, ident = 0, acces = (
+#		{ mode = texte, format = "@ %s 0x%08X", variables = ( nom, hexa ) }
+		{ mode = texte, format = "@ %s %s", donnees = ( { var = nom, format = "%s"}, { var = hexa, format = "0x%08X" } ) }
+	), ressources = (
+		{ E1-3  := categorie = divers, masque=0x1, bit0 = 0,  status = -1, defaut = 0, unite = , colonne = 1, codage = key, key.textes = "off/on", key.valeurs = ( 0, 0x1 )  },
+		{ E1-4  := categorie = divers, masque=0x1, bit0 = 1,  status = -1, defaut = 0, unite = , colonne = 2, codage = key, key.textes = "off/on", key.valeurs = ( 0, 0x1 )  },
+		{ E1-5  := categorie = divers, masque=0x1, bit0 = 2,  status = -1, defaut = 0, unite = , colonne = 3, codage = key, key.textes = "off/on", key.valeurs = ( 0, 0x1 )  },
+		{ E1-6  := categorie = divers, masque=0x1, bit0 = 3,  status = -1, defaut = 0, unite = , colonne = 4, codage = key, key.textes = "off/on", key.valeurs = ( 0, 0x1 )  },
+		{ E1-7  := categorie = divers, masque=0x1, bit0 = 4,  status = -1, defaut = 0, unite = , colonne = 5, codage = key, key.textes = "off/on", key.valeurs = ( 0, 0x1 )  },
+		{ E1-8  := categorie = divers, masque=0x1, bit0 = 5,  status = -1, defaut = 0, unite = , colonne = 6, codage = key, key.textes = "off/on", key.valeurs = ( 0, 0x1 )  },
+		{ E1-9  := categorie = divers, masque=0x1, bit0 = 6,  status = -1, defaut = 0, unite = , colonne = 7, codage = key, key.textes = "off/on", key.valeurs = ( 0, 0x1 )  },
+		{ E1-10 := categorie = divers, masque=0x1, bit0 = 7,  status = -1, defaut = 0, unite = , colonne = 1, codage = key, key.textes = "off/on", key.valeurs = ( 0, 0x1 )  },
+		{ E1-11 := categorie = divers, masque=0x1, bit0 = 8,  status = -1, defaut = 0, unite = , colonne = 2, codage = key, key.textes = "off/on", key.valeurs = ( 0, 0x1 )  },
+		{ E1-12 := categorie = divers, masque=0x1, bit0 = 9,  status = -1, defaut = 0, unite = , colonne = 3, codage = key, key.textes = "off/on", key.valeurs = ( 0, 0x1 )  },
+		{ E1-13 := categorie = divers, masque=0x1, bit0 = 10, status = -1, defaut = 0, unite = , colonne = 4, codage = key, key.textes = "off/on", key.valeurs = ( 0, 0x1 )  },
+		{ E1-14 := categorie = divers, masque=0x1, bit0 = 11, status = -1, defaut = 0, unite = , colonne = 5, codage = key, key.textes = "off/on", key.valeurs = ( 0, 0x1 )  },
+		{ E1-15 := categorie = divers, masque=0x1, bit0 = 12, status = -1, defaut = 0, unite = , colonne = 6, codage = key, key.textes = "off/on", key.valeurs = ( 0, 0x1 )  },
+		{ E1-16 := categorie = divers, masque=0x1, bit0 = 13, status = -1, defaut = 0, unite = , colonne = 7, codage = key, key.textes = "off/on", key.valeurs = ( 0, 0x1 )  },
+#		{ DAC-1 := categorie = auxi, masque = 0x3FFF, bit0 = 0, status = -1,  defaut = 0x1FFF, colonne = 1, unite = kVolts, codage = float, float.min = 0.0, float.max = 1.0  },
+#		{ DAC-2 := categorie = auxi, masque = 0x3FFF, bit0 = 16, status = -1, defaut = 0x1FFF, colonne = 2, unite = kVolts, codage = float, float.min = 0.0, float.max = 1.0  }
+		{ DAC-1 := categorie = auxi, masque = 0x3FFF, bit0 = 0, status = -1,  defaut = 0x1FFF, colonne = 1, unite = kV, codage = float, float.min = 1.06, float.max = -1.03  },
+		{ DAC-2 := categorie = auxi, masque = 0x3FFF, bit0 = 0, status = -1, defaut = 0x1FFF, colonne = 2, unite = kV, codage = float, float.min = 1.07, float.max = -1.04  }
+	), adc = ( LTC2145, LTC2145 ), gain = ( 1.0, 1.0 ), procedures = () },
+	{ AdcCali := version = 1.0, inactive = non, ident = 0, ressources = (
+		{ power-v1 := categorie = divers, adresse = 0x5, masque = 0x1, bit0 = 0,  status = -1, init = non, defaut = 0, colonne = 2, unite = , codage = key, key.textes = on/OFF, key.valeurs = ( 0x0, 0x1 )  },
+		{ power-v2 := categorie = divers, adresse = 0x5, masque = 0x1, bit0 = 4,  status = -1, init = non, defaut = 0, colonne = 2, unite = , codage = key, key.textes = on/OFF, key.valeurs = ( 0x0, 0x1 )  },
+		{ power-v3 := categorie = divers, adresse = 0x5, masque = 0x1, bit0 = 8,  status = -1, init = non, defaut = 0, colonne = 2, unite = , codage = key, key.textes = on/OFF, key.valeurs = ( 0x0, 0x1 )  },
+		{ power-v4 := categorie = divers, adresse = 0x5, masque = 0x1, bit0 = 12, status = -1, init = non, defaut = 0, colonne = 2, unite = , codage = key, key.textes = on/OFF, key.valeurs = ( 0x0, 0x1 )  },
+		{ dth-v1 := categorie = divers, adresse = 0x5, masque = 0x1, bit0 = 1,  status = -1, init = non, defaut = 0, colonne = 3, unite = , codage = key, key.textes = non/active, key.valeurs = ( 0x0, 0x1 )  },
+		{ dth-v2 := categorie = divers, adresse = 0x5, masque = 0x5, bit0 = 1,  status = -1, init = non, defaut = 0, colonne = 3, unite = , codage = key, key.textes = non/active, key.valeurs = ( 0x0, 0x1 )  },
+		{ dth-v3 := categorie = divers, adresse = 0x5, masque = 0x9, bit0 = 1,  status = -1, init = non, defaut = 0, colonne = 3, unite = , codage = key, key.textes = non/active, key.valeurs = ( 0x0, 0x1 )  },
+		{ dth-v4 := categorie = divers, adresse = 0x5, masque = 0x13, bit0 = 1, status = -1, init = non, defaut = 0, colonne = 3, unite = , codage = key, key.textes = non/active, key.valeurs = ( 0x0, 0x1 )  },
+		{ gain-v1 := categorie = gain, adresse = 0x5, masque = 0x1, bit0 = 2,  status = -1, init = non, defaut = 0, colonne = 1, unite = , codage = key, key.textes = 1/1.5, key.valeurs = ( 0x0, 0x1 )  },
+		{ gain-v2 := categorie = gain, adresse = 0x5, masque = 0x1, bit0 = 6,  status = -1, init = non, defaut = 0, colonne = 1, unite = , codage = key, key.textes = 1/1.5, key.valeurs = ( 0x0, 0x1 )  },
+		{ gain-v3 := categorie = gain, adresse = 0x5, masque = 0x1, bit0 = 10, status = -1, init = non, defaut = 0, colonne = 1, unite = , codage = key, key.textes = 1/1.5, key.valeurs = ( 0x0, 0x1 )  },
+		{ gain-v4 := categorie = gain, adresse = 0x5, masque = 0x1, bit0 = 14, status = -1, init = non, defaut = 0, colonne = 1, unite = , codage = key, key.textes = 1/1.5, key.valeurs = ( 0x0, 0x1 )  },
+		{ random-v1 := categorie = divers, adresse = 0x5, masque = 0x1, bit0 = 3,  status = -1, init = non, defaut = 0, colonne = 4, unite = , codage = key, key.textes = non/active, key.valeurs = ( 0x0, 0x1 )  },
+		{ random-v2 := categorie = divers, adresse = 0x5, masque = 0x1, bit0 = 7,  status = -1, init = non, defaut = 0, colonne = 4, unite = , codage = key, key.textes = non/active, key.valeurs = ( 0x0, 0x1 )  },
+		{ random-v3 := categorie = divers, adresse = 0x5, masque = 0x1, bit0 = 11, status = -1, init = non, defaut = 0, colonne = 4, unite = , codage = key, key.textes = non/active, key.valeurs = ( 0x0, 0x1 )  },
+		{ random-v4 := categorie = divers, adresse = 0x5, masque = 0x1, bit0 = 15, status = -1, init = non, defaut = 0, colonne = 4, unite = , codage = key, key.textes = non/active, key.valeurs = ( 0x0, 0x1 )  },
+		{ sortie := categorie = divers, adresse = 0x6, masque = 0xFFFF, bit0 = 255, status = -1, init = oui, defaut = 0, colonne = 1, unite = , codage = int, int.min = 0, int.max = 65535  }
+	), adc = ( LTC2203, LTC2203, LTC2203, LTC2203 ), gain = ( 1.0, 1.0, 1.0, 1.0 ), procedures = () },
+	{ AdcBO := version = 0.3, inactive = non, ident = 0, ressources = (), adc = LTC1566, procedures = () },
+	{ Sy127 := version = 1, inactive = non, ident = 0, ressources = (
+		{ HV1 := categorie = polar, adresse = 1, masque = 0, bit0 = 50, status = -1, init = non, defaut = 0, colonne = 1, unite = V, codage = int, int.min = 0, int.max = 4000  },
+		{ HV2 := categorie = polar, adresse = 2, masque = 0, bit0 = 10, status = -1, init = non, defaut = 0, colonne = 2, unite = V, codage = int, int.min = -1000, int.max = 1000  }
+	), procedures = (), acces = { mode = texte, format = "1BAA%s\rC%s\r1", donnees = ( { var = nom, format = "%s"}, { var = valeur, format = "%d" } ) }
+	}
+)

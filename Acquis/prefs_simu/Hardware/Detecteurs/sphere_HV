@@ -1,0 +1,267 @@
+#
+sphere/2voies: ok (HS/ok)
+	parms detecteur = {
+		masse = 0 	# masse du detecteur (g)
+		mode = standard 	# mode de sauvegarde
+		demarrage = neant 	# nom du fichier de demarrage de run
+		entretien = neant 	# nom du fichier d'entretien periodique
+		voisins = () 	# detecteurs a sauver aussi en mode 'voisins'
+		associes = () 	# detecteurs a sauver aussi en mode 'individuel'
+	}
+#
+#	---------- Parametrage de la voie signal ----------
+#
+	parms signal = {
+		usage = defaut 	# Utilisation finale de la voie (jetee/defaut/stream/evts/tout)
+		sensibilite = 1 	# nV/keV
+		Rdetecteur = 1.4013e-45 	# Mohms
+	}
+	reglages signal = {
+		HV1 = 0.0000
+		led = off
+	}
+	evenement signal = {
+		duree = 2 	# Duree evenement (ms)
+		delai = 0 	# Decalage evenement (ms)
+		interv = 2 	# Fenetre de recherche (ms)
+		pre-trigger = 50 	# Pre-trigger (%)
+		temps-mort = -1 	# Temps mort avant nouvelle recherche (milllisec.) (=post-trigger si <0)
+		base.depart = 25 	# Position du debut de ligne de base dans le pre-trigger (%)
+		base.arrivee = 75 	# Position de la fin de ligne de base dans le pre-trigger (%)
+		temps.depart = 10 	# Debut du temps de montee (%)
+		temps.arrivee = 90 	# Fin du temps de montee (%)
+		phase1.t0 = 0 	# Debut integrale rapide (ms)
+		phase1.dt = 0 	# Duree integrale rapide (ms)
+		phase2.t0 = 0 	# Debut integrale longue (ms)
+		phase2.dt = 0 	# Duree integrale longue (ms)
+		template.dim = 512 	# Dimension du template (points)
+		template.temps.montee = 0.01 	# temps de montee (ms)
+		template.temps.descente1 = 0.02 	# temps de la descente #1 (ms)
+		template.temps.descente2 = 0.04 	# temps de la descente #2 (ms)
+		template.facteur.descente2 = 1 	# gain de la descente #2
+		moyen.min = 4300 	# Amplitude min pour calcul evt moyen
+		moyen.max = 0 	# Amplitude max pour calcul evt moyen
+		affichage.min = -8192 	# Signal recu minimum (ADU) [pour l'affichage]
+		affichage.max = 8191 	# Signal recu maximum (ADU) [pour l'affichage]
+	}
+	trmt-au-vol signal = {
+		type = neant 	# Traitement au vol (neant/demodulation/filtrage/invalidation)
+		parametre = 11 	# Parametre (int) du traitement au vol
+		texte = "sur 11 pts" 	# Parametre (char[]) du traitement au vol
+		gain = 1 	# Gain logiciel au vol
+		execution = au_vol 	# La demodulation peut etre differee (au_vol/sur_tampon)
+	}
+	trmt-sur-tampon signal = {
+		type = neant 	# Traitement pre-trigger (neant/demodulation/filtrage/invalidation)
+		parametre = 0 	# Parametre (int) du traitement pre-trigger
+		texte = ButH2/100Hz 	# Parametre (char[]) du traitement pre-trigger
+		gain = 1 	# Gain logiciel pre-trigger
+		dim.tampon = 1024 	# Dimension du tampon resultat des traitements
+		dim.lissage = 50 	# Dimension de l'evaluation de la ligne de base
+		periodes.pattern = 10 	# Nb.periodes pour soustraction du pattern
+		moyenne.archive = 0 	# Facteur de moyennage avant la sauvegarde des evenements
+		template = analytique 	# Filtrage par template (neant/database/analytique)
+	}
+	trigger signal = {
+		type = seuil 	# Type de recherche d'evenement (neant/seuil/front/porte/bruit)
+		signe = positif 	# Sens de la variation attendue (negatif/indifferent/positif)
+		origine = interne 	# Origine du trigger (interne/deporte/fpga)
+		regulation = non 	# Autorisation de reguler automatiquement
+		reprise = fixe 	# Tactique de gestion du temps mort apres evenement (fixe/attends_seuil/reporte)
+		amplitude.min = 0 	# Amplitude minimum pour impulsions positives (ADU)
+		amplitude.max = 0 	# Amplitude maximum pour impulsions negatives (ADU)
+		montee = 0.1 	# Temps de montee minimum (microsecs.)
+		duree = 0 	# Duree d'evenement minimum (microsecs.)
+		#		Coupures avant sauvegarde
+		coupures = non 	# Vrai si coupures actives (non/oui/toujours)
+		veto = non 	# Vrai si voie en veto
+		ampl.rejette = non 	# Inverse la condition de coupure sur l'amplitude
+		underflow = 550 	# Plancher pour les amplitudes (ADU)
+		overflow = 650 	# Plafond pour les amplitudes (ADU)
+		montee.rejette = oui 	# Inverse la condition de coupure sur le temps de montee
+		montee.min = 0.001 	# Temps de montee minimum (millisecs)
+		montee.max = 0.005 	# Temps de montee maximum (millisecs)
+		bruit.rejette = non 	# Inverse la condition de coupure sur le bruit
+		bruit.max = 1e+06 	# Bruit maximum sur la ligne de base (ADU)
+		alpha.amplitude = 40000 	# Seuil pour un temps mort special alpha (ADU)
+		alpha.duree = 5000 	# Temps mort special alpha (ms)
+		#		Interconnexion entre voies
+		connexion.out = non 	# Autorisation de sortie
+		connexion.delai = 0 	# Delai de sortie du signal trigger [-1 si pas emis] (millisecs)
+		connexion.in = non 	# Autorisation d'entree
+		connexion.detec = 0 	# Detecteur branche sur sortie trigger autre voie
+		connexion.capteur = 0 	# Capteur (dudit detecteur) branche sur sortie trigger autre voie
+	}
+	regulation signal = {
+		Type = neant 	# Type de regulation (neant/taux/intervalles)
+		Plancher.min = 2 	# Plancher pour le seuil min
+		Plafond.min = 30000 	# Plafond  pour le seuil min
+		Plancher.max = 2 	# Plancher pour le seuil max
+		Plafond.max = -30000 	# Plafond  pour le seuil max
+		#
+		#		Regulation par le taux d'evenements
+		#
+		Active.1 = oui 	# Echelle de temps #1 en service
+		Echelle.1 = 1 	# Echelle de temps #1 (mn)
+		Nb.1.min = 60 	# Nombre d'evt minimum a l'echelle #1
+		Action.1.min.type = diviser_par 	# Type action si nb1 < min1
+		Action.1.min.parm = 2 	# Valeur action si nb1 < min1
+		Nb.1.max = 180 	# Nombre d'evt maximum a l'echelle #1
+		Action.1.max.type = multipl.par 	# Type action si nb1 > max1
+		Action.1.max.parm = 1.5 	# Valeur action si nb1 > max1
+		#
+		Active.2 = non 	# Echelle de temps #2 en service
+		Echelle.2 = 0 	# Echelle de temps #2 (mn)
+		Nb.2.min = 0 	# Nombre d'evt minimum a l'echelle #2
+		Action.2.min.type = continuer 	# Type action si nb2 < min2
+		Action.2.min.parm = 0 	# Valeur action si nb2 < min2
+		Nb.2.max = 0 	# Nombre d'evt maximum a l'echelle #2
+		Action.2.max.type = continuer 	# Type action si nb2 > max2
+		Action.2.max.parm = 0 	# Valeur action si nb2 > max2
+		#
+		Active.3 = non 	# Echelle de temps #3 en service
+		Echelle.3 = 0 	# Echelle de temps #3 (mn)
+		Nb.3.min = 0 	# Nombre d'evt minimum a l'echelle #3
+		Action.3.min.type = continuer 	# Type action si nb3 < min3
+		Action.3.min.parm = 0 	# Valeur action si nb3 < min3
+		Nb.3.max = 0 	# Nombre d'evt maximum a l'echelle #3
+		Action.3.max.type = continuer 	# Type action si nb3 > max3
+		Action.3.max.parm = 0 	# Valeur action si nb3 > max3
+		#
+		#		Regulation par intervalles
+		#
+		Interv.nb = 0 	# Nombre d'intervalles
+		Interv.duree = 0 	# Longueur (s)
+		Interv.ajuste = 0 	# Ajustement seuil (ADU)
+		Interv.evt = 0 	# Facteur decision
+		Interv.min = 0 	# Delai mini (nb.interv.)
+		Interv.incr = 0 	# Increment si bruit (ADU)
+	}
+#
+#	---------- Parametrage de la voie light ----------
+#
+	parms light = {
+		usage = defaut 	# Utilisation finale de la voie (jetee/defaut/stream/evts/tout)
+		sensibilite = 1 	# nV/keV
+		Rdetecteur = 1.4013e-45 	# Mohms
+	}
+	reglages light = {
+		HV2 = 0.0000
+	}
+	evenement light = {
+		duree = 2 	# Duree evenement (ms)
+		delai = 0 	# Decalage evenement (ms)
+		interv = 2 	# Fenetre de recherche (ms)
+		pre-trigger = 50 	# Pre-trigger (%)
+		temps-mort = -1 	# Temps mort avant nouvelle recherche (milllisec.) (=post-trigger si <0)
+		base.depart = 25 	# Position du debut de ligne de base dans le pre-trigger (%)
+		base.arrivee = 75 	# Position de la fin de ligne de base dans le pre-trigger (%)
+		temps.depart = 10 	# Debut du temps de montee (%)
+		temps.arrivee = 90 	# Fin du temps de montee (%)
+		phase1.t0 = 0 	# Debut integrale rapide (ms)
+		phase1.dt = 0 	# Duree integrale rapide (ms)
+		phase2.t0 = 0 	# Debut integrale longue (ms)
+		phase2.dt = 0 	# Duree integrale longue (ms)
+		template.dim = 512 	# Dimension du template (points)
+		template.temps.montee = 0.01 	# temps de montee (ms)
+		template.temps.descente1 = 0.14 	# temps de la descente #1 (ms)
+		template.temps.descente2 = 0.2 	# temps de la descente #2 (ms)
+		template.facteur.descente2 = 1 	# gain de la descente #2
+		moyen.min = 4300 	# Amplitude min pour calcul evt moyen
+		moyen.max = 0 	# Amplitude max pour calcul evt moyen
+		affichage.min = -8192 	# Signal recu minimum (ADU) [pour l'affichage]
+		affichage.max = 8191 	# Signal recu maximum (ADU) [pour l'affichage]
+	}
+	trmt-au-vol light = {
+		type = neant 	# Traitement au vol (neant/demodulation/filtrage/invalidation)
+		parametre = 1 	# Parametre (int) du traitement au vol
+		texte =  	# Parametre (char[]) du traitement au vol
+		gain = 1 	# Gain logiciel au vol
+		execution = au_vol 	# La demodulation peut etre differee (au_vol/sur_tampon)
+	}
+	trmt-sur-tampon light = {
+		type = neant 	# Traitement pre-trigger (neant/demodulation/filtrage/invalidation)
+		parametre = 1 	# Parametre (int) du traitement pre-trigger
+		texte =  	# Parametre (char[]) du traitement pre-trigger
+		gain = 1 	# Gain logiciel pre-trigger
+		dim.tampon = 1024 	# Dimension du tampon resultat des traitements
+		dim.lissage = 50 	# Dimension de l'evaluation de la ligne de base
+		periodes.pattern = 0 	# Nb.periodes pour soustraction du pattern
+		moyenne.archive = 0 	# Facteur de moyennage avant la sauvegarde des evenements
+		template = analytique 	# Filtrage par template (neant/database/analytique)
+	}
+	trigger light = {
+		type = seuil 	# Type de recherche d'evenement (neant/seuil/front/porte/bruit)
+		signe = positif 	# Sens de la variation attendue (negatif/indifferent/positif)
+		origine = interne 	# Origine du trigger (interne/deporte/fpga)
+		regulation = non 	# Autorisation de reguler automatiquement
+		reprise = fixe 	# Tactique de gestion du temps mort apres evenement (fixe/attends_seuil/reporte)
+		amplitude.min = 0 	# Amplitude minimum pour impulsions positives (ADU)
+		amplitude.max = -50 	# Amplitude maximum pour impulsions negatives (ADU)
+		montee = 10.24 	# Temps de montee minimum (microsecs.)
+		duree = 0 	# Duree d'evenement minimum (microsecs.)
+		#		Coupures avant sauvegarde
+		coupures = non 	# Vrai si coupures actives (non/oui/toujours)
+		veto = non 	# Vrai si voie en veto
+		ampl.rejette = non 	# Inverse la condition de coupure sur l'amplitude
+		underflow = 0 	# Plancher pour les amplitudes (ADU)
+		overflow = 500 	# Plafond pour les amplitudes (ADU)
+		montee.rejette = non 	# Inverse la condition de coupure sur le temps de montee
+		montee.min = 0.001 	# Temps de montee minimum (millisecs)
+		montee.max = 25600 	# Temps de montee maximum (millisecs)
+		bruit.rejette = non 	# Inverse la condition de coupure sur le bruit
+		bruit.max = 1e+06 	# Bruit maximum sur la ligne de base (ADU)
+		alpha.amplitude = 40000 	# Seuil pour un temps mort special alpha (ADU)
+		alpha.duree = 5000 	# Temps mort special alpha (ms)
+		#		Interconnexion entre voies
+		connexion.out = non 	# Autorisation de sortie
+		connexion.delai = 0 	# Delai de sortie du signal trigger [-1 si pas emis] (millisecs)
+		connexion.in = non 	# Autorisation d'entree
+		connexion.detec = 0 	# Detecteur branche sur sortie trigger autre voie
+		connexion.capteur = 0 	# Capteur (dudit detecteur) branche sur sortie trigger autre voie
+	}
+	regulation light = {
+		Type = neant 	# Type de regulation (neant/taux/intervalles)
+		Plancher.min = 0 	# Plancher pour le seuil min
+		Plafond.min = 0 	# Plafond  pour le seuil min
+		Plancher.max = 0 	# Plancher pour le seuil max
+		Plafond.max = 0 	# Plafond  pour le seuil max
+		#
+		#		Regulation par le taux d'evenements
+		#
+		Active.1 = non 	# Echelle de temps #1 en service
+		Echelle.1 = 0 	# Echelle de temps #1 (mn)
+		Nb.1.min = 0 	# Nombre d'evt minimum a l'echelle #1
+		Action.1.min.type = continuer 	# Type action si nb1 < min1
+		Action.1.min.parm = 0 	# Valeur action si nb1 < min1
+		Nb.1.max = 0 	# Nombre d'evt maximum a l'echelle #1
+		Action.1.max.type = continuer 	# Type action si nb1 > max1
+		Action.1.max.parm = 0 	# Valeur action si nb1 > max1
+		#
+		Active.2 = non 	# Echelle de temps #2 en service
+		Echelle.2 = 0 	# Echelle de temps #2 (mn)
+		Nb.2.min = 0 	# Nombre d'evt minimum a l'echelle #2
+		Action.2.min.type = continuer 	# Type action si nb2 < min2
+		Action.2.min.parm = 0 	# Valeur action si nb2 < min2
+		Nb.2.max = 0 	# Nombre d'evt maximum a l'echelle #2
+		Action.2.max.type = continuer 	# Type action si nb2 > max2
+		Action.2.max.parm = 0 	# Valeur action si nb2 > max2
+		#
+		Active.3 = non 	# Echelle de temps #3 en service
+		Echelle.3 = 0 	# Echelle de temps #3 (mn)
+		Nb.3.min = 0 	# Nombre d'evt minimum a l'echelle #3
+		Action.3.min.type = continuer 	# Type action si nb3 < min3
+		Action.3.min.parm = 0 	# Valeur action si nb3 < min3
+		Nb.3.max = 0 	# Nombre d'evt maximum a l'echelle #3
+		Action.3.max.type = continuer 	# Type action si nb3 > max3
+		Action.3.max.parm = 0 	# Valeur action si nb3 > max3
+		#
+		#		Regulation par intervalles
+		#
+		Interv.nb = 0 	# Nombre d'intervalles
+		Interv.duree = 0 	# Longueur (s)
+		Interv.ajuste = 0 	# Ajustement seuil (ADU)
+		Interv.evt = 0 	# Facteur decision
+		Interv.min = 0 	# Delai mini (nb.interv.)
+		Interv.incr = 0 	# Increment si bruit (ADU)
+	}

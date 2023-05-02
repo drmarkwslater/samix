@@ -1,0 +1,7 @@
+include $(COMPIL_LIB)/tcp/makefile.defs
+TCP := $(SOURCE_LIB)/$(LIBFOLDER)
+TCPNAME := $(LIBNAME)
+TCPLIB := $(LIBS)/lib$(LIBNAME).a
+TCPMAKE := $(COMPIL_LIB)/$(LIBFOLDER)
+$(TCPLIB):
+	cd $(TCPMAKE) && make

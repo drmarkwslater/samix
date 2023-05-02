@@ -1,0 +1,12 @@
+#!/bin/tcsh
+#
+# autre solution: alias usbterm screen /dev/`ls /dev | grep tty.usbserial` 115200 8N1
+#
+set port = `ls /dev | grep tty.usbserial`
+if($port != "") then
+	screen /dev/$port 115200 8N1
+	killall SCREEN
+else
+	echo Pas de port de type 'tty.usbserial' dans /dev
+endif
+exit

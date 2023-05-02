@@ -1,0 +1,172 @@
+include ../../../../std/envir/unix/makefile.unix
+
+ifeq ($(wm),x11)
+#	Systeme d'Acquisition Multidetecteurs sous unIX
+	XQ = samix
+	CFLAGS += -DForSamix
+
+else ifeq ($(wm),gl)
+#	Generic Acquisition System On Linux
+	XQ = gasol
+	CFLAGS += -DForGasol
+
+else ifeq ($(wm),wx)
+#	Systeme d'Acquisition Multi Bolometres avec Apple / wxWidgets
+	XQ = sambaWX
+	CFLAGS += -DForSambaWX
+
+else
+#	Systeme d'Acquisition Multi Bolometres avec Apple
+	XQ = samba
+	CFLAGS += -DForSamba
+endif
+CFLAGS += -DCOMPIL_DIR=$(COMPIL_EDW)/samba -DSOURCE_DIR=$(SOURCE_EDW)/samba -DAPPLI_NAME=$(XQ) -DAPPLI_DIR=$(BIN_ACQ) -DAPPLI_FILE=$(XQ)
+
+$(FOLDER): $(XQ)
+	@echo "                    _____________________"
+	@echo "                   |                     |"
+	@echo "                   | Logiciel $(XQ) pret |"
+	@echo "                   |_____________________|"
+#	@echo ".................... Logiciel $(XQ) pret ...................."
+
+include $(COMPIL_LIB)/utils/makefile.defs
+UTILS := $(SOURCE_LIB)/$(LIBFOLDER)
+UTILSNAME := $(LIBNAME)
+UTILSLIB := $(LIBS)/lib$(LIBNAME).a
+UTILSMAKE := $(COMPIL_LIB)/$(LIBFOLDER)
+$(UTILSLIB):
+	cd $(UTILSMAKE); make
+
+include $(COMPIL_LIB)/opium4/makefile.defs
+OPIUM := $(SOURCE_LIB)/$(LIBFOLDER)
+OPIUMNAME := $(LIBNAME)
+OPIUMLIB := $(LIBS)/lib$(LIBNAME).a
+OPIUMMAKE := $(COMPIL_LIB)/$(LIBFOLDER)
+$(OPIUMLIB):
+	cd $(OPIUMMAKE); make
+
+GRAFLISTE = $(OPIUMLIB)
+
+ifeq ($(wm),gl)
+include $(COMPIL_LIB)/GLFW/makefile.defs
+	GLFWNAME := $(LIBNAME)
+	GLFWLIB := $(LIBS)/lib$(LIBNAME).a
+	GLFWMAKE := $(COMPIL_LIB)/$(LIBFOLDER)
+$(GLFWLIB):
+	cd $(GLFWMAKE); make
+
+include $(COMPIL_LIB)/GLUT/makefile.defs
+	GLUTNAME := $(LIBNAME)
+	GLUTLIB := $(LIBS)/lib$(LIBNAME).a
+	GLUTMAKE := $(COMPIL_LIB)/$(LIBFOLDER)
+$(GLUTLIB):
+	cd $(GLUTMAKE); make
+
+	GRAFLISTE += $(GLFWLIB) $(GLUTLIB)
+endif
+
+include $(COMPIL_LIB)/fltr/makefile.defs
+FLTR := $(SOURCE_LIB)/$(LIBFOLDER)
+FLTRNAME := $(LIBNAME)
+FLTRLIB := $(LIBS)/lib$(LIBNAME).a
+FLTRMAKE := $(COMPIL_LIB)/$(LIBFOLDER)
+$(FLTRLIB):
+	cd $(FLTRMAKE); make
+
+include $(COMPIL_LIB)/FFT/makefile.defs
+FFT := $(SOURCE_LIB)/$(LIBFOLDER)
+FFTNAME := $(LIBNAME)
+FFTLIB := $(LIBS)/lib$(LIBNAME).a
+FFTMAKE := $(COMPIL_LIB)/$(LIBFOLDER)
+$(FFTLIB):
+	cd $(FFTMAKE); make
+
+include $(COMPIL_LIB)/tcp/makefile.defs
+TCP := $(SOURCE_LIB)/$(LIBFOLDER)
+TCPNAME := $(LIBNAME)
+TCPLIB := $(LIBS)/lib$(LIBNAME).a
+TCPMAKE := $(COMPIL_LIB)/$(LIBFOLDER)
+$(TCPLIB):
+	cd $(TCPMAKE); make
+
+include $(COMPIL_LIB)/db/makefile.defs
+DB := $(SOURCE_LIB)/$(LIBFOLDER)
+DBNAME := $(LIBNAME)
+DBLIB := $(LIBS)/lib$(LIBNAME).a
+DBMAKE := $(COMPIL_LIB)/$(LIBFOLDER)
+$(DBLIB):
+	cd $(DBMAKE); make
+
+include $(COMPIL_EDW)/PCI/makefile.PCI
+# supprime de SAMBALIBS: -l$(PCINAME)
+# supprime de $(BIN)/samba:  $(PCILIB)
+
+SAMBALIBS = -L$(LIBS) -l$(UTILSNAME) -l$(OPIUMNAME)
+ifeq ($(OS),Darwin)
+	ifeq ($(wm),gl)
+		SAMBALIBS += -l$(GLFWNAME) -l$(GLUTNAME) -L/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/ -L/opt/X11/lib -lGL
+	endif
+	SAMBALIBS += -lcurl
+endif
+ifeq ($(OS),Linux)
+	ifeq ($(wm),gl)
+		SAMBALIBS += -l$(GLFWNAME) -l$(GLUTNAME) -lGL -lXrandr -lXxf86vm -ldl -lpthread
+	endif
+endif
+SAMBALIBS += -l$(FFTNAME) -l$(FLTRNAME) -l$(TCPNAME) -l$(DBNAME) -lX11 -lm
+
+
+# ***** Repertoires propres ***************************************************
+
+SAMBA = $(SOURCE_EDW)/samba
+SALSA = $(SOURCE_EDW)/salsa
+SAMBADEFS = $(wildcard $(SAMBA)/*.h) $(wildcard $(SALSA)/*.h)
+SAMBABIN = $(RELS)/samba
+
+INCLUDES = -I$(SOURCE_EDW) -I$(SOURCE_EDW)/Electronique -I$(SAMBA) -I$(SALSA) -I$(FLTR) -I$(SOURCE_LIB) -I$(OPIUM) -I$(DB) -I$(TCP) -I$(PCI) -I$(FFT) -I$(FFT)/fftw -I$(FFT)/rfftw -I$(UTILS) -I/usr/include
+
+# ***** Listes ***************************************************************
+
+SAMBACODE = $(notdir $(wildcard $(SAMBA)/*.c))
+SAMBAOBJS = $(SAMBACODE:.c=.o)
+SAMBARELS := $(foreach fichier,$(SAMBAOBJS),$(SAMBABIN)/$(fichier))
+
+SALSACODE = $(notdir $(wildcard $(SALSA)/*.c))
+SALSAOBJS = $(SALSACODE:.c=.o)
+SALSARELS := $(foreach fichier,$(SALSAOBJS),$(SAMBABIN)/$(fichier))
+
+# ***** Interface utilisateur ************************************************
+
+$(XQ): $(BIN_ACQ)/$(XQ)
+	@$(PRGM)/std/envir/unix/version_counter $(BIN_ACQ) $(XQ) $(SAMBA)
+	$(RELOAD)
+
+$(BIN_ACQ)/$(XQ): $(SAMBABIN) $(SAMBARELS) $(SALSARELS) $(LIBS) $(UTILSLIB) $(GRAFLISTE) $(DBLIB) $(TCPLIB) $(FFTLIB) $(FLTRLIB)
+#	@echo "ar=" && which ar
+#	@echo "ld=" && which ld
+	@echo "| $(wm)"
+	@echo "===== Edition de liens pour $@"
+	$(LD) $(LFLAGS) $G $(EXECUTABLE) $(SAMBARELS) $(SALSARELS) $(SAMBALIBS) $(LIBSTD)
+	@cp -Rv $(SAMBA)/Info/ $(BIN_ACQ)/SambaInfo
+	@echo "====================== Executable $@ cree ====================="
+#	$(warning | Variante: $(wm))
+	@echo "| Systeme: $(OS)/$(wm) (compilateur: $(CC))"
+
+$(SAMBARELS): $(SAMBA)/$(notdir $(@:.o=.c)) $(SAMBADEFS)
+	@echo "| $(wm)"
+	@echo "===== Compile $(SAMBA)/$(notdir $(@:.o=.c))"
+	$(CC) $(CFLAGS) $(INCLUDES) $(BINAIRE) $(SAMBA)/$(notdir $(@:.o=.c))
+
+$(SALSARELS): $(SALSA)/$(notdir $(@:.o=.c)) $(SAMBADEFS)
+	@echo "| $(wm)"
+	@echo "===== Compile $(SALSA)/$(notdir $(@:.o=.c))"
+	$(CC) $(CFLAGS) $(INCLUDES) $(BINAIRE) $(SALSA)/$(notdir $(@:.o=.c))
+
+$(SAMBABIN): $(RELS)
+	mkdir -pv $(SAMBABIN)
+
+$(BIN_ACQ)/SambaInfo: $(BIN_ACQ)
+	mkdir -pv $(BIN_ACQ)/SambaInfo
+
+clean:
+	rm -vf $(SAMBABIN)/*

@@ -1,0 +1,1 @@
+#ifdef macintosh#ifndef XCODE#pragma message(__FILE__)#endif#endif

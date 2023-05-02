@@ -1,0 +1,2 @@
+boite = 30	# Numero de boite (repartiteur IP/carte ADC) par defaut, -1 si a ne pas utiliser
+P = prefs_RP30 	# Repertoire des preferences (relatif a la racine, ou absolu)

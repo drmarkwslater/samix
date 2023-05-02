@@ -1,0 +1,60 @@
+#!/bin/sh
+#
+aide() {
+	echo "Usage: $0 [<ssh_adrs> [<folder> [<port>]]]"
+	echo "<ssh_adrs>: <user>'@'<ip_adrs>"
+	echo "<folder>  : Samba TopDirectory [acq]"
+	echo "<vsn>     : <v>_<s>_<r>"
+	exit
+};
+#
+if [[ -e $HOME/.samba_top ]]; then {
+	#top_data=`cat -n $HOME/.samba_top | grep 1`; ligne1=($top_data); top_decl=${ligne1[1]}
+	top_decl=`cat $HOME/.samba_top | grep setups | sed "s/setups //"`
+}; else {
+	echo "L'installation de Samba est trop vieille, voire inexistante! Desole..."
+	exit
+}; fi
+#
+magasin=$top_decl/Packs
+exec=$top_decl/executables
+objet="pack"; nom="lsm"; appellation="du pack"
+#
+dest=$1
+topdir=${2:-Samba}
+port=${3:-22}
+if [[ $dest ]]; then echo Expedition $appellation $nom vers $dest:$port/$topdir
+else echo Emballage $appellation $nom; fi
+
+# echo "! Recherche du pack $magasin/$nom"
+if [[ -e $magasin/$nom ]]; then {
+	echo " "
+	fichier=Pack_$nom.tar
+	tar cvf $fichier -C $top_decl -T $magasin/executables
+	if [[ -d $top_decl/Commun ]]; then tar rvf $fichier -C $top_decl Commun; fi
+	tar rvf $fichier -C $top_decl -T $magasin/$nom
+#	tar rvf $fichier -C $top_decl Docs
+	resultat="Dossier d'installation $nom"
+	if [[ $dest ]]; then {
+		final=$topdir; farside="cd $final; tar xvf $fichier"
+	}; fi
+}; else {
+	echo "! Recherche du pack $nom dans $magasin infructueuse !"; aide
+}; fi
+
+if [[ $fichier ]]; then {
+	echo . Fichier cree: $fichier;
+	if [[ $dest ]]; then {
+		echo . Transfert de $fichier dans $dest:$final
+		if [[ $port ]]; then {
+			scp -P $port $fichier $dest:$final
+#			ssh -p $port $dest $farside
+		}; else {
+			scp $fichier $dest:$final
+#			ssh $dest $farside
+		}; fi
+		echo "............. $resultat mis a jour le `date` pour $dest:$port/$topdir"
+	}; else echo "............. $resultat cree le `date`"; fi
+}; else {
+	echo "! Nom $objet inconnu, pas de fichier cree !"; aide
+}; fi

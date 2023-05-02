@@ -1,0 +1,82 @@
+#
+Echantillonnage = 976.562 	# Frequence d'echantillonnage demandee (kHz)
+Partition.reelle = standard 	# Partition reellement utilisee (standard/solo/globale)
+Classement.numeriseurs = tour 	# Ordre de presentation des numeriseurs
+Classement.detecteurs = tour 	# Ordre de presentation des detecteurs
+Longueur.fibres = 16 	# Longueur des fibres Numeriseurs-OPERA (m)
+Donnees.tampon = 30000 	# Profondeur tampon par bolo et par voie (ms)
+Compensation.attente = 10 	# Attente apres chgt amplitude pour la compensation (ms)
+Detec.entretien.periode = 3600 	# Delai entre deux regulations de detecteurs (s)
+Detec.charge_v1 = non 	# Chargement prealable des reglages au lancement des reglages de voie
+Detec.charge_run = oui 	# Chargement des numeriseurs avant run si sauvegarde
+#
+# Lecture des donnees
+Lect.retardateur = non 	# Presence d'un retardateur dans la planche de prise de donnees
+Lect.IP.validite = 183.273 	# Duree d'abonnement aux donnees UDP (s)
+Lect.stoppe.repart = oui 	# Arrete les repartiteurs sur 'stop run'
+Lect.taux.periode = 1 	# Periode de calcul du taux d'evenement (s)
+Lect.taux.seuil = 5000 	# Seuil d'alarme de taux d'evenement (Hz)
+Lect.delai.mini = 10 	# Seuil de delai pour enregistrement (ms)
+Lect.duree.reprise = 300 	# Duree minimum pour reprise apres regen (s)
+Lect.duree.raz.NTD = 60 	# Duree du RAZ des FET NTD (s)
+Lect.duree.raz.NbSi = 300 	# Duree du RAZ des FET NbSi apres polarisation (s)
+Lect.duree.limite = active 	# Limitation de la lecture
+Lect.duree.maxi = 999999 	# Duree maximum de la lecture (mn)
+Lect.duree.tranche = 60 	# Duree d'une tranche de sauvegarde (mn)
+Lect.sequencement = non 	# Activation des sequences
+Lect.signal.amplitude = 5000 	# Graduation en ADU pour affichage signal
+Lect.signal.zero = 0 	# Milieu ecran  pour affichage signal
+Lect.synchro.type = D3 	# Calage du demarrage de la lecture (neant/D3/seconde)
+Lect.IP.perdus = genere 	# Action a prendre sur trames manquantes (abandonne/insiste/genere)
+Lect.restart.delai = 5 	# Duree minimum pour reprise apres erreur (s)
+Lect.BN.decode = non 	# Decode l'etat des numeriseurs [fait maintenant par les BO]
+Lect.BN.status.lit = non 	# Lit l'etat decode (trame -1) des numeriseurs
+Lect.BN.status.sauve = non 	# Sauve l'etat decode (trame -1) des numeriseurs
+Lect.ident-check = non 	# Verification de l'identification des numeriseurs
+Lect.status-check = non 	# Verification du status (10eme mot du bloc)
+Lect.trig_online = non 	# Traitement et trigger online dans la lecture
+Lect.secu.polar0 = non 	# Polarisation a 0 automatiquement en cas d'erreur de lecture
+Interv.sequence = 60000 	# Intervalle entre sequencements (ms)
+Gene.autorise = non 	# Permet l'utilisation des generateurs meme si lecture reelle
+Deconvolution.autorise = non 	# Permet de calculer la deconvoluee des evenements
+#
+# Recherche des evenements
+Trigger.demande = oui 	# Detection d'evenement a activer (sinon, c'est un stream)
+Trigger.coupures = oui 	# Coupures (apres calcul evt) sur max ampl,duree,bruit
+Trigger.conformite = non 	# Controle si l'evt calcule est conforme a l'evt demande
+Trigger.connexion = non 	# Permet de transmettre l'info 'trigger' d'une voie a  d'autres
+Trigger.bits.level = channel 	# Signification des bits des mots du 'bit-trigger' (detector/channel)
+Trigger.bits.numeros = local 	# Numerotation des bits des mots du 'bit-trigger' (local/global)
+Trigger.bits.bloc = 0 	# Nb. bits/detecteur (0: selon detecteur)
+#
+# Traitement des evenements
+Trmt.deconvolue = oui 	# Deconvolution de chaque evt trigge en sous-evts sur donnees deconvoluees
+Trmt.regul.evt = non 	# Regulation du taux d'evenements par fluctuation du seuil
+Trmt.regul.delai = 1 	# Delai de perturbation d'une regulation de DAC pour la regulation du taux d'evenements
+Trmt.calcul = max 	# Mode de calcul de l'evenement sur les voies ajoutees
+Trmt.datation = maxi 	# Datation de l'evenement (montee/maxi)
+Trmt.sur_pretrig = non 	# Evalue l'evenement sur le tampon du trigger (les donnees brutes sinon)
+Trmt.montee = oui 	# Evalue les temps de montee et de descente
+Trmt.integrales = oui 	# Evalue les integrales de l'evenement a differentes phases
+Trmt.pattern = non 	# Soustraction du pattern moyen (non/avant/apres)
+Trmt.saute_evt = non 	# Sauter evt pour calculer le pattern moyen
+Trmt.evt.calage = unique 	# Calage des temps d'evenement (neant/par physique/unique)
+Trmt.evt.ref = auto 	# Type de voie de reference si calage 'unique' [auto=evt le plus court]
+Trmt.evt.calage.mode = unique 	# Reference de calage en temps des evenement (neant/par physique/unique)
+Trmt.evt.calage.objet = enregistrement 	# Niveau de calage en temps des evenement (enregistrement/temps du maxi)
+Trmt.evt.calage.ref = auto 	# Modele de voie de reference si calage 'unique' [auto=evt le plus court]
+Trmt.ntuples = voie 	# Calcule les n-tuples pour l'analyse (niveau: non/modele/voie)
+Trmt.filtrees = oui 	# Stocke aussi le resultat du traitement pre-trigger
+Trmt.suivi.max = 4096 	# Longueur du suivi du filtrage
+Trgr.garde_signe = oui 	# Amplitudes du signe du trigger demande
+#
+# Sauvegarde des evenements
+Sauvegarde.evt = seul 	# Mode de sauvegarde si evts (seul/coinc/voisins/tous/manip)
+Sauvegarde.assoc = oui 	# Sauvegarde egalement des detecteurs associes
+Sauvegarde.max = 1024 	# Nombre d'evts maxi avant vidage
+Sauvegarde.reduction = 0 	# Taux de reduction du nombre d'evenements sauves
+Sauvegarde.regen = 100 	# Inverse du taux d'evenements sauves pendant la regeneration
+Sauvegarde.traces = 1 	# Sauvegarde des traces des evenements
+Sauvegarde.MonitNtp.dim = 65536 	# Dimension du ntuple memorise en cours d'acquisition
+Sauvegarde.MonitNtp.paw = ASCII 	# Calcul et sauvegarde du ntuple par evenement (sans/ASCII/PAW)
+Sauvegarde.entete = manip 	# Portee des detecteurs et voies dans l'entete (locale/manip)

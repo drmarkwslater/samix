@@ -1,0 +1,4 @@
+# [claps]
+Detecteurs = { nb = 4, code = 1, #
+ } 	# Definition du chassis des detecteurs
+Digitiseurs = { nb = 1, code = 1, noms = hg/bg/hd/bd } 	# Definition du chassis des numeriseurs

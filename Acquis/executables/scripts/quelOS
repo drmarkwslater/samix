@@ -1,0 +1,3 @@
+echo "   Systeme:" `uname -s` version `uname -r`
+echo "Definition:" `uname -v`
+echo "Processeur:" `uname -m` pour architecture `uname -p`

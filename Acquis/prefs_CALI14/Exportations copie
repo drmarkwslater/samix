@@ -1,0 +1,9 @@
+# Mesures implementees: impedance/taux_voie/taux_global
+Exports = {
+	timing = periodique 	# Moment d'exportation (periodique/debut run/fin run)
+	support = fichier 	# Support d'envoi (fichier/catalogue/memoire/udp)
+	nom = DernierExport 	# Nom du support
+	periode_ms = 1000 	# Intervalle entre exportations (ms)
+	exportable = { taux := taux_voie  }
+	exporte = "taux[signal-sphere]"
+}

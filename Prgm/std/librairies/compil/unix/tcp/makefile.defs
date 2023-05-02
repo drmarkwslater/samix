@@ -1,0 +1,4 @@
+LIBNAME = tcp
+LIBFOLDER = tcp
+LIBFLAGS = -I$(SOURCE_LIB)/utils
+LIBSTANDARD = oui

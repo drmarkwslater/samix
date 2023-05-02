@@ -1,0 +1,19 @@
+There is an infinity of ways to organize the files related to the Acquisition System, SAMBA. But, if you are a beginner, the best is to adopt the "standard" installation in the following way ¹:
+1/ download the Samba Pack dedicated to spheres: Pack_SPC.tar;
+2/ under a shell (e.g. with Terminal), create a folder, preferably just in your top directory, preferably called "Samba" or "Acquis";
+3/ "cd" to it;
+4/ move the Samba Pack inside ("mv <my_downloads_folder>/Pack_SPC.tar .");
+5/ untar it ("tar xvf Pack_SPC.tar");
+6/ install stuff with the standard script: "./executables/scripts/install_std";
+7/ get executables accessible from shell: "cp ./executables/scripts/tcsh_login ../.login"
+   (by the way, set /bin/tcsh as the default login shell for Terminal)
+8/ Icons appeared in your Dock. Click on "StartSamba" and you will see Samba starting, with an emulation of the detector.
+
+To go further, you have in turn to prepare your computer to accept the connections from the ADC box. This will be described in a document to be completed at the moment...
+
+Other files to download:
+* FormatSambaV3.pdf : Format of the run files produced by Samba.
+* libarch.tar : A library to read Samba runs, and an example of using it.
+
+----------------------------------------------------------
+(¹) by the way, this will simplify my interventions to help you further...

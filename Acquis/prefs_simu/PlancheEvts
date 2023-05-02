@@ -1,0 +1,18 @@
+# [claps]
+graphiques = { par_classe = { largeur = 200, hauteur = 125 }, focus = { largeur = 400, hauteur = 250 } }
+tous-les-evts = {
+	taux.valeur = non
+	taux.courbe = non
+	trace_evt = non
+	deconvolue = non
+	autoscale = oui
+	scale.min = -6
+	scale.max = 1
+}
+particulieres = (
+	{ alpha := utilisee = oui, taux.valeur = oui, taux.courbe = oui, trace_evt = oui, deconvolue = oui, autoscale = oui, scale.min = -6, scale.max = 1 },
+	{ beta := utilisee = oui, taux.valeur = oui, taux.courbe = oui, trace_evt = oui, deconvolue = oui, autoscale = oui, scale.min = -5, scale.max = 1 },
+	{ gamma := utilisee = oui, taux.valeur = oui, taux.courbe = oui, trace_evt = oui, deconvolue = oui, autoscale = oui, scale.min = -6, scale.max = 1 },
+	{ muon := utilisee = oui, taux.valeur = oui, taux.courbe = non, trace_evt = non, deconvolue = non, autoscale = oui, scale.min = -5000, scale.max = 5000 },
+	{ neutron := utilisee = oui, taux.valeur = oui, taux.courbe = non, trace_evt = non, deconvolue = non, autoscale = oui, scale.min = -5000, scale.max = 5000 }
+)

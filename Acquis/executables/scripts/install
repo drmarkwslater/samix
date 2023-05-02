@@ -1,0 +1,37 @@
+#!/bin/tcsh
+#
+# Trouve le chemin complet quelque soit l'endroit d'ou on l'appelle
+set commande = `pwd`/$0
+set base = $commande:h
+#
+set xeq = `echo $base | sed "s:/\./:/:" | sed "s:/\.::" | sed "s:/scripts::"`
+set top = $xeq:h
+set prgm = $top:h/Prgm
+#
+printf "setups $top\n" > $HOME/.samba_top
+printf "applis $xeq\n" >> $HOME/.samba_top
+printf "code $prgm\n" >> $HOME/.samba_top
+printf "labo Saclay\n" >> $HOME/.samba_top
+echo Fichier cree: $HOME/.samba_top
+mkdir -pv $xeq/AutresVersions
+echo Repertoire cree: $xeq/AutresVersions
+#
+cp $xeq/scripts/tcsh_login $HOME/.login
+
+if ( $OSTYPE == darwin ) then
+	defaults write com.apple.Terminal Shell /bin/tcsh
+	if ( "$1" != "" ) then
+		set appli = "$1"
+	else
+		set appli = "Samba"
+	endif
+	defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>"`echo $xeq`"/Version$appli.app</string><key>_CFURLStringType</key><integer>0</integer></dict><key>file-label</key><string>Version$appli</string></dict></dict>"
+	defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>"`echo $xeq`"/Start$appli.app</string><key>_CFURLStringType</key><integer>0</integer></dict><key>file-label</key><string>Start$appli</string></dict></dict>"
+	#defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>"`echo $xeq`"/$appli.app/</string><key>_CFURLStringType</key><integer>0</integer></dict><key>file-label</key><string>$appli</string></dict></dict>"
+	defaults write com.apple.dock persistent-apps -array-add "<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>"`echo $xeq`"/scripts/ReportSambaCrash</string><key>_CFURLStringType</key><integer>0</integer></dict><key>file-label</key><string>ReportSambaCrash</string></dict></dict>"
+	killall Dock
+	sleep 1
+	#++ $xeq/Samba.app/Contents/MacOS/Samba -installe -H=`pwd` -K=`pwd` -info=$xeq/Samba.app/Contents/Resources/ -langue=English -fontsize=10 -noir
+endif
+
+exit

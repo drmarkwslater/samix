@@ -1,0 +1,7 @@
+include $(COMPIL_LIB)/db/makefile.defs
+DB := $(SOURCE_LIB)/$(LIBFOLDER)
+DBNAME := $(LIBNAME)
+DBLIB := $(LIBS)/lib$(LIBNAME).a
+DBMAKE := $(COMPIL_LIB)/$(LIBFOLDER)
+$(DBLIB):
+	cd $(DBMAKE) && make

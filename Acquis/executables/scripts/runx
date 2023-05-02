@@ -1,0 +1,15 @@
+#!/bin/tcsh
+#
+if(($1 != "") && ($2 != "")) then
+	set adrs = `ifconfig | grep 'inet ' | grep -v 127`
+	set disp = `echo $adrs[2]":0.0"`
+	set cmde = "cd Acquis; ./executables/$2 -display=$disp"
+	#-- echo $cmde
+	ssh $1 $cmde 
+	exit
+endif
+
+echo "Execute une appli X11 sur un systeme distant, mais avec affichage local"
+echo "Usage: runx { 'samix' | 'ipaix' }"
+echo "exemple: runx 'm1' samix"
+exit

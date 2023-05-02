@@ -1,0 +1,15 @@
+# Fichier de configuration
+#
+p	/tmp_mnt/home/manip/mnt/edelweis/edw2/prefs_LSM	# Repertoire des preferences
+c	ConfigGenerale		# Configuration generale (relatif au rep. des prefs)
+o	edw2			# Origine des donnees (neant/pci/edw0/edw1/edw2)
+f	fg22013			# Fichier de donnees si origine=edw
+#
+d	/tmp_mnt/home/manip/mnt/edelweis/edw2/streams	# Repertoire des donnees brutes
+s	/tmp_mnt/home/manip/mnt/edelweis/edw2/events	# Repertoire des evenements sauvegardes
+r	/tmp_mnt/home/manip/mnt/edelweis/edw2/resultats	# Repertoire des resultats
+g	/tmp_mnt/home/manip/mnt/edelweis/edw2/figures	# Repertoire des graphiques
+a	/tmp_mnt/home/manip/mnt/edelweis/aide		# Repertoire contenant l'aide
+#
+e	off	# Execution en mode expert
+n	off	# Creation fichiers si absents

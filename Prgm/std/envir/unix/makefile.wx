@@ -1,0 +1,20 @@
+IMPLEMENTATION = 
+# -DForOpiumWX defini dans wnd.h
+
+WXDEFS = -D_FILE_OFFSET_BITS=64 -DHAVE_SYS_SYSCTL_H -DWXUSINGDLL -DWXWIDGETS -DUNIX
+ifeq ($(OS),Darwin)
+	WXWIDGETS = $(PRGM)/std/librairies/sources/wxWidgets-3.1.5
+	WXDEFS += -D__WXMAC__ -D__WXOSX__ -D__WXMAC_XCODE__ -D__WXOSX_COCOA__
+	WXLIBS = $(PRGM)/binaires/mac64/lib
+	WXINCL = -I$(WXWIDGETS)/lib/wx/include/osx_cocoa-unicode-3.1
+	WXCORE = wx_osx_cocoau_core-3.1
+endif
+ifeq ($(OS),Linux)
+	WXWIDGETS = $(PRGM)/wxWidgets-3.1.5
+	WXDEFS += -D__UNIX__ -D__LINUX__ -D__WXGTK__ -DWXBUILDING -DWXMAKINGDLL_GL
+	WXLIBS = $(WXWIDGETS)/lib
+	WXINCL = -I$(WXWIDGETS)/lib/wx/include/gtk3-unicode-3.1
+	WXCORE = wx_gtk3u_core-3.1
+endif
+CFLAGS += $(WXDEFS)
+WXINCL += -I$(WXWIDGETS)/include

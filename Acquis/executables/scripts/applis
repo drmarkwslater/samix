@@ -1,0 +1,65 @@
+#!/bin/tcsh
+#
+if(-e $HOME/.samba_top) then
+	# set top_exec = ` cat -n ~/.samba_top | grep -w 2`; set dir_exec = $top_exec[2]
+	set dir_exec = `grep applis $HOME/.samba_top | sed "s/applis //"`
+	set instal = "dans $dir_exec"
+else
+	set xqt=`ps -x -o pid -o start -o pcpu -o command | grep "executables/Samba" | grep -v grep | sed "s/\/executables/ /"`
+	if ("$xqt" != "") then
+		set dir_exec = $xqt[4]/executables
+	else
+		echo "!!! Etat de Samba indeterminé (pas de fichier TOP defini, ni d'execution en cours)"
+		exit
+	endif
+endif
+echo "- Applications: dans $dir_exec"
+#
+echo "- Applications Xcode:"
+cd $dir_exec
+foreach appli ( `ls -d *.app` )
+	if ( -e $appli/Contents/Resources/version ) then
+		set vsn = `cat $appli/Contents/Resources/version | sed s/_/./g`
+		echo "  . `echo $appli | sed s/.app//` $vsn"
+	else
+		echo "  . `echo $appli | sed s/.app//`"
+	endif
+end
+
+#
+echo "- Autres fichiers:"
+cd $dir_exec
+foreach appli ( `ls -d * | grep -v .app | grep -v dSYM` )
+	if ( -fx $appli ) then
+		echo "  . $appli"
+	endif
+end
+
+echo "- Executables compiles (dans ./bin):"
+cd bin
+foreach appli ( `ls -d * | grep -v dSYM` )
+	echo "  . $appli"
+end
+
+echo "- Scripts (dans ./scripts):"
+cd ../scripts
+foreach appli ( `ls -d *` )
+	set utilise = ""
+	set l1 = `cat $appli | grep "#!\/bin"`
+	if ("$l1" != "") then
+		# set utilise = `echo $l1 | sed s/$rep//` : totalement incompris
+		set utilise = `echo $l1 | sed s/"#!\/bin\/"/""/`
+	else
+		set l1 = `cat $appli | grep "#!\/usr/bin"`
+		if ("$l1" != "") then
+			set utilise = `echo $l1 | sed s/"#!\/usr\/bin\/"/""/`
+		endif
+	endif
+	if ("$utilise" != "") then
+		echo "  . $appli ($utilise)"
+	else
+		echo "  . $appli"
+	endif
+end
+
+echo "... terminé!"

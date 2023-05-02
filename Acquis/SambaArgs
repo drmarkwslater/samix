@@ -1,0 +1,48 @@
+# Systeme d'Acquisition Multi-Bolometres sur Apple
+#
+# ssh `newsvr`
+# cd /data/news/news-sno/samba
+# tar cvf ti30s003.tar ti30s003/
+#
+boite = -1
+#
+P = prefs_simu
+#setup = ( prefs_simu, prefs_CALI14 )
+#
+M = ./ 	# Repertoire maitre (relatif a la racine, ou absolu)
+#
+E = donnees
+S = Runs	# Repertoire des donnees en relecture si origine=edw (relatif a la racine, ou absolu)
+#
+R = resultats 	# Repertoire des resultats  (relatif a la racine, ou absolu)
+G = figures 	# Repertoire des graphiques (relatif a la racine, ou absolu)
+K = . 		# Repertoire du catalogue   (relatif a la racine, ou absolu)
+D = db	 	# Racine de la base de donnees des detecteurs (relatif a la racine, ou absolu)
+s = streams 	# Repertoire des donnees brutes [streams] (relatif a l'espace de sauvegarde)
+e = events 	# Repertoire des evenements sauvegardes   (relatif a l'espace de sauvegarde)
+#
+conf = Organisation 	# Configuration generale (relatif au repertoire des preferences)
+#conf = FileList 	# Configuration generale (relatif au repertoire des preferences)
+#conf = ConfigGenerale 	# Configuration generale (relatif au repertoire des preferences)
+starter = neant 	# Nom de l'hote declenchant la lecture si multitache inactif
+x = oui 		# Execution en mode expert
+langages = standard 	# Repertoire des dictionnaires (relatif au repertoire des preferences)
+#langue = native 	# Langage a utiliser dans les dialogues
+langue = English 	# Langage a utiliser dans les dialogues
+dico = maj 		# Si maj, complete le dictionnaire avec les derniers ajouts (fixe/maj)
+init = non 		# Chargement des detecteurs au demarrage de SAMBA
+installe = non 		# Creation du setup par defaut (-create inclus)
+create = oui 		# Creation fichiers si absents
+display = ":0.0"        # Serveur X11 a utiliser pour l'affichage
+
+# MacOSX/Quickdraw:
+# fontname = Courier      # Type de caracteres
+# MacOSX/X11:
+# fontname = "*courier*medium-r-*-%d-*"   # Type de caracteres (pour Unix)
+# Linux/X11:
+# fontname = "*fixed*medium-r-*-%d-*iso8859-14"   # Type de caracteres (pour Unix)
+fontname = standard 	# Type de caracteres
+fontsize = 10 		# Taille des caracteres
+noir = oui 		# Fond noir, texte blanc
+batch = non 		# Execution en mode batch
+unix = non 		# Execution sous UNIX (SambaArgs optionnel)

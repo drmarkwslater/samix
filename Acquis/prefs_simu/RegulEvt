@@ -1,0 +1,41 @@
+#
+Taux_attendu = 1 	# Taux d'evenements attendu (pour l'affichage)
+Trmt.regul.evt = non 	# Type de regulation du taux d'evenements (non/taux/intervalles)
+#
+# Regulation par le taux d'evenements
+#
+Active.1 = oui 	# Echelle de temps #1 en service
+Echelle.1 = 1 	# Echelle de temps #1 (mn)
+Nb.1.min = 0 	# Nombre d'evt minimum a l'echelle #1
+Action.1.min.type = increment_de 	# Type action si nb1 < min1
+Action.1.min.parm = -2 	# Valeur action si nb1 < min1
+Nb.1.max = 2 	# Nombre d'evt maximum a l'echelle #1
+Action.1.max.type = increment_de 	# Type action si nb1 > max1
+Action.1.max.parm = 2 	# Valeur action si nb1 > max1
+#
+Active.2 = oui 	# Echelle de temps #2 en service
+Echelle.2 = 10 	# Echelle de temps #2 (mn)
+Nb.2.min = 5 	# Nombre d'evt minimum a l'echelle #2
+Action.2.min.type = increment_de 	# Type action si nb2 < min2
+Action.2.min.parm = -2 	# Valeur action si nb2 < min2
+Nb.2.max = 20 	# Nombre d'evt maximum a l'echelle #2
+Action.2.max.type = increment_de 	# Type action si nb2 > max2
+Action.2.max.parm = 2 	# Valeur action si nb2 > max2
+#
+Active.3 = oui 	# Echelle de temps #3 en service
+Echelle.3 = 100 	# Echelle de temps #3 (mn)
+Nb.3.min = 50 	# Nombre d'evt minimum a l'echelle #3
+Action.3.min.type = increment_de 	# Type action si nb3 < min3
+Action.3.min.parm = -2 	# Valeur action si nb3 < min3
+Nb.3.max = 200 	# Nombre d'evt maximum a l'echelle #3
+Action.3.max.type = increment_de 	# Type action si nb3 > max3
+Action.3.max.parm = 2 	# Valeur action si nb3 > max3
+#
+# Regulation par intervalles
+#
+Interv.nb = 5 	# Nombre d'intervalles
+Interv.duree = 5 	# Longueur (s)
+Interv.ajuste = 0 	# Ajustement seuil (ADU)
+Interv.evt = 1.5 	# Facteur decision
+Interv.min = 2 	# Delai mini (nb.interv.)
+Interv.incr = 2 	# Increment si bruit (ADU)

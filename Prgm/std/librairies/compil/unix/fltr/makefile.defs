@@ -1,0 +1,4 @@
+LIBNAME = fltr
+LIBFOLDER = fltr
+LIBFLAGS = 
+LIBSTANDARD = oui

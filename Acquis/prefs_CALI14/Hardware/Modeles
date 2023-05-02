@@ -1,0 +1,7 @@
+# [claps]
+Detecteurs = Hardware/Detecteurs/modeles
+Numeriseurs = Hardware/Numeriseurs/modeles
+Cablages = Hardware/Cablage/modeles
+Repartiteurs = Hardware/Repartiteurs/modeles
+Environnement = Hardware/Environnement
+Chassis = Hardware/Chassis

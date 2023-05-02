@@ -1,0 +1,6 @@
+# [claps]
+Variables = (
+	{ Type := mot-cle, liste = test/ar37/fe55/ambe/fond, description = "Type de run"  },
+	{ Source := mot-cle, liste = neant/Fe55, description = "Source de calibration en place"  },
+	{ Blindage := mot-cle, liste = absent/ouvert/ferme, description = "Configuration du blindage"  }
+)

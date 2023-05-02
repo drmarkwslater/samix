@@ -1,0 +1,199 @@
+#!/bin/sh
+#
+aide() {
+	echo "Usage: $0 <objet> [<ssh_adrs> [<folder> [<port>]]]"
+	echo "<objet>   : 'pack-<pack>'"
+	echo "          | 'exec'"
+	echo "          | 'fic:'<fichier>"
+	echo "          | 'app.'<appli>"
+	echo "          | 'samba'"
+	echo "          | 'tango'"
+	echo "          | 'gasol'"
+	echo "          | 'giga'"
+	echo "          | 'derniere'"
+	echo "          | 'vsn:<appli><v>_<s>_<r>'"
+	echo "          | 'run:<run>'"
+	echo "<ssh_adrs>: <user>'@'<ip_adrs>"
+	echo "<folder>  : Samba TopDirectory [acq]"
+	echo "exemple   : expedie vsn:Samba9_46_16 sphere2@localhost Samba 6002"
+	echo "            (apres avoir lance l'alias gotoq2)"
+	if [[ -e $HOME/.samba_top ]]; then
+		/bin/echo -n "<pack>    : "
+		# top_data=`cat -n $HOME/.samba_top | grep -w 1`; ligne1=($top_data); dir_data=${ligne1[1]}
+		dir_data=`grep setups $HOME/.samba_top | sed "s/setups //"`
+		magasin=$dir_data/Packs; pack_ls=`ls $dir_data/Packs`
+		# echo "Fichiers dans '$dir_data/Packs': '$pack_ls'"
+		for fichier in `ls $dir_data/Packs`; do 
+			if [[ -f $magasin/$fichier ]]; then 
+				if [[ $liste == "" ]]; then liste="$fichier"
+				else liste+=", $fichier"; fi
+			fi
+		done
+		echo $liste
+	fi
+	exit
+};
+#
+if [[ -e $HOME/.samba_top ]]; then {
+# Attention, on est dans sh, pas tcsh!
+	# top_data=`cat -n $HOME/.samba_top | grep -w 1`; ligne1=($top_data); dir_data=${ligne1[1]}
+	dir_data=`grep setups $HOME/.samba_top | sed "s/setups //"`
+	echo Samba est installé dans $dir_data
+	# top_exec=`cat -n $HOME/.samba_top | grep -w 2`; ligne2=($top_exec); dir_exec=${ligne2[1]}
+	dir_exec=`grep applis $HOME/.samba_top | sed "s/applis //"`
+	echo Les exécutables de Samba sont dans $dir_exec
+	echo Les données de Samba sont dans $dir_data
+}; else {
+	echo "L'installation de Samba est trop vieille, voire inexistante! Désolé..."
+	exit
+}; fi
+magasin=$dir_data/Packs
+#
+if [[ $1 ]]; then {
+	nom=""
+	type=${1:0:4}
+	if [[ $type == "pack" ]]; then {
+		objet="pack"; nom=${1:5}; appellation="du pack"
+		if [[ $nom == "" ]]; then nom="news"; fi
+	}; elif [[ $type == "fic:" ]]; then {
+		objet="fichier"; nom=${1:4}; appellation="du fichier"
+	}; elif [[ $type == "app." ]]; then {
+		objet="appli"; nom=${1:4}; appellation="de l'application"
+	}; elif [[ $type == "vsn:" ]]; then {
+		objet="version"; nom=${1:4}; appellation="de la version"
+	}; elif [[ $type == "run:" ]]; then {
+		objet="run"; nom=${1:4}; appellation="du run"
+	}; else {
+		objet=$1; appellation="du logiciel"
+		case $objet in
+			( derniere | version | samba ) nom="Samba";;
+			gasol ) nom="Gasol";;
+			tango ) nom="Tango";;
+			gigas ) nom="Gigas";;
+			exec ) nom="Executables";;
+			( -h | -help ) aide;;
+		esac
+	}; fi
+	if [[ $nom == "" ]]; then {
+		echo "! Application non precisée, pas d'expédition !"; aide; exit
+	}; fi
+
+	dest=$2; topdir=${3:-acq}; port=${4:-22}
+	if [[ $dest ]]; then echo Expédition $appellation $nom vers $dest:$port/$topdir
+	else echo Emballage $appellation $nom; fi
+
+	case $objet in
+		exec) {
+				echo " "
+				fichier=samba_exec.tar
+				tar cvf $fichier -C $dir_data -T $magasin/executables
+				resultat="Executables Samba"
+				if [[ $dest ]]; then {
+					final=$topdir; farside="cd $final; tar xvf $fichier"
+				}; fi
+		};;
+		pack ) {
+			# echo "! Recherche du pack $magasin/$nom"
+			if [[ -e $magasin/$nom ]]; then {
+				echo " "
+				fichier=Pack_${nom}_`date "+%y%m%d%H%M%S"`.tar
+				tar cvf $fichier -C $dir_data -T $magasin/executables
+				tar rvf $fichier -C $dir_data -T $magasin/$nom
+				tar rvf $fichier -C $dir_data Docs
+				resultat="Dossier d'installation $nom"
+				if [[ $dest ]]; then {
+					final=$topdir; farside="cd $final; tar xvf $fichier"
+				}; fi
+			}; else {
+				echo "! Recherche du pack $nom dans $magasin infructueuse !"
+				aide
+			}; fi
+		};;
+		run) {
+			cd $dir_data
+			if [[ -e SambaArgs ]]; then {
+				maindir=`grep "^T = " SambaArgs  | sed s/#\ Racine\ des\ fichiers\ d\'acquisition// | sed s/\ //g | sed s/\	//g`
+				archives=`grep "^E = " SambaArgs | sed s/#\ Espace\ de\ sauvegarde\ des\ donnees\ \(relatif\ a\ la\ racine,\ ou\ absolu\)// | sed s/\ //g | sed s/\	//g`
+			}; else {
+				echo "Pas de SambaArgs dans $dir_data! Installation non conforme, désolé..."
+				exit
+			}; fi
+			echo " "
+			dir_runs=${archives:2}/events
+			echo "* Repertoire de référence: ${maindir:2}."; cd ${maindir:2}
+			echo "* Recherche du run '$dir_runs/$nom'"
+			if [[ -e $dir_runs/$nom ]]; then {
+				mkdir -pv $dir_data/tars
+				fichier=$dir_data/tars/$nom.tar
+				tar cvf $fichier -C $dir_runs $nom
+				resultat="Run $nom.tar"
+				if [[ $dest ]]; then {
+					final=$topdir
+					farside="cd $final; tar xvf $nom.tar; rm -fv $nom.tar"
+				}; fi
+			}; else {
+				echo "! Ce run n'a pas été trouvé."
+				exit
+			}; fi
+		};;
+		fichier) {
+			echo " "
+			fichier=$nom
+			resultat="Fichier $nom"
+			if [[ $dest ]]; then {
+				final=$topdir/executables
+				farside="ls -l $fichier"
+			}; fi
+		};;
+		appli) {
+			# le tarfile doit etre copie dans ../executables
+			echo " "
+			fichier=$nom.tar
+			tar cvf $fichier -C $dir_exec $nom.app/ $nom.app.dSYM/
+			resultat="Application $nom"
+			if [[ $dest ]]; then {
+				final=$topdir/executables
+				farside="cd $final; tar xvf $fichier"
+			}; fi
+		};;
+		( derniere | samba | tango | gasol | gigas) {
+			# le tarfile doit etre copie dans ../executables
+			echo " "
+			fichier=$nom.tar
+			tar cvf $fichier -C $dir_exec $nom.app/ $nom.app.dSYM/
+			read vsn < $dir_exec/$nom.app/Contents/Resources/version
+			resultat="$nom v$vsn"
+			if [[ $dest ]]; then {
+				final=$topdir/executables
+				farside="cd $final; tar xvf $fichier; ./sauve $nom"
+			}; fi
+		};;
+		version ) {
+			echo " "
+			fichier=$nom.tar
+			tar cvf $fichier -C $dir_exec/AutresVersions $nom.app/
+			resultat=$nom # "$nom v$vsn"
+			if [[ $dest ]]; then {
+				final=$topdir/executables/AutresVersions
+				farside="cd $final; tar xvf $fichier; rm -fv $fichier"
+			}; fi
+		};;
+	esac
+	if [[ $fichier ]]; then {
+		echo . Fichier cree: `pwd`/$fichier;
+		if [[ $dest ]]; then {
+			echo . Transfert de $fichier dans $dest:$final
+			if [[ $port ]]; then {
+				scp -P $port $fichier $dest:$final
+				ssh -p $port $dest $farside
+			}; else {
+				scp $fichier $dest:$final
+				ssh $dest $farside
+			}; fi
+			echo "............. $resultat mis à jour le `date` pour $dest:$port/$topdir"
+		}; else echo "............. $resultat créé le `date`"; fi
+	}; else {
+		echo "! Nom $objet inconnu, pas de fichier créé !"; aide
+	}; fi
+
+}; else aide; fi

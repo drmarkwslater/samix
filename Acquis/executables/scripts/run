@@ -1,0 +1,50 @@
+#!/bin/tcsh
+#
+set ce_jour = `date "+%c"`
+
+if(-e $HOME/.samba_top) then
+	# set top_data = `cat -n $HOME/.samba_top | grep -w 1`; set dir_data = $top_data[2]
+	# set top_exec = `cat -n $HOME/.samba_top | grep -w 2`; set dir_exec = $top_exec[2]
+	set dir_data = `grep setups $HOME/.samba_top | sed "s/setups //"`
+	set dir_exec = `grep applis $HOME/.samba_top | sed "s/applis //"`
+	set instal = "dans $dir_data"
+else
+	set xqt=`ps -x -o pid -o lstart -o pcpu -o command | grep "executables/" | grep -v grep | sed "s/\/executables/ /"`
+	if ("$xqt" != "") then
+		set dir_exec = $xqt[8]/executables
+		set instal = "ancienne"
+	else
+		echo "!!! Installation indéfinie (pas d'exécution en cours, ni de fichier TOP défini)"
+		exit
+	endif
+endif
+#
+if($1 == "") then
+	echo "| Installation: $instal"
+	echo "| Applications:"
+	cd $dir_exec
+	foreach appli (`ls -d *.app`)
+		set nom = `echo $appli | sed s/.app//`
+		echo "| . $nom[1]"
+	end
+	echo "|______________"
+else
+	if(-e $dir_exec/${1}.app) then
+		echo "============== Execution de $1 a $ce_jour[4]"
+		echo "| Installation: $instal"
+		echo "|"
+		$dir_exec/${1}.app/Contents/MacOS/$1 $2 $3 $4 $5 $6
+	else
+		echo "| Installation: $instal"
+		echo "! ! Application $1 inconnue dans $dir_exec"
+		echo "| Applications connues:"
+		cd $dir_exec
+		foreach appli (`ls -d *.app`)
+			set nom = `echo $appli | sed s/.app//`
+			echo "| . $nom[1]"
+		end
+		echo "|______________"
+	endif
+endif
+
+exit

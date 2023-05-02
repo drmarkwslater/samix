@@ -1,0 +1,11 @@
+# Definition des filtres, enregistree le 15.05.20 a 13:32:07
+#
+Echantillonnage = 976.562   # Echantillonnage (kHz) pour personnalisation des standards
+#
+#
+=ButH2/100Hz : 
+    =Butterworth/h (passe-haut) *2 @100 Hz @0.0001 ech.
+#
+=Filtre #2 : 
+    directs= 0.999545 -1.99909 0.999545
+    inverses= 0.999091 -1.99909

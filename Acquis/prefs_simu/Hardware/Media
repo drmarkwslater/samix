@@ -1,0 +1,4 @@
+#
+media = (
+	{ sy127 := type = USB, port = FTFO3ZKR }
+)

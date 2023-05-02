@@ -1,0 +1,7 @@
+include $(COMPIL_LIB)/FFT/makefile.defs
+FFT := $(SOURCE_LIB)/$(LIBFOLDER)
+FFTNAME := $(LIBNAME)
+FFTLIB := $(LIBS)/lib$(LIBNAME).a
+FFTMAKE := $(COMPIL_LIB)/$(LIBFOLDER)
+$(FFTLIB):
+	cd $(FFTMAKE) && make

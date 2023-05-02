@@ -1,0 +1,7 @@
+#
+#
+Generateurs = (
+	{ capteur := voies = "signal sphere", niveau_DC = -1000, bruit = 5, frequence_evt = 10, energie_ADU = 600, resolution = 10 },
+	{ laser := voies = "light sphere", niveau_DC = -900, bruit = 5, frequence_evt = 10, energie_ADU = 500, resolution = 10 }
+)
+

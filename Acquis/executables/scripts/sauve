@@ -1,0 +1,45 @@
+#!/bin/tcsh
+#
+if($1 != "") then
+	set app = inconnue
+	switch($1) 
+		case samba: 
+		case Samba:
+			set app = Samba; breaksw
+		case tango: 
+		case Tango: 
+			set app = Tango; breaksw
+		case gasol: 
+		case Gasol: 
+			set app = Gasol; breaksw
+		case gigas: 
+		case Gigas: 
+			set app = Gigas; breaksw
+	endsw
+	if($app == "inconnue") then
+		echo Application $1 inconnue
+	else
+		if(-e $HOME/.samba_top) then
+			# set def_data = `cat -n ~/.samba_top | grep 1`; set dir_data = $def_data[2]
+			# set def_exec = `cat -n ~/.samba_top | grep 2`; set dir_exec = $def_exec[2]
+			set dir_data = `grep setups $HOME/.samba_top | sed "s/setups //"`
+			set dir_exec = `grep applis $HOME/.samba_top | sed "s/applis //"`
+			cd $dir_exec
+			set vsn = `cat $app.app/Contents/Resources/version`
+			if(-e AutresVersions/$app$vsn.app) then
+				echo La version courante de $app, $vsn, est deja sauvee dans $dir_exec/AutresVersions
+			else
+				cp -Rv $app.app AutresVersions/$app$vsn.app
+				echo La version courante de $app, $vsn, a ete sauvee dans $dir_exec/AutresVersions
+			endif
+		else
+			echo "Installation de Samba: ancienne"
+			echo "Executable Samba: emplacement indetermine"
+		endif
+		exit
+	endif
+endif
+
+echo "Sauve la version courante de Samba ou Tango dans 'AutresVersions'"
+echo "Usage: $0 { 'samba' | 'tango' | 'gasol' | 'gigas' }"
+exit

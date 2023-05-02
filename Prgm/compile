@@ -1,0 +1,55 @@
+#!/bin/tcsh
+#
+set commande = `pwd`/$0
+set base = $commande:h
+set prgm = `echo $base | sed "s:/\./:/:" | sed "s:/\.::"`
+set acquis = $prgm:h/Acquis
+set xeq = $acquis/executables
+
+echo The code source is in $prgm
+echo The acquisition S/W is in $acquis
+
+set dir = $acquis; if ( -e $dir ) then
+	echo Directory found: $dir
+else
+	mkdir -pv $dir; echo Created directory: $dir
+endif
+set dir = $xeq; if ( -e $dir ) then
+	echo Directory found: $dir
+else
+	mkdir -pv $dir; echo Created directory: $dir
+endif
+set dir = $xeq/AutresVersions; if ( -e $dir ) then
+	echo Directory found: $dir
+else
+	mkdir -pv $dir; echo Created directory: $dir
+endif
+#
+if ( -e $HOME/.samba_top ) then
+	set action = "Changed"
+else
+	set action = "Created"
+endif
+printf "setups $acquis\n" > $HOME/.samba_top
+printf "applis $xeq\n" >> $HOME/.samba_top
+printf "code $prgm\n" >> $HOME/.samba_top
+printf "labo Saclay\n" >> $HOME/.samba_top
+echo $action file: $HOME/.samba_top
+
+if ( -e $xeq/scripts/tcsh_login ) then
+	cp $xeq/scripts/tcsh_login $HOME/.login
+	echo Changed file: $HOME/.login
+endif
+
+setenv PRGM $prgm
+setenv APPLIS $xeq
+cd $prgm/std/librairies/compil/unix; make_all x11
+if ( "$1" != "" ) then
+	set appli = "$1"
+else 
+	set appli = "samba"
+endif
+cd $prgm/edw/compil/unix/$appli
+make
+
+exit

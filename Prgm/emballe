@@ -1,0 +1,93 @@
+#!/bin/sh
+#
+aide() {
+	echo "Usage: $0 categ=<categorie> <nom> [<nom>]"
+	echo "<categorie> : 'source'| 'xcode' | 'unix' | 'exec' | 'setup' | 'tout'"
+	echo "<nom>       : 'lib' | 'edw' | 'diags'"
+	echo "exemple     : emballe categ=source lib edw"
+	echo "remarque    : 'unix' ou 'xcode' incluent 'source' et 'setup'"
+	exit
+};
+ajoute() {
+	categ=${1:6}
+	case $categ in
+		exec ) {
+			composants+=" --exclude $exec/AutresVersions --exclude $exec/adhoc --exclude $exec/incertains $exec"
+		};;
+		setup ) {
+			composants+=" $acquis/SambaArgs $acquis/TangoArgs $acquis/Docs $acquis/prefs_simu $acquis/prefs_CALI14 $acquis/executables/scripts"
+		};;
+		unix ) {
+ 			composants+=" --exclude $envir/unix/Archives $envir/unix"
+			for objet; do
+				case $objet in
+					diags ) composants+=" $dbg/compil/unix/";;
+					lib   ) {
+					        composants+=" --exclude $std/compil/unix/wxWidgets"
+					        composants+=" $std/compil/unix/"
+					};;
+					edw   ) composants+=" $edw/compil/unix/";;
+				esac
+			done
+		};;
+		xcode ) {
+			composants+=" $envir/EnvironnementApple.h --exclude $envir/Xcode2.4/Archives $envir/Xcode2.4"
+			for objet; do
+				case $objet in
+					diags ) composants+=" $dbg/compil/Xcode2.4/";;
+					lib   ) composants+=" --exclude $std/compil/Xcode2.4/wxWidgets --exclude $std/compil/Xcode2.4/build $std/compil/Xcode2.4/";;
+					edw   ) composants+=" $edw/compil/Xcode2.4/";;
+				esac
+			done
+		};;
+		source ) {
+			for objet; do
+				case $objet in
+					diags ) composants+=" $dbg/sources";;
+					lib   ) {
+						composants+=" $std/sources/utils $std/sources/opium4 $std/sources/FFT $std/sources/fltr $std/sources/tcp $std/sources/db"
+					        #-- composants+=" $std/sources/GLFW $std/sources/GLUT $std/sources/WXI"
+					};;
+					edw   ) {
+					         composants+=" --exclude $edw/sources/samba/Archives $edw/sources/samba $edw/sources/salsa $edw/sources/tango"
+					         composants+=" --exclude $edw/sources/PCI/Reserve $edw/sources/PCI"
+					};;
+				esac
+			done
+		};;
+	esac
+}
+#
+if [[ $1 ]]; then {
+	categ=${1:6}
+	cd $HOME
+	fichier="samba_$categ.tar"
+	prgm="Prgm"
+	acquis="Acquis"
+	envir="$prgm/std/envir"
+	dbg="$prgm/std/diags"
+	std="$prgm/std/librairies"
+	edw="$prgm/edw"
+	magasin=$prgm/Packs
+	exec="$acquis/executables"
+	composants=" $prgm/emballe $prgm/compile $envir/environnement.h";
+	case $categ in
+		( source | exec ) ajoute $1 $@;;
+		( xcode | unix ) {
+			ajoute categ=source $@
+			ajoute $1 $@
+			ajoute categ=setup $@
+		};;
+		tout ) {
+			ajoute categ=source $@
+			ajoute categ=xcode $@
+			ajoute categ=unix $@
+			ajoute categ=exec $@
+			ajoute categ=setup $@
+		};;
+	esac
+	#-- echo "...... Composants: $composants"
+	tar cvf $fichier $composants
+	echo "====== Fichier cree: $HOME/$fichier"
+
+}; else aide; fi

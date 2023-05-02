@@ -1,0 +1,26 @@
+# [claps]
+AvecIP = oui 		# Verification presence des repartiteurs sur IP
+IpLog = non 		# Imprime les details de la transmission
+ErreurLog = non 	# Imprime les details des erreurs de transmission
+ErreurStoppe = non 	# Arrete le repartiteur en cas d'erreur de transmission
+DepileOpt = non 	# Verification quand le bouton 'Debug' est pousse
+TempsCpu = oui 		# Verification des temps passes
+DetailCpu = non 	# Verification detaillee des temps CPU
+TempsCalcul = non 	# Verification des temps de calcul
+DetailCalcul = non 	# Verification detaillee des temps de calcul
+IdentBB = non 		# Identification des numeriseurs
+IdentRep = non 		# Identification classee par repartiteur
+Compensation = non 	# Elements du calcul de la compensation
+Display = non 		# Affichage des donnees traitees
+MonitEvts = non 	# Affichage des evenements
+EtatFinal = non 	# Impression des variables internes en fin de lecture
+pTauxEvts = non 	# Construction du panel 'pTauxDetaille'
+TauxEvts = non 		# Calcul du taux d'evenements par voie
+BitTrigger = non 	# Verification si le BitTrigger est nul
+Integrales = non 	# Deverminage des integrales
+EvtMoyen = non 		# Deverminage de l'utilisation de l'evt moyen
+CalculEvts = non 	# Verification du calcul de la LdB et de l'amplitude
+SuiviEtatEvts = non 	# Suivi de l'etat de chaque evenement, du trigger a la memorisation
+SuiviTrmtEvts = non 	# Suivi du traitement de chaque evenement, du trigger a la memorisation
+SuiviEtatStrm = non 	# Verification du decompte des octets transmis en mode stream
+GestionConfigs = non 	# Gestion des configurations de voie

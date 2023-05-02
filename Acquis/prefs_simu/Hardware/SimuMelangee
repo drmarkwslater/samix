@@ -1,0 +1,3 @@
+# Modes de simulation
+#
+Simulations = { "cathode" := voies = ( "signal sphere", "lampeUV sphere" ), niveau_DC = -800, bruit = 5, frequence_evt = 10, energie_ADU = 500, resolution = 10 }

@@ -1,0 +1,7 @@
+include $(COMPIL_LIB)/fltr/makefile.defs
+FLTR := $(SOURCE_LIB)/$(LIBFOLDER)
+FLTRNAME := $(LIBNAME)
+FLTRLIB := $(LIBS)/lib$(LIBNAME).a
+FLTRMAKE := $(COMPIL_LIB)/$(LIBFOLDER)
+$(FLTRLIB):
+	cd $(FLTRMAKE) && make

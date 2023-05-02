@@ -1,0 +1,6 @@
+#!/bin/sh
+#
+if [[ $1 ]]; then {
+	expedie pack-$1
+}; fi
+echo "La prochaine fois, utilises 'expedie pack-$1'"

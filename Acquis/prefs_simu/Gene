@@ -1,0 +1,3 @@
+#
+#
+Generateurs = { "Gene#1" := voies = "signal sphere", niveau_DC = 0, bruit = 5, frequence_evt = 1, energie_ADU = 1000, resolution = 10, intervalle = poisson, autostart = non }

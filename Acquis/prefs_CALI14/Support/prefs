@@ -1,0 +1,9 @@
+version = 2 	# version du format de ce fichier (garder cette variable en premier!)
+source = neant 	# origine des variables et de leur valeur (neant/fichier/serveur)
+fichier = defs 	# nom du fichier source
+serveur = 192.168.3.13 	# adresse IP du serveur
+port = 6342 	# port IP du serveur
+format = json 	# format des donnees du serveur (edw/json)
+permanent = oui 	# garde la connexion en permanence
+variables = vars 	# nom du fichier des variables a afficher et a archiver
+valeurs = vals 	# nom du fichier des valeurs (si source=fichier et format=json)

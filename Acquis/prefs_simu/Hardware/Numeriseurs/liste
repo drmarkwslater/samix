@@ -1,0 +1,6 @@
+# Numeriseurs
+#
+# syntaxe:    <connecteur> '>' ( <definition>  | '@' <fichier> [ '>' <fibre> ] ) -- fichier contenant la definition, relatif au repertoire contenant le present fichier
+# definition:                  [ <modele> ] '#' <serial> [ '@' <adresse_hexa> ] [ 'x' <gain> { ',' <gain> } ] [ '>' <fibre> ] [ '{' / { <ressource '=' <valeur> / } '}' ]
+#
+01 > @AdcRp > int

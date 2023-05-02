@@ -1,0 +1,160 @@
+#!/bin/tcsh
+#
+# ajouter dans ~/.login (a la fin):
+# if ( -ef $HOME/.samba_login ) source $HOME/.samba_login
+#
+# note: "set shell = `/bin/ps -p $$ -ocomm=`" renvoie $shell = "-tcsh"
+# et "set nom = ${shell:s/-//}" [ou meme "$shell:s/-//"] renvoie $nom = "tcsh"
+# mais originellement, $shell vaut "/bin/tcsh" ...
+#
+echo "----------------------------------------- login SAMBA --------"
+
+if(-e $HOME/.samba_top) then
+	#-- set top_data = `cat -n ~/.samba_top | grep -w 1`; set dir_data = $top_data[2]
+	#-- set top_exec = ` cat -n $HOME/.samba_top | grep -w 2`; set dir_exec = $top_exec[2]
+	#-- set top_exec = ` cat $HOME/.samba_top | grep -w applis `; set dir_exec = $top_exec[2]
+	set dir_data = `grep setups $HOME/.samba_top | sed "s/setups //"`
+	set dir_exec = `grep applis $HOME/.samba_top | sed "s/applis //"`
+	set dir_prgm = `grep code $HOME/.samba_top | sed "s/code //"`
+	set instal_dans = "dans $dir_data"; set exec_dans = "dans $dir_exec"; set prgm_dans = "dans $dir_prgm"
+else
+	set dir_data = $HOME/Samba
+	set dir_exec = $dir_data/executables
+	set dir_prgm = $HOME/Prgm
+	set instal_dans = "ancienne"; set exec_dans = "présumé dans $dir_exec"; set prgm_dans = "présumé dans $dir_prgm"
+endif
+echo "Installation de Samba: $instal_dans"
+echo "   Applications Samba: $exec_dans"
+echo " Code et compilations: $prgm_dans"
+
+# ... variables d'environnement
+echo "  Autres applications: PATH complété de $dir_exec"
+setenv PATH "$dir_exec":$dir_exec/bin:$dir_exec/scripts:$PATH
+setenv PRGM $dir_prgm
+setenv APPLIS $dir_exec
+#-- echo $PATH
+
+# ... Necessite d'entrer le mot de passe
+#set total = `sysctl -n kern.ipc.maxsockbuf`
+#@ udp = $total / 2
+#sudo sysctl net.inet.udp.recvspace=$udp
+
+# ... alias Samba
+setenv ACQDIR $dir_data
+alias samba  "$dir_exec/Samba.app/Contents/MacOS/Samba"
+alias tango  "$dir_exec/Tango.app/Contents/MacOS/Tango"
+alias samix "$dir_exec/samix"
+alias gasol  "$dir_exec/Gasol.app/Contents/MacOS/Gasol"
+alias gigas  "$dir_exec/Gigas.app/Contents/MacOS/Gigas"
+alias ipaix "$dir_exec/ipaix"
+#echo $ACQDIR
+
+# ... alias acces reseau
+alias ipadrs "ifconfig | grep 'inet '"
+alias ipalias "alias | grep echo"
+alias iptest 'set adrs = \!*; set item = `echo $adrs | sed s/@/\ /`; ping $item[2]'
+# emploi: ping `ip nomad`
+alias ip 'echo \!* | cut -f 2 -d @'
+#++ alias pings 'ping `echo sphere@130.15.30.152 | cut -f 2 -d @`' :marche
+#++ alias toto 'echo \!* | cut -f 2 -d @' :marche avec toto `s50`
+#++ alias titi 'echo echo \!* | cut -f 2 -d @' :marche avec titi `s50`
+#++ alias pings 'ping `echo ``\!*`` | cut -d "@" -f 2`'
+
+alias cali "echo 192.168.2."
+alias mig "echo gros@sedimcaa19.local"
+alias mac "echo gros@sedimcaa19.extra.cea.fr"
+alias linux "echo gros@sedipcu189.extra.cea.fr"
+alias m1 "echo gros@dphpmcf62.extra.cea.fr"
+alias b546 "echo nostos@132.166.12.50"
+alias pnnr "echo acquis@132.166.33.106"
+alias newsac "echo acquis@132.166.33.108"
+alias imac "echo acquis@132.166.38.92"
+alias hard "echo acquis@132.166.35.113"
+#alias xfn "echo acquis@132.166.28.129"
+#alias xfn "echo acquis@132.166.33.199"
+alias bigsur "echo gros@132.166.33.199"
+alias mc38 "echo acquis@132.166.12.38"
+#alias mc50 "echo nostos@132.166.12.50"
+alias unix "echo gros@daplxa.extra.cea.fr"
+alias extra "echo gros@132.166.28.133"
+#alias ascea "echo ascea@132.166.38.92"
+alias ascea "echo acquis@ascea.extra.cea.fr"
+#alias asm "echo ascea@132.166.37.214"
+#alias ik "echo katsioulas@132.166.35.138"
+alias cata "echo gros@132.166.35.138"
+alias lsm "echo 134.158.176."
+alias s "echo acquis@134.158.176.2"
+#alias sx 'ssh acquis@134.158.176.\!*'
+alias alain "echo archeops@134.158.176.29"
+#alias sedine "echo nostos@134.158.176.56"
+alias sedine "echo acquis@134.158.176.56"
+#alias snoglobe "echo acquis@134.158.176.57"
+alias crate "echo edelweiss@134.158.176.156"
+alias orca "echo edelweiss@134.158.176.235"
+alias dbd "echo nostos@134.158.216.93"
+alias ali "echo nostos@134.158.216.83"
+#alias nomad "echo spcneutron@134.158.216.20"
+alias n1 "echo nostos@134.158.216.124"
+alias ipnl5 "echo archeops@134.158.81.245"
+alias ipnl7 "echo archeops@134.158.81.247"
+alias ipel "echo edelweiss@lyovis11.in2p3.fr"
+alias ipe "echo edelweiss@localhost"
+alias r2d2 "echo R2D2@borimac2-sf.cenbg.in2p3.fr"
+alias cppm "echo nemo@marnemo.in2p3.fr"
+alias lpsc "echo gros@lpsc-ssh.in2p3.fr"
+#alias vk "echo edelweiss@134.2.98.11"
+alias iliascea "echo ilias-cea@155.207.9.31"
+alias ilias "echo spcneutron@155.207.9.31"
+#alias g5 "echo acquis@192.168.0.107"
+#alias mcp "echo news_piro@142.244.195.204"
+alias mcp "echo news_piro@142.244.195.107"
+#oulalalab
+alias acqmcp "ssh -NT -L 2000:142.244.195.107:5900 `mcp` & (sleep 3 ; open -W vnc://localhost:2000)"
+alias acqmcq 'set procs = `ps | grep news_piro | grep -v grep`; kill $procs[1]'
+#
+#-- echo alias NEWS
+#alias s50 "echo sphere@130.15.30.152"
+#alias s50 "echo sphere@130.15.24.107"
+#alias queens "echo 130.15.24.108"
+#alias queens "echo 130.15.29.158"
+alias queens "echo 130.15.29.175"
+alias news1 "echo sphere@`queens`"
+alias news2 "echo sphere2@`queens`"
+alias news3 "echo sphere3@`queens`"
+alias atnews1 "echo sphere@`queens`"
+alias atnews2 "echo -p 20022 sphere2@`queens`"
+alias atnews3 "echo -p 30022 sphere3@`queens`"
+alias fromnews1 "echo sphere@`queens`"
+alias fromnews2 "echo -P 20022 sphere2@`queens`"
+alias fromnews3 "echo -P 30022 sphere3@`queens`"
+alias tonews1 "echo -P 22"
+alias tonews2 "echo -P 20022"
+alias tonews3 "echo -P 30022"
+alias newsxeq1 "echo sphere@`queens` Samba 22"
+alias newsxeq2 "echo sphere2@`queens` Samba 20022"
+alias newsxeq3 "echo sphere3@`queens` Samba 30022"
+alias mm1 "echo sphere@192.168.1.101"
+alias mm2 "echo sphere2@192.168.1.104"
+alias mm3 "echo sphere3@192.168.1.105"
+alias snoglobe "echo acquis@192.168.38.101"
+alias newsvr "echo newsdata@sphere.phy.queensu.ca"
+alias newdata "echo newsdata@sphere.phy.queensu.ca:/data/news"
+#- alias acqq1 "echo Connect to localhost:5001; ssh -NT -L 5001:192.168.1.101:5900 `newsvr` & open -a Screen\ Sharing"
+#- alias acqq2 "echo Connect to localhost:5002; ssh -NT -L 5002:192.168.1.104:5900 `newsvr` & open -a Screen\ Sharing"
+#- alias acqq3 "echo Connect to localhost:5003; ssh -NT -L 5003:192.168.1.105:5900 `newsvr` & open -a Screen\ Sharing"
+alias acqq1 "ssh -NT -L 5001:192.168.1.101:5900 `newsvr` & (sleep 3 ; open -W vnc://localhost:5001)"
+alias acqq2 "ssh -NT -L 5002:192.168.1.104:5900 `newsvr` & (sleep 3 ; open -W vnc://localhost:5002)"
+alias acqq3 "ssh -NT -L 5003:192.168.1.105:5900 `newsvr` & (sleep 3 ; open -W vnc://localhost:5003)"
+alias acqqq 'set procs = `ps | grep queensu | grep -v grep`; kill $procs[1]'
+alias gotoq1 "ssh -NT -L 6001:192.168.1.101:22 `newsvr` & (sleep 3 ; ssh -p 6001 sphere@localhost)"
+alias gotoq2 "ssh -NT -L 6002:192.168.1.104:22 `newsvr` & (sleep 3 ; ssh -p 6002 sphere2@localhost)"
+alias gotoq3 "ssh -NT -L 6003:192.168.1.105:22 `newsvr` & (sleep 3 ; ssh -p 6003 sphere3@localhost)"
+#
+#-- echo alias RP
+alias rp169 "echo root@169.254.253.72"
+alias rp "echo root@192.168.2."
+#
+alias pour_ssh "echo 22"
+alias pour_ard "echo 3000 5900"
+alias pour_tim "echo 407 407"
+#alias ipeps "ps aux | grep ipepdvedw1"

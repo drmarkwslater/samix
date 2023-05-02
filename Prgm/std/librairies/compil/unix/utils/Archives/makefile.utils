@@ -1,0 +1,33 @@
+# ***** Utilitaires *********************************************************
+
+UTILS = $(SOURCE_LIB)/utils
+
+UTILSNAME = utils
+UTILSBIN = $(RELS)/utils
+UTILSLIB = $(LIBS)/lib$(UTILSNAME).a
+
+UTILSDEFS = $(wildcard $(UTILS)/*.h)
+UTILSFICS = $(notdir $(wildcard $(UTILS)/*.c))
+UTILSLIST = $(UTILSFICS:.c=.o)
+
+UTILSFLAGS = -I$(UTILS) -I$(OPIUM) $(BINAIRE)
+
+$(UTILSNAME): $(UTILSLIST) $(LIBS)
+	@echo ".................... Assemblage de la librairie $(UTILSNAME) ........."
+	cd $(UTILSBIN) && $(LIBGEN:LIBRAIRIE=$(UTILSLIB)) $(UTILSLIST)
+	@echo ".................... Librairie $(UTILSNAME) prete ...................."
+
+$(UTILSLIB): $(UTILSLIST) $(LIBS)
+	@echo ".................... Assemblage de la librairie $(UTILSNAME) prete ..."
+	cd $(UTILSBIN) && $(LIBGEN:LIBRAIRIE=$(UTILSLIB)) $(UTILSLIST)
+	@echo ".................... Librairie $(UTILSNAME) prete ...................."
+
+$(UTILSLIST): $(wildcard $(UTILS)/*.c) $(UTILSDEFS) $(OPIUMDEFS) $(UTILSBIN)
+	cd $(UTILSBIN) && $(CC) $(CFLAGS) $(UTILSFLAGS) $(UTILS)/$(@:.o=.c)
+
+$(UTILSBIN): $(RELS)
+	mkdir -pv $(UTILSBIN)
+
+CLEANDIR = $(UTILSBIN)
+CLEANLIST = $(UTILSLIST) $(UTILSLIB)
+

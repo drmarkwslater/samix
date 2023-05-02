@@ -1,0 +1,13 @@
+# [claps]
+Polarisation = 4 	# Polarisation du detecteur (V)
+Energie.reference = 122 	# Energie du signal dans les runs de calibration (keV)
+Chaleur.reference = 4000 	# Amplitude du signal chaleur de calibration (ADU)
+Chaleur.seuil = 4.5 	# Seuil chaleur (keV)
+Chaleur.resolution.base = 0.5 	# Resolution chaleur sur la ligne de base (keV)
+Chaleur.resolution.signal = 2 	# Resolution chaleur sur le signal de calibration (keV)
+Ionisation.reference = -2600 	# Amplitude du signal ionisation de calibration (ADU)
+Ionisation.seuil = 4.5 	# Seuil ionisation (keV)
+Ionisation.resolution.base = 1 	# Resolution ionisation sur la ligne de base (keV)
+Ionisation.resolution.signal = 1.5 	# Resolution ionisation sur le signal de calibration (keV)
+Neutrons.facteur = 0.16 	# Facteur multiplicatif pour la zone neutrons
+Neutrons.exposant = 0.18 	# Exposant pour la zone neutrons

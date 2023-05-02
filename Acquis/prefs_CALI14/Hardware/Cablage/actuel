@@ -1,0 +1,8 @@
+# Description du cablage
+#
+# Syntaxe: { '=' <definition> | <cablage_reel> }
+# <definition>:  <type> '{' // { <reglage-detecteur> ':' <ressource_numeriseur> // ...} '}'
+# <cablage_reel: [ [<nom>]['/'<type>] ':' ] <position> '>' { <connecteur> [ '.' { <voie> | '*' } ] [ 'x' <gain> [ '/' <capa_pF> ] ] [',']}
+# <gain> par defaut: 1, <capa_pF> par defaut: 10
+#
+/signal1_UV2: 1 > 01.1, 01.2

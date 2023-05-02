@@ -1,0 +1,16 @@
+#!/bin/tcsh
+#
+if($1 != "") then
+	foreach lib (`ls`)
+		if(-d $lib) then
+			cd $lib
+			make wm=$1
+			cd ..
+		endif
+	end
+else
+	echo "Usage: $0 <wm>"
+	echo "<wm> : 'x11' | 'gl' | 'wx'"
+endif
+
+exit

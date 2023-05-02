@@ -1,0 +1,53 @@
+# [claps]
+# Traitement et Analyse Nouvelle GeneratiOn
+wj13m000 	# Fichier a analyser
+m = 5000000 	# Nombre d'evenements maximum (0 si evenements de longueur fixe)
+o =  	# Options specifiques a la manip
+#
+P = prefs_RP30 	# Repertoire des preferences de TANGO (relatif au repertoire courant)
+A = Analyse 	# Repertoire des produits d'analyse (relatif aux preferences)
+E = donnees/ 	# Espace de sauvegarde des donnees (relatif a la racine)
+R = results/ 	# Repertoire des resultats  (relatif a la racine)
+G = figures 	# Repertoire des figures recopiees (relatif a la racine)
+D = db/ 	# Racine de la base de donnees des detecteurs (relatif a la racine)
+evts = events 	# Repertoire des evenements sauvegardes (relatif a l'espace de sauvegarde)
+unix = non 	# Execution sous UNIX (SambaArgs optionnel)
+# Si pas batch:
+display = ":0.0" 	# Serveur X11 a utiliser pour l'affichage
+langue = native 	# Langage a utiliser dans les dialogues
+langue = English 	# Langage a utiliser dans les dialogues
+dico = fixe 	# maj: complete avec les derniers ajouts/ net: retire les termes non traduits (net/fixe/maj)
+noir = oui 	# Fond noir, texte blanc pour les fenetres de dialogue
+fontname = standard 	# Type de caracteres
+fontsize = 10 	# Taille des caracteres
+keyboard = US 	# Type de clavier (US/FR-mac/FR-dell)
+videonum = 99 	# Numero d'ecran avec OpenGL
+qualite = ecran 	# Qualite des graphiques (papier/ecran)
+linesize = 2 	# Largeur des traits des graphiques en qualite papier
+aide = aide 	# Sous-repertoire de l'aide (relatif au repertoire 'info')
+trad = dico 	# Sous-repertoire des dictionnaires de langue (relatif au repertoire 'info')
+#
+RC_ms = 0.14 	# Temps de descente par defaut de l'ampli (corrige par le fichier 'ZonesTemps')
+graphiques = Graphiques 	# Repertoire des graphiques (relatif aux produits d'analyse)
+coupures = Coupures 	# Repertoire des coupures (relatif aux produits d'analyse)
+subsets = Subsets 	# Repertoire des sous-ensemble d'evenements (relatif aux produits d'analyse)
+filtres = Filtres 	# Fichier de filtres pre-definis (relatif aux preferences)
+calibration = Calib 	# Repertoire des donnees de calibration (relatif aux produits d'analyse)
+unite.event = EvtCalib 	# Fichier de l'evenement unite (relatif aux donnees de calibration)
+unite.temps = temps 	# Fichier des temps caracteristiques de l'evenement unite (relatif aux donnees de calibration)
+sep = root 	# Separateur des colonnes des ntuples ecrits (root/csv/tab)
+evt.hdr = oui 	# Affiche les entetes d'evenements
+evt.voies = non 	# Affiche les infos des voies ayant participe a l'evenement
+evt.ntuple = oui 	# Affiche le ntuple calcule sur l'evenement
+evt.ldb = alignees 	# Lignes de base pour un evenement (reelles/alignees)
+evt.maxi = reels 	# Temps des maxima pour un evenement (reels/alignes)
+evt.loupe = oui 	# Agrandissement de l'affichage du detecteur touche
+evt.unite = masque 	# Affichage de l'evenement unite (masque/trace)
+evt.deconv = trace 	# Affichage de l'evenement deconvolue (masque/trace)
+#
+exec =  	# Commande a executer immediatement (syntaxe avec -exec=help)
+liste =  	# Demande une liste de runs
+fast = oui 	# Ouverture seule (ou lecture prealable) des archives
+aleat = non 	# Ne verifie PAS la continuite de la numerotation des evenements
+verbeux = non 	# Mode bavard
+NSDocumentRevisionsDebugMode = NO 	# Execute via Xcode

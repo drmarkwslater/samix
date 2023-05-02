@@ -1,0 +1,42 @@
+# [claps]
+# Parametres generaux
+Graphiques.hauteur = 250 	# Hauteur des graphiques (pixels)
+Graphiques.largeur = 400 	# Largeur des graphiques (pixels)
+Graphique.synchro = non 	# Synchronisation avec la synchronisation
+Donnees.duree = 1 	# Duree de donnees affichee (ms)
+Donnees.unite.chgt = ADU 	# Changement d'unite des donnees (ADU/mV ADC/mV BB/nV detec/keV)
+Donnees.unite.mV = 0.038 	# Valeur d'un ADU en mV
+Donnees.unite.keV = 1000 	# Valeur d'un ADU en keV
+#
+# Contenu de l'ecran
+Affichage.donnees = GraphiquesV2 	# Fichier de definition de l'affichage des graphiques utilisateurs
+Affichage.interv = 500 	# Intervalle entre affichage des donnees (ms)
+Affichage.modes = non 	# Affichage des modes de fonctionnement
+Affichage.trigger = non 	# Affichage du trigger demande
+Affichage.ldb = non 	# Affichage des lignes de base
+Affichage.seuils = non 	# Affichage du graphique des seuils
+Affichage.etat = non 	# Affichage de l'etat de l'acquisition
+Affichage.reseau = non 	# Affichage de l'etat du reseau
+Affichage.evt = oui 	# Affichage du dernier evenement
+Affichage.taux.panel = non 	# Affichage du panel des taux d'evenements
+Affichage.taux.graph = non 	# Affichage du graphique des taux d'evenements
+Affichage.classes = non 	# Affichage de la planche des evenements par classe
+#
+# Modes pour les evenements
+Evt.fenetre_integree = oui 	# Fenetre du dernier evenement integree a la planche du run
+Evt.sonorisation = oui 	# Sonorisation en fonction de la categorie d'evenement (si definie)
+Evt.Y.automatique = oui 	# Vrai si calcul automatique des extremas en Y pour chaque evenement
+# Si echelle Y fixe
+Evt.Ymin = -30000 	# Valeur du minimum en Y pour chaque evenement
+Evt.Ymax = 30000 	# Valeur du maximum en Y pour chaque evenement
+#
+# Histogrammes predefinis
+Histo.ampl = non 	# Affichage de l'histogramme des amplitudes
+Histo.ampl.min = 5000 	# Nb evts minimum pour l'histogramme des amplitudes
+Histo.ampl.max = 5000 	# Nb evts maximum pour l'histogramme des amplitudes
+Histo.montee = non 	# Affichage de l'histogramme des temps de montee
+Histo.montee.min = 0 	# Nb evts minimum pour l'histogramme des temps de montee
+Histo.montee.max = 5000 	# Nb evts maximum pour l'histogramme des temps de montee
+Histo.2D = non 	# Affichage de l'histo amplitude x tps montee
+Histo.2D.min = 0 	# Nb evts minimum pour l'histo amplitude x tps montee
+Histo.2D.max = 500 	# Nb evts maximum pour l'histo amplitude x tps montee

@@ -1,0 +1,12 @@
+#!/bin/tcsh
+#
+if ($#) then
+#	set loc = "lsm"; set rep = /Volumes/DonneesSPC4/events
+#	set loc = "grenoble"; set rep = $HOME/Samba/runs/events
+	set loc = "saclay"; set rep = /Volumes/DonneesSPCd3/donnees/events
+	foreach nom ($*)
+		scp -r $rep/$nom newsdata@sphere.phy.queensu.ca:/data/news/$loc/samba/
+	end
+else
+	echo "Usage: $0 <run_name> [ <run_name>] (NO slash in the run name)"
+endif

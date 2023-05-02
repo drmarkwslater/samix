@@ -1,0 +1,4 @@
+LIBNAME = utils
+LIBFOLDER = utils
+LIBFLAGS = -I$(SOURCE_LIB)/opium4
+LIBSTANDARD = oui

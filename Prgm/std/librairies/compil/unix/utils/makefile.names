@@ -1,0 +1,7 @@
+include $(COMPIL_LIB)/utils/makefile.defs
+UTILS := $(SOURCE_LIB)/$(LIBFOLDER)
+UTILSNAME := $(LIBNAME)
+UTILSLIB := $(LIBS)/lib$(LIBNAME).a
+UTILSMAKE := $(COMPIL_LIB)/$(LIBFOLDER)
+$(UTILSLIB):
+	cd $(UTILSMAKE) && make

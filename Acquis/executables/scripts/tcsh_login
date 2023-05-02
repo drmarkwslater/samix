@@ -1,0 +1,138 @@
+echo "----------------------------------------- login general -----"
+echo Connexion a `uname -n` sous `uname -s` V`uname -r | cut -d . -f 1`.`uname -r | cut -d . -f 2`
+
+# en fait, /sys est inconnu dans Darwin
+if ( -ef /sys/.login )       source /sys/.login
+# acces a la Finkerie
+if ( -ef /sw/bin/init.csh )  source /sw/bin/init.csh
+# compilation des FPGA
+if ( -ef $HOME/.xilinx.csh ) source $HOME/.xilinx.csh
+#++ source $HOME/.cshrc
+
+if($?SSH_CLIENT) then
+	setenv REMOTEHOST `echo $SSH_CLIENT | sed "s/::ffff://" | cut -d " " -f 1`
+	echo Client  SSH: $SSH_CLIENT
+	setenv DISPLAY `echo $REMOTEHOST`:0.0
+else
+	setenv REMOTEHOST `hostname`
+	setenv DISPLAY :0.0
+endif
+echo Connexion  depuis $REMOTEHOST
+echo Affichage X11 sur $DISPLAY
+echo Shell: $version
+echo Compilations pour $OSTYPE/`uname -p`
+
+# ... variables d'environnement
+setenv MAIL /usr/spool/mail/$USER
+setenv TERMPATH $HOME/termcap:/usr/share/lib/termcap
+# pour python... 
+setenv PATH $HOME/.local/bin:$PATH
+setenv PATH .:$HOME/bin:$PATH
+setenv MANPATH .:/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/usr/local/mysql/man:/usr/share/man
+setenv EXINIT 'set redraw wm=8'
+setenv TERM xterm-color
+setenv CLICOLOR "1"
+setenv LSCOLORS "exfxcxdxcxegedabagacad"
+setenv EDITOR 'emacs -nw'
+#?? setenv PRGMDIR $HOME/Prgm
+
+# limite de la taille du stack
+limit stacksize 32760
+# for not producing core dump
+limit coredumpsize 0
+
+# ... configuration de TCSH
+#umask 022
+umask 002
+# n'existe plus...: stty new
+stty -tabs
+if ( $OSTYPE != darwin ) then
+	stty cr0
+	tset -I -Q
+endif
+set term = vt220
+set history = 50
+set ignoreeof
+set ellipsis
+set matchbeep=nomatch
+set noclobber
+set notify
+set autolist
+set complete
+set autoexpand
+set fignore = (.o .d \~)
+alias precmd "echo -------------"
+set prompt = %m:%U%B%c4%b%u"> "
+set rprompt = "<%P[%?]"
+set cdpath = $HOME
+set color
+set mail=/var/mail/$USER
+set symlinks chase
+set who = "%n has %a at %l from %m (%M)"
+set printexitvalue
+unset autologout
+
+# ... alias generaux
+alias dir ls -F
+alias cdir 'cd \!*; pwd; ls -F'
+alias cdl 'cd \!*; pwd; ls -Fhl'
+alias cda 'cd \!*; pwd; ls -Fhla'
+alias same 'cd ../\!*; pwd'
+alias df df -h
+alias virer rm -f
+alias unloadall "ipcs | unload -av"
+alias l more
+alias eject "sudo umount -fv /Volumes/\!*"
+alias lo logout
+alias users who
+
+complete cdir 'p/1/d/'
+complete cdl 'p/1/d/'
+complete same 'p/1/d/'
+complete eject 'p/1/d/'
+complete sysctl 'n/*/`sysctl -Na`/'
+
+# ... alias pur Mac
+setenv prefs /System/Library/PreferencePanes
+alias edit "open -a TextEdit"
+alias code "open -a TextWrangler"
+alias build 'xcodebuild -target \!* build'
+alias xv "open -a Preview"
+alias usbterm 'screen /dev/`ls /dev | grep tty.usbserial` 115200 8N1'
+
+# ... Raccourcis UNIX (plus ou moins pompes ailleurs)
+alias py /usr/local/Cellar/python/3.7.7/Frameworks/Python.framework/Versions/3.7/bin/python3.7
+alias ftp ftp -i
+alias haut stty rows
+alias larg stty cols
+alias kicest nmap -O -v
+alias term "xterm +bdc +cm -aw -sb -rightbar -rv -cr green -ms yellow -geometry 132x60 -ls /bin/tcsh"
+alias xdiff "usr/bin/X11/dxdiff"
+alias reverse 'echo "\033[?5h"'
+alias blanc 'echo "\033[?5l"'
+alias ascii 'echo \033[m\033(B\033)0\017'
+
+# ... Exemples d'acces aux autres machines
+#alias mounth0 mount -t nfs -v -o bg seivm6:/h0 $HOME/m6h0
+#alias gotom3   'xterm -fn "$FONTE" -bg $BGND -fg $FGND -cr red -ms yellow -im -j -si -T MiG/m3 -n m3 -e telnet seivm3 &'
+#alias gotopc   'rsh dapnt3 wincenter -display $DISPLAY'
+#alias copym3   'xterm -fn "$FONTE" -bg $BGND -fg $FGND -cr red -ms yellow -im -j -si -T MiG/m3 -n ftp/m3 -e ftp seivm3 &'
+
+# ... login specifique acquisition
+if(-e $HOME/.samba_top) then
+	#-- set top_exec = ` cat -n $HOME/.samba_top | grep -w 2`; set dir_exec = $top_exec[2]
+	#-- set top_exec = ` cat $HOME/.samba_top | grep -w applis `; set dir_exec = $top_exec[2]
+	set dir_exec = `grep applis $HOME/.samba_top | sed "s/applis //"`
+	if ( -ef $dir_exec/scripts/samba_login ) then
+		source $dir_exec/scripts/samba_login
+	endif
+else
+	echo "Installation de Samba indéterminée, pas de login dédié"
+endif
+echo "--------------------------------------------------------------"
+
+# --- some executions
+# /usr/bin/echo "\033[?5h"
+#biff n
+echo Il est `date "+%Hh%M %Ss %p, en ce %A %d %B %G (semaine %V)"`
+echo "Terminal $tty sous $shell, user $user (Id $uid/$gid)"

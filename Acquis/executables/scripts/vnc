@@ -1,0 +1,16 @@
+#!/bin/tcsh
+#
+set adrs = `echo $1 | sed s/@/\ /`
+set port = 2000
+if ($2 != "") set port = $2
+#set cmde = `ssh -f -N -L ${port}:${adrs[2]}:5900 $1`
+#if ($cmde) then
+#	echo youpi
+#else
+#	echo gloups
+#endif
+ssh -f -N -L ${port}:${adrs[2]}:5900 $1
+open -W vnc://localhost:$port
+
+set xqt=`ps -x -o pid -o command | grep "${port}:${adrs[2]}:5900" | grep -v grep`
+if ("$xqt" != "") kill $xqt[1]
