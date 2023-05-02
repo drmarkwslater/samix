@@ -1,0 +1,33 @@
+# ***** Assemblage d'une librairie "std" ****************************************
+
+$(info  .................... Assemblage de la librairie $(LIBNAME) ....)
+
+LIBSRCE = $(SOURCE_LIB)/$(LIBFOLDER)
+LIBBINS = $(RELS)/$(LIBNAME)
+LIBFILE = $(LIBS)/lib$(LIBNAME).a
+
+LIBDEFS = $(wildcard $(LIBSRCE)/*.h)
+LIBCODE = $(notdir $(wildcard $(LIBSRCE)/*.c))
+LIBOBJS = $(LIBCODE:.c=.o)
+LIBRELS := $(foreach fichier,$(LIBOBJS),$(LIBBINS)/$(fichier))
+
+ifneq ($(FOLDER),$(LIBNAME))
+$(FOLDER): $(LIBNAME)
+endif
+$(LIBFILE): $(LIBNAME)
+
+$(LIBNAME): $(LIBS) $(LIBBINS) $(LIBRELS)
+	@echo ".................... Assemblage final ...."
+	$(LIBGEN:LIBRAIRIE=$(LIBFILE)) $(LIBRELS)
+	@echo ".................... Librairie $(LIBNAME) prete ...................."
+
+$(LIBRELS): $(LIBSRCE)/$(notdir $(@:.o=.c)) $(LIBDEFS) $(LIBBINS)
+	@echo "========== Compile $(LIBSRCE)/$(notdir $(@:.o=.c)) =============================="
+	$(CC) $(CFLAGS) -I$(LIBSRCE) $(LIBFLAGS) $(BINAIRE) $(LIBSRCE)/$(notdir $(@:.o=.c))
+
+$(LIBBINS): $(RELS)
+	mkdir -pv $(LIBBINS)
+
+clean:
+	cd $(RELS) && rm -vfr $(LIBBINS) && cd $(LIBS) && rm -vf $(LIBFILE)
+
