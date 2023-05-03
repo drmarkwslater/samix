@@ -10,7 +10,11 @@
 #include <sys/fcntl.h> /* pour Clavier* */
 /* ca pour sysctlbyname */
 #include <sys/types.h>
-#include <sys/sysctl.h>
+#ifdef MACOSX
+        #include <sys/sysctl.h>
+#else
+        #include <linux/sysctl.h>
+#endif
 #ifdef _SYS_SYSCTL_H
 //	#define _SYS_SYSCTL_H_
 #endif

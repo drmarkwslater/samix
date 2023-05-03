@@ -25,7 +25,11 @@
 	#include <sys/utsname.h> /* pour uname */
 	/* pour sysctl */
 	#include <sys/types.h>
-	#include <sys/sysctl.h>
+        #ifdef MACOSX
+                #include <sys/sysctl.h>
+        #else
+	        #include <linux/sysctl.h>
+        #endif
 #endif
 #include <sys/resource.h>
 #include <sys/shm.h>
