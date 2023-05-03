@@ -33,7 +33,7 @@ dico = maj 		# Si maj, complete le dictionnaire avec les derniers ajouts (fixe/m
 init = non 		# Chargement des detecteurs au demarrage de SAMBA
 installe = non 		# Creation du setup par defaut (-create inclus)
 create = oui 		# Creation fichiers si absents
-display = ":0.0"        # Serveur X11 a utiliser pour l'affichage
+#display = ":0.0"        # Serveur X11 a utiliser pour l'affichage
 
 # MacOSX/Quickdraw:
 # fontname = Courier      # Type de caracteres

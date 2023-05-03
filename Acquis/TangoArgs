@@ -13,7 +13,7 @@ D = db/ 	# Racine de la base de donnees des detecteurs (relatif a la racine)
 evts = events 	# Repertoire des evenements sauvegardes (relatif a l'espace de sauvegarde)
 unix = non 	# Execution sous UNIX (SambaArgs optionnel)
 # Si pas batch:
-display = ":0.0" 	# Serveur X11 a utiliser pour l'affichage
+#display = ":0.0" 	# Serveur X11 a utiliser pour l'affichage
 langue = native 	# Langage a utiliser dans les dialogues
 langue = English 	# Langage a utiliser dans les dialogues
 dico = fixe 	# maj: complete avec les derniers ajouts/ net: retire les termes non traduits (net/fixe/maj)
